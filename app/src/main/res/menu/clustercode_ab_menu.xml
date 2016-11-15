@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/clustercode_menu_help"
+        android:icon="@drawable/info_ic"
+        app:showAsAction="ifRoom"
+        android:onClick="helpOnClick"
+        />
+    <item
+        android:title="@string/clustercode_menu_share"
+        android:icon="@drawable/clustercode_ic_share"
+
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="@string/clustercode_menu_save"
+        android:onClick="saveCodeOnClick"
+        android:id="@+id/clustercode_menu_savetogallery"
+        />
+</menu>

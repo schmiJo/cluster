@@ -1,0 +1,102 @@
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="@string/numberHeader"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/numberCountry"
+                    android:textSize="10sp"/>
+                <EditText
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/register_ic_down"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textSize="16sp"
+                    android:focusableInTouchMode="false"
+                    android:textColor="@color/colorAccent"
+                    android:layout_gravity="bottom"
+                    android:id="@+id/register_number_country"/>
+            </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="#c5c5c5"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="6dp"
+                >
+                <EditText
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:hint="@string/phoneNumber"
+                    android:textColor="@color/colorAccent"
+                    android:id="@+id/register_number_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:background="@drawable/login_selector_bg_edit"
+                    android:textCursorDrawable="@drawable/login_bg_input_cursor"
+                    android:paddingBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:textColorHighlight="@color/colorAccent"
+                    />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/numberVisibleToOthers"
+        android:textColor="@color/secondaryText"
+        android:layout_marginTop="16dp"
+        android:id="@+id/register_number_check"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numberError"
+            android:layout_marginStart="32dp"
+            android:textColor="#DD0000"
+            android:visibility="invisible"
+            android:textSize="12dp"
+            android:id="@+id/register_number_error"/>
+
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="16dp"
+            android:text="@string/numberSkip"
+            android:background="?selectableItemBackgroundBorderless"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_gravity="end"
+            android:id="@+id/register_number_skip"/>
+
+    </LinearLayout>
+</ScrollView>

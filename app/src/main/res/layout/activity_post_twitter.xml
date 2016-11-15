@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_post_twitter_activtiy"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.media.cluster.cluster.Twitter.PostTwitterActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@color/dividerColor" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="144dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    style="?android:attr/buttonBarStyle">
+
+
+                    <ImageButton
+                        android:id="@+id/twitter_post_camera_button"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="13dp"
+                        app:srcCompat="@drawable/typefield_ic_twitter_1_camera"
+                        android:background="?selectableItemBackgroundBorderless"/>
+
+                    <ImageButton
+                        android:id="@+id/twitter_post_gif_button"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="13dp"
+                        app:srcCompat="@drawable/typefield_ic_twitter_2_gif"
+                        android:background="?selectableItemBackgroundBorderless"/>
+
+                    <ImageButton
+                        android:id="@+id/twitter_post_poll_button"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="13dp"
+                        app:srcCompat="@drawable/twitter_composer_poll_ic"
+                        android:background="?selectableItemBackgroundBorderless"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/twitter_post_location_button"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_margin="13dp"
+                        app:srcCompat="@drawable/twitter_composer_location_ic"
+                        android:background="?selectableItemBackgroundBorderless"
+                        />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/twitter_post_tweet_button"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="13dp"
+                android:background="@drawable/tw__btn_composer_tweet"
+                android:enabled="false"
+                android:text="@string/tw__post_tweet"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/twitter_post_count_text"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="106dp"
+                android:text="140" />
+
+
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="56dp"
+        android:layout_marginTop="56dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/twitter_post_tweet_edit_text"
+                style="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blank"
+                android:cursorVisible="false"
+                android:hint="@string/tw__composer_hint"
+                android:inputType="textMultiLine"
+                android:textColorHint="@color/secondaryText"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:padding="12dp">
+
+
+
+            <ImageButton
+                android:id="@+id/twitter_post_close_button"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:layout_margin="7dp"
+                app:srcCompat="@drawable/tw__composer_close"
+                android:onClick="closeActivty" />
+
+        <ImageView
+            android:id="@+id/twitter_post_profile_pic"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/woman_undidentified" />
+
+
+    </FrameLayout>
+
+
+</FrameLayout>

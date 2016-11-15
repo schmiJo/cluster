@@ -1,0 +1,119 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.media.cluster.cluster.Login.RegisterFinishedFragment">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/register_finished_welcome_message"
+            android:text="@string/welcomeClustername"
+            android:textSize="20sp"
+            android:maxLines="1"/>
+
+
+        <TextView
+            android:id="@+id/register_finished_clustercode_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcomeDescription"
+            android:layout_marginTop="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            />
+
+        <fragment
+            android:id="@+id/register_clustercode_holder"
+            android:name="com.media.cluster.cluster.ClusterCodeFragment.ClusterCodeFragment"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/register_finished_add_service_message"
+            android:text="@string/welcomeServiceAddHeader"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:paddingTop="32dp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="4dp"
+                app:srcCompat = "@drawable/round_service_ic_skype"
+                android:layout_gravity="bottom"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_margin="4dp"
+                android:layout_height="40dp"
+                app:srcCompat = "@drawable/round_service_ic_tumblr"
+                android:layout_gravity="bottom"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                app:srcCompat = "@drawable/fab_ic_add"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/register_finished_add_service_fab"
+                />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_margin="4dp"
+                android:layout_height="40dp"
+                app:srcCompat = "@drawable/round_service_ic_facebook"
+                android:layout_gravity="bottom"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_margin="4dp"
+                android:layout_height="40dp"
+                app:srcCompat = "@drawable/round_service_ic_twitter"
+                android:layout_gravity="bottom"/>
+
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:minLines="2"
+            android:textColor="@color/secondaryText"
+            android:text="@string/welcomeServiceAddDescription"
+            />
+    </LinearLayout>
+
+
+</ScrollView>

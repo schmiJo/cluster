@@ -1,0 +1,154 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="com.media.cluster.cluster.Login.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:background="#27436e">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/login_screen_portrait_header"
+                    android:layout_width="88dp"
+                    android:layout_height="96dp"
+                    android:src="@drawable/app_logo_high" />
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:textColorHint="@color/colorPrimaryLight">
+
+            <EditText
+                android:id="@+id/login_username_input"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/login_selector_bg_edit"
+                android:gravity="center_vertical"
+                android:hint="@string/username"
+                android:inputType="textPersonName"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimaryLight"
+                android:textColorHighlight="@color/colorAccent"
+                android:textCursorDrawable="@drawable/login_bg_input_cursor"
+                android:textSize="18sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:textColorHint="@color/colorPrimaryLight">
+
+            <EditText
+                android:id="@+id/login_password_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/login_selector_bg_edit"
+                android:hint="@string/login_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimaryLight"
+                android:textColorHighlight="@color/colorAccent"
+                android:textCursorDrawable="@drawable/login_bg_input_cursor"
+                android:textSize="18sp" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="48dp"
+            app:mrl_rippleAlpha="0.5"
+            app:mrl_rippleColor="@color/backgroundDark">
+
+            <Button
+                android:id="@+id/loginSubmitButton"
+                android:layout_width="256dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_bt_shape"
+                android:fontFamily="sans-serif"
+                android:onClick="sumbitLoginInfo"
+                android:text="@string/login"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="20dp" />
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+        <TextView
+            android:id="@+id/loginErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="error"
+            android:textColor="#d27374"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="64dp"
+            android:layout_marginTop="16dp"
+            app:mrl_rippleAlpha="1"
+            app:mrl_rippleColor="@color/backgroundDark">
+
+            <Button
+                android:id="@+id/loginRegisterButton"
+                android:layout_width="256dp"
+                android:layout_height="32dp"
+                android:background="@drawable/login_bt_shape"
+                android:fontFamily="sans-serif"
+                android:onClick="loginFabClicked"
+                android:text="@string/register"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="16dp" />
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+
+    </LinearLayout>
+
+</ScrollView>

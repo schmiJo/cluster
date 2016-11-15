@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register_select_month"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dialogBackground"
+    tools:context="com.media.cluster.cluster.Login.RegisterSelectMonthActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"
+        app:cardCornerRadius="6dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Jan">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_jan"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Jan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_jan"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Feb">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_feb"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Feb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_feb"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Mar">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_mar"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Mar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_mar"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Apr">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_apr"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Apr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_apr"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                app:mrl_rippleColor="@color/rippleColor">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="May">
+
+                    <RadioButton
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end"
+                        android:id="@+id/register_radio_button_may"
+                        android:clickable="false"/>
+
+                    <TextView
+                        android:text="@string/May"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/register_row_title_may"
+                        android:layout_marginStart="16dp"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:textColor="@color/primaryText"/>
+                </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Jun">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_jun"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Jun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_jun"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Jul">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_jul"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Jul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_jul"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Aug">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_aug"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Aug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_aug"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Sep">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_sep"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Sep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_sep"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+        </com.balysv.materialripple.MaterialRippleLayout>
+        <com.balysv.materialripple.MaterialRippleLayout android:layout_width="match_parent"
+            android:layout_height="75dp"
+            app:mrl_rippleColor="@color/rippleColor">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="Okt">
+
+                <RadioButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:id="@+id/register_radio_button_okt"
+                    android:clickable="false"/>
+
+                <TextView
+                    android:text="@string/Okt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/register_row_title_okt"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textColor="@color/primaryText"/>
+            </FrameLayout>
+
+
+        </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Nov">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_nov"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Nov"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_nov"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="Dec">
+
+            <RadioButton
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:id="@+id/register_radio_button_dec"
+                android:clickable="false"/>
+
+            <TextView
+                android:text="@string/Dec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_row_title_dec"
+                android:layout_marginStart="16dp"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/primaryText"/>
+        </FrameLayout>
+
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+    </LinearLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
+
+
+</FrameLayout>

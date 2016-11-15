@@ -1,0 +1,218 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+
+    <android.support.design.widget.AppBarLayout
+
+        android:id="@+id/twitter_profile_appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+        <android.support.design.widget.CollapsingToolbarLayout
+
+
+            android:id="@+id/twitter_profile_collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:id="@+id/twitter_profile_actionbar_layout">
+
+                <ImageView
+                    android:id="@+id/twitter_profile_title_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_alignParentTop="true"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aaa_chat_back_ground_light" />
+
+                <FrameLayout
+                    android:id="@+id/twitter_profile_pic_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="55dp">
+
+                    <View
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/twitter_profile_pic_frame" />
+
+                    <ImageView
+                        android:id="@+id/twitter_profile_profile_pic"
+                        android:layout_width="115dp"
+                        android:layout_height="115dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/men_unidentified" />
+                </FrameLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/twitter_profile_name_layout"
+                    android:layout_marginStart="16dp"
+                    android:layout_below="@+id/twitter_profile_title_pic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/twitter_profile_pic_layout"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="username"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#b1ffffff"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="normal Name"
+                        android:textSize="18sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="#fff"
+                        android:textAllCaps="true"
+                        android:drawableStart="@drawable/twitter_vertification_ic"
+                        android:drawablePadding="4dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                   android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="60dp"
+                    android:id="@+id/twitter_profile_status_layout"
+                    android:layout_marginStart="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:typeface="normal"
+                        android:textStyle="bold"
+                        android:text= "1M Followers"
+                        android:maxLines="1"/>
+
+                    <TextView
+                        android:layout_marginStart="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:typeface="normal"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:text= "234 Tweets"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/twitter_profile_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/twitter_profile_pic_layout"
+                    android:text="statssdgsdfsdfsdfsdfsdfsdfsdf"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="16sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#fff"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/twitter_profile_status_layout"
+                    android:drawableStart="@drawable/ic_link_website"
+                    android:text="sdfsf"
+                    android:drawablePadding="6dp"
+                    android:layout_marginStart="16dp"/>
+
+
+            </RelativeLayout>
+
+
+            <android.support.v7.widget.Toolbar
+
+                android:id="@+id/twitter_profile_actionbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/twitter_profile_toolbar_layout"
+                    android:background="@color/blank"
+                    android:visibility="invisible"
+                    >
+
+                    <TextView
+                        android:id="@+id/twitter_profile_toolbar_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20dp"
+                        android:textColor="#fff"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Username"/>
+
+                    <TextView
+                        android:id="@+id/twitter_profile_toolbar_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="127 Tweets"
+                        android:fontFamily="sans-serif"
+                        />
+                </LinearLayout>
+                </android.support.v7.widget.Toolbar>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/twitter_profile_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            app:tabIndicatorColor="#fff"
+            app:tabIndicatorHeight="3dp" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="normal"
+        app:layout_behavior="com.media.cluster.cluster.Main.ScrollingFABBehavior"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"
+        app:srcCompat = "@drawable/fab_cluster_icon"
+        />
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/twitter_profile_view_pager"
+      android:layout_width="match_parent"
+      android:layout_height="1234dp"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</android.support.design.widget.CoordinatorLayout>

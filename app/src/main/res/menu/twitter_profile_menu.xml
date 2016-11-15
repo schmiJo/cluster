@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/share"
+        android:id="@+id/twitter_profile_menu_share"
+        app:showAsAction="never" />
+
+    <item
+        android:title="@string/twitter_action_mute"
+        android:id="@+id/twitter_profile_menu_mute"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/twitter_action_block"
+        android:id="@+id/twitter_profile_menu_block"
+        app:showAsAction="never"/>
+
+    <item
+        android:title="@string/report"
+        android:id="@+id/twitter_profile_menu_report"
+        app:showAsAction="never"/>
+
+
+
+
+
+
+
+
+</menu>

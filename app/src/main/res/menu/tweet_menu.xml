@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/twitter_action_search"
+        android:icon="@drawable/twitter_action_ic_search"
+        android:title="@string/twitter_action_search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/twitter_action_mute"
+        android:title="@string/twitter_action_mute"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/twitter_action_block"
+        android:title="@string/twitter_action_block"
+        app:showAsAction = "never"
+        />
+
+</menu>

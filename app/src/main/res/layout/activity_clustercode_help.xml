@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_clustercode_help2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dialogBackground"
+    tools:context="com.media.cluster.cluster.ClusterCode.ClusterCodeHelp">
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/clustercode_help_cardview1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_alignParentTop="true"
+
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/clustercode_help"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:id="@+id/textView" />
+
+    </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/clustercode_help_cardview1"
+            app:srcCompat="@drawable/speech_bubble_triangle_down"
+            android:id="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="4dp"
+            android:elevation="15dp"
+            />
+
+
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/speech_bubble_triangle_down"
+        android:layout_alignEnd="@id/clustercode_help_cardview1"
+        android:layout_marginEnd="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:id="@+id/clustercode_help_cardview2_triangle"
+        android:elevation="15dp"
+        />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:id="@+id/clustercode_help_cardview2"
+        android:layout_above="@+id/clustercode_help_cardview2_triangle"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/clustercode_help_camera"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            />
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

@@ -1,0 +1,155 @@
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.media.cluster.cluster.Login.RegisterDateFragment">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="64dp"
+
+   >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "@string/basicInformationHeader"
+        android:textColor="@color/primaryText"
+        android:layout_gravity="center"/>
+
+    <FrameLayout
+        android:layout_width="250dp"
+        android:layout_height="110dp"
+        android:minWidth="225dp"
+        android:layout_gravity="center"
+        android:maxWidth="320dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/month"
+                android:textColor="@color/brightText"/>
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/register_ic_down"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:id="@+id/register_date_month_edit_text"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center_horizontal"
+>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/day"
+                android:textColor="@color/brightText"/>
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="2"
+                android:id="@+id/register_date_day_edit_text"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="end">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/year"
+                android:textColor="@color/brightText"/>
+
+            <EditText
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4"
+                android:id="@+id/register_date_year_edit_text"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dateError"
+            android:textColor="#Dd0000"
+            android:visibility="invisible"
+            android:id="@+id/date_error_message"
+            android:textSize="12sp"
+            android:layout_gravity="bottom"/>
+
+
+    </FrameLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enterYourGender"
+            android:textColor="@color/brightText"
+            android:id="@+id/textView" />
+
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/register_ic_down"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:id="@+id/register_date_gender_edit_text"
+            android:textSize="16sp"
+            android:textColor="@color/primaryText"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genderError"
+            android:textColor="#Dd0000"
+            android:visibility="invisible"
+            android:id="@+id/gender_error_message"
+            android:textSize="12sp" />
+
+
+
+        </LinearLayout>
+
+
+
+</LinearLayout>
+</ScrollView>

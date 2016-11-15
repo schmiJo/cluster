@@ -1,0 +1,96 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def dbflow_version = "4.0.0-beta1"
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+
+    dexOptions {
+        jumboMode true
+    }
+
+    defaultConfig {
+        applicationId "com.media.cluster.cluster"
+        minSdkVersion 19
+        vectorDrawables.useSupportLibrary = true
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
+
+    jcenter()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile('com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1@aar') {
+        transitive = true
+    }
+    compile('com.twitter.sdk.android:twitter:1.12.1@aar') {
+        transitive = true;
+    }
+
+    //OAuthCompile
+
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    compile 'net.zetetic:android-database-sqlcipher:3.5.4@aar'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-sqlcipher:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.scribejava:scribejava-apis:3.2.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.codepath.libraries:android-oauth-handler:1.1.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
+    compile 'com.balysv:material-ripple:1.0.2'
+    compile 'com.android.support:support-v4:25.0.0'
+    compile 'com.google.firebase:firebase-core:9.8.0'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.android.support:cardview-v7:25.0.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.3.0'
+    testCompile 'junit:junit:4.12'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true;
+    }
+}
+//apply google services plugin
+apply plugin: 'com.google.gms.google-services'

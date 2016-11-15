@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Material Design Colors-->
+    <color name="colorPrimary">#284878</color>
+    <color name="colorPrimaryDark">#213b61</color>
+    <color name="colorPrimaryLight">#a3a8c2</color>
+    <color name="colorAccent">#607d8b</color>
+    <color name="colorAccentClicked">#53636b</color>
+
+    <color name="dividerColor">#acacac</color>
+    <color name="colorVoid">#f9f9f9</color>
+    <color name="backgroundDark">#333333</color>
+    <color name="splashScreen">#485d74</color>
+
+    <color name="twitterColor">#1DA1F2</color>
+    <color name="twitterStatusBarColor">#657686</color>
+
+    <!-- Text Colors-->
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#757575</color>
+    <color name="brightText">#9c9c9c</color>
+    <color name="highlightedText">#515151</color>
+
+    <color name="rippleColor">#cacaca</color>
+    <color name="selectedRow">#e4e3e3</color>
+
+    <color name= "registerAccessDenied">#cbccdc</color>
+
+
+    <color name="blank">#00ffffff</color>
+
+    <color name="dialogBackground">#aa282828</color>
+
+    <color name="drawer_icon">#607d8b</color>
+
+    <!--Fab colors-->
+    <!--Item colors-->
+    <color name="fab_icon">#ffffff</color>
+
+    <color name="button_unclicked">#bdbdbd</color>
+    <color name="button_clicked">#5c6bc0</color>
+</resources>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_services"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.media.cluster.cluster.Login.AddServicesActivity">
+
+    <include
+        android:id="@+id/add_service_no_selected_include"
+        layout="@layout/add_services_no_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/add_service_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#e1e5ea"
+                    android:elevation="2dp"
+                    android:id="@+id/add_service_icon_container">
+
+                    <ImageView
+                        android:id="@+id/add_service_icon_facebook"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        app:srcCompat="@drawable/round_service_ic_facebook" />
+
+                    <ImageView
+                        android:id="@+id/add_service_icon_twitter"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        app:srcCompat="@drawable/round_service_ic_twitter" />
+
+                    <ImageView
+                        android:id="@+id/add_service_icon_tumblr"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        app:srcCompat="@drawable/round_service_ic_tumblr" />
+
+                    <ImageView
+                        android:id="@+id/add_service_icon_skype"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_gravity="center_vertical"
+                        android:padding="8dp"
+                        app:srcCompat="@drawable/round_service_ic_skype" />
+
+                </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:src="@color/dividerColor" />
+
+            <LinearLayout
+                android:id="@+id/add_service_facebook_row_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/speech_service_ic_facebook" />
+
+                    <TextView
+                        android:id="@+id/add_service_facebook_row_username"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/addServiceEmail"
+                        android:textSize="20sp" />
+
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        app:mrl_rippleColor="@color/rippleColor">
+
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/add_service_delete_ic"
+                            android:onClick="deleteFacebookRow"
+                            />
+
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/dividerColor" />
+
+            </LinearLayout>
+
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/add_service_twitter_row_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/speech_service_ic_twiter" />
+
+                    <TextView
+                        android:id="@+id/add_service_twitter_row_username"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/username"
+                        android:textSize="20sp" />
+
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        app:mrl_rippleColor="@color/rippleColor">
+
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/add_service_delete_ic"
+                            android:onClick="deleteTwitterRow"
+                            />
+
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/dividerColor" />
+
+            </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/add_service_tumblr_row_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/speech_service_ic_tumblr" />
+
+                    <TextView
+                        android:id="@+id/add_service_tumblr_row_username"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/username"
+                        android:textSize="20sp" />
+
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        app:mrl_rippleColor="@color/rippleColor">
+
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/add_service_delete_ic"
+                            android:onClick="deleteTumblrRow"
+                            />
+
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/dividerColor" />
+
+            </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/add_service_skype_row_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_margin="8dp"
+                        app:srcCompat="@drawable/speech_service_ic_skype" />
+
+                    <TextView
+                        android:id="@+id/add_service_skype_row_username"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/username"
+                        android:textSize="20sp" />
+
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:layout_width="46dp"
+                        android:layout_height="match_parent"
+                        app:mrl_rippleColor="@color/rippleColor">
+
+                        <Button
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/add_service_delete_ic"
+                            android:onClick="deleteSkypeRow"
+                            />
+
+                    </com.balysv.materialripple.MaterialRippleLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/dividerColor" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <!--Drawer Row Icon-->
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mrl_rippleColor="#181818">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/drawer_row_layout">
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="15dp"
+        android:id="@+id/drawer_row_image"/>
+
+    <!--Drawer Row Title-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorVoid"
+        android:id="@+id/drawer_row_text"
+        android:textSize="15sp"/>
+        </LinearLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+</LinearLayout>
