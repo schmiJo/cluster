@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -248,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //----------------------------------------------------------------------------------------------------View Pager End------------------------------------------------------------------------------
+
 
 //----------------------------------------------------------------------------------------------------Fab Start-----------------------------------------------------------------------------------
 

@@ -10,59 +10,59 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
+
         >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="356dp"
-            android:background="#f9f9f9"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
-
-
-            <ImageView
-                android:id="@+id/profile_profile_pic"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="22dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/alien_unidentified"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.9" />
+            android:layout_height="300dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            android:background="@drawable/private_chat_background_default"
+            >
 
 
             <FrameLayout
                 android:id="@+id/framelayout_title"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="300dp"
                 android:layout_gravity="bottom|center_horizontal"
-                android:background="@color/colorVoid"
                 android:orientation="vertical"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.3">
+                app:layout_collapseParallaxMultiplier="0.3"
+                android:layout_marginBottom="4dp">
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:id="@+id/profile_profile_pic"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/alien_unidentified"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.9"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="22dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="bottom|center"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/profile_name_full"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="bottom|center"
                         android:textColor="@color/primaryText"
-                        android:textSize="25sp" />
+                        android:textSize="25sp"
+                        android:id="@+id/profile_name_full"/>
 
                     <TextView
-                        android:id="@+id/profile_clustername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="4dp"
-                        android:textColor="@color/secondaryText" />
+                        android:textColor="@color/secondaryText"
+                        android:id="@+id/profile_clustername"/>
 
                 </LinearLayout>
 
@@ -86,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/profile_tab_layout"
