@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -265,6 +267,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
     private ArrayList<Object> getPrivateChatData() {
         messages.add(new PrivateChatDataModelText("10:15", "bla bla bla", SocialMedias.FACEBOOK));
+        messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.detail_hometown_button),SocialMedias.TWITTER));
         return messages;
     }
 

@@ -39,7 +39,7 @@
                     android:layout_alignParentTop="true"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/aaa_chat_back_ground_light" />
+                    android:src="@drawable/private_chat_background_default" />
 
                 <FrameLayout
                     android:id="@+id/twitter_profile_pic_layout"

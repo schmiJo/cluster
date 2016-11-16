@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:mrl_rippleColor="@color/rippleColor"
+        android:layout_gravity="center_vertical|end">
+
+    <FrameLayout
+        android:id="@+id/private_image_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/chat_bubble_facebook"
+        android:minWidth="80dp">
+
+
+        <ImageView
+            android:id="@+id/private_image"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+             />
+
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="3dp">
+
+            <ImageView
+                android:id="@+id/private_image_media"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="start" />
+
+
+
+            <TextView
+                android:id="@+id/private_image_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+
+
+        </FrameLayout>
+    </FrameLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
 </FrameLayout>

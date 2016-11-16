@@ -1,10 +1,12 @@
 package com.media.cluster.cluster.ChatPrivate;
 
+import android.graphics.Bitmap;
+
 import com.media.cluster.cluster.R;
 
 
 public class PrivateChatDataModelImage {
-    String message;
+    Bitmap image;
     String sendingTime;
     int backgroundID;
 
@@ -12,9 +14,9 @@ public class PrivateChatDataModelImage {
 
 
 
-    public PrivateChatDataModelImage(String sendingTime, String message, PrivateChatActivity.SocialMedias socialMedias) {
+    public PrivateChatDataModelImage(String sendingTime, Bitmap image, PrivateChatActivity.SocialMedias socialMedias) {
         this.sendingTime = sendingTime;
-        this.message = message;
+        this.image = image;
 
         switch (socialMedias){
             case FACEBOOK:

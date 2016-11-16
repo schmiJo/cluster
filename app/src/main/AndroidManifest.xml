@@ -22,6 +22,7 @@
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -99,17 +100,15 @@
         <activity android:name=".Twitter.PostTwitterActivity" />
         <activity
             android:name=".Twitter.EmbeddedTweetActivity"
-            android:theme="@style/AppTheme.Twitter"
-           />
-        <activity android:name=".Twitter.TwitterProfileViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".Twitter.EmbeddedTweetActivity">
-
-        </activity>
-
-        <activity android:name=".Account.AccountActivity"
-            android:parentActivityName=".ChatPrivate.PrivateChatActivity"
-            />
+            android:theme="@style/AppTheme.Twitter" />
+        <activity
+            android:name=".Twitter.TwitterProfileViewActivity"
+            android:parentActivityName=".Twitter.EmbeddedTweetActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Account.AccountActivity"
+            android:parentActivityName=".ChatPrivate.PrivateChatActivity" />
+        <activity android:name=".General.DetailPictureActivity"></activity>
     </application>
 
 </manifest>

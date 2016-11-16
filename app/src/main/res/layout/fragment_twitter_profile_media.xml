@@ -1,14 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/twitter_profile_media_recycler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.media.cluster.cluster.Twitter.TwitterProfileMediaFragment">
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/twitter_profile_media_recycler"
-        android:scrollbars="vertical"
-        android:isScrollContainer="true"
-        />
-</FrameLayout>
+    android:nestedScrollingEnabled="true"
+    android:scrollbars="vertical"
+    tools:context="com.media.cluster.cluster.Twitter.TwitterProfileMediaFragment" />

@@ -30,6 +30,10 @@
     <string name="followers">Followers</string>
     <string name="uploads">Uploads</string>
 
+    <string name="save">Save</string>
+    <string name="forwardTo">Forward to</string>
+    <string name="tweetPhoto">Tweet Photo</string>
+
     <!--Twitter-->
     <string name="twitter_action_search">Search</string>
     <string name="twitter_action_mute">Mute</string>

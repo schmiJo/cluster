@@ -1,9 +1,14 @@
 package com.media.cluster.cluster.Twitter;
 
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.media.cluster.cluster.R;
 
@@ -58,9 +63,27 @@ import java.util.List;
     }
 
     private void configureImage(final TwitterProfileMediaViewHolder viewHolder, int position){
+        final ImageView image = viewHolder.getImageView();
         final TwitterProfileMediaImageDataModel data = (TwitterProfileMediaImageDataModel) items.get(position);
-        viewHolder.getImageView().setImageBitmap(data.image);
-        viewHolder.getImageView().setOnClickListener(new View.OnClickListener() {
+        final ViewTreeObserver observer = image.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+
+                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) image.getLayoutParams();
+                params.height = image.getWidth() / 2;
+                image.setLayoutParams(params);
+                image.setImageBitmap(Bitmap.createScaledBitmap(data.image, image.getWidth(), image.getWidth() /2, true));
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    image.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    image.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
+       image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
