@@ -1,12 +1,13 @@
 package com.media.cluster.cluster.ChatPrivate;
 
+import android.graphics.Bitmap;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.FrameLayout;
 
 import com.media.cluster.cluster.R;
 
@@ -18,8 +19,6 @@ import java.util.List;
 
     final static private int TEXT = 0;
     final static private int IMAGE = 1;
-    final static private int LOCATION = 2;
-    final static private int GIF = 3;
 
 
 
@@ -70,26 +69,33 @@ import java.util.List;
 
     }
 
-    private void configureTextViewHolder(PrivateChatTextViewHolder textVH, int position) {
-        PrivateChatDataModelText dataModel = (PrivateChatDataModelText) items.get(position);
+    private void configureTextViewHolder(final PrivateChatTextViewHolder textVH, int position) {
+        final PrivateChatDataModelText dataModel = (PrivateChatDataModelText) items.get(position);
 
-        textVH.getTime().setText(dataModel.sendingTime);
-        textVH.getMessage().setText(dataModel.message);
-        textVH.getBackground().setBackgroundResource(dataModel.backgroundID);
-        switch (dataModel.backgroundID){
-            case R.drawable.chat_bubble_facebook:
-                textVH.getMedia().setImageResource(R.drawable.round_service_ic_facebook);
-                break;
-            case R.drawable.chat_bubble_skype:
-                textVH.getMedia().setImageResource(R.drawable.round_service_ic_skype);
-                break;
-            case R.drawable.chat_bubble_twitter:
-                textVH.getMedia().setImageResource(R.drawable.round_service_ic_twitter);
-                break;
-            case R.drawable.chat_bubble_tumblr:
-                textVH.getMedia().setImageResource(R.drawable.round_service_ic_tumblr);
-                break;
-        }
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                textVH.getTime().setText(dataModel.sendingTime);
+                textVH.getMessage().setText(dataModel.message);
+                textVH.getBackground().setBackgroundResource(dataModel.backgroundID);
+                switch (dataModel.backgroundID){
+                    case R.drawable.chat_bubble_facebook:
+                        textVH.getMedia().setImageResource(R.drawable.round_service_ic_facebook);
+                        break;
+                    case R.drawable.chat_bubble_skype:
+                        textVH.getMedia().setImageResource(R.drawable.round_service_ic_skype);
+                        break;
+                    case R.drawable.chat_bubble_twitter:
+                        textVH.getMedia().setImageResource(R.drawable.round_service_ic_twitter);
+                        break;
+                    case R.drawable.chat_bubble_tumblr:
+                        textVH.getMedia().setImageResource(R.drawable.round_service_ic_tumblr);
+                        break;
+                }
+            }
+        });
+
 
 
     }
@@ -97,44 +103,54 @@ import java.util.List;
     private void configureImageViewHoder(final PrivateChatImageViewHolder imageVH, int position){
         final PrivateChatDataModelImage dataModel = (PrivateChatDataModelImage) items.get(position);
 
-        imageVH.getTime().setText(dataModel.sendingTime);
-        imageVH.getRoot().setBackgroundResource(dataModel.backgroundID);
-        switch (dataModel.backgroundID){
-            case R.drawable.chat_bubble_facebook:
-                imageVH.getMedia().setImageResource(R.drawable.round_service_ic_facebook);
-                break;
-            case R.drawable.chat_bubble_skype:
-                imageVH.getMedia().setImageResource(R.drawable.round_service_ic_skype);
-                break;
-            case R.drawable.chat_bubble_twitter:
-                imageVH.getMedia().setImageResource(R.drawable.round_service_ic_twitter);
-                break;
-            case R.drawable.chat_bubble_tumblr:
-                imageVH.getMedia().setImageResource(R.drawable.round_service_ic_tumblr);
-                break;
-        }
-        imageVH.getImage().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                ViewGroup.LayoutParams params = imageVH.getImage().getLayoutParams();
-                params.height = (dataModel.image.getHeight() / dataModel.image.getWidth()) * imageVH.getImage().getWidth();
-                imageVH.getImage().setLayoutParams(params);
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    imageVH.getImage().getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    imageVH.getImage().getViewTreeObserver().removeGlobalOnLayoutListener(this);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                imageVH.getTime().setText(dataModel.sendingTime);
+                imageVH.getRoot().setBackgroundResource(dataModel.backgroundID);
+                switch (dataModel.backgroundID){
+                    case R.drawable.chat_bubble_facebook:
+                        imageVH.getMedia().setImageResource(R.drawable.round_service_ic_facebook);
+                        break;
+                    case R.drawable.chat_bubble_skype:
+                        imageVH.getMedia().setImageResource(R.drawable.round_service_ic_skype);
+                        break;
+                    case R.drawable.chat_bubble_twitter:
+                        imageVH.getMedia().setImageResource(R.drawable.round_service_ic_twitter);
+                        break;
+                    case R.drawable.chat_bubble_tumblr:
+                        imageVH.getMedia().setImageResource(R.drawable.round_service_ic_tumblr);
+                        break;
                 }
+                imageVH.getImage().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        ViewGroup.LayoutParams params = imageVH.getImage().getLayoutParams();
+                        params.height = (dataModel.image.getHeight() / dataModel.image.getWidth()) * imageVH.getImage().getWidth();
+                        imageVH.getImage().setLayoutParams(params);
+
+
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            imageVH.getImage().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        } else {
+                            imageVH.getImage().getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
+
+                    }
+                });
+                imageVH.getImage().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                Bitmap compressed  = Bitmap.createScaledBitmap(dataModel.image,300, (dataModel.image.getHeight() / dataModel.image.getWidth())*300 ,true);
+                imageVH.getImage().setImageBitmap(compressed);
             }
         });
-        imageVH.getImage().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
-
-        imageVH.getImage().setImageBitmap(dataModel.image);
 
     }
 
@@ -156,5 +172,4 @@ import java.util.List;
         }
     }
 
-
-}
+ }

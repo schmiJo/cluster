@@ -316,7 +316,7 @@ public class FabActivity extends AppCompatActivity {
     }
 
     public void closeFab(){
-        MainActivity.closeFab(getApplicationContext());
+        new MainActivity().closeFab(getApplicationContext());
         fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation_reverse));
         fabRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom));
         finish();

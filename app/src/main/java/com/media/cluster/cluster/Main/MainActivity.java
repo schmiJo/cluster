@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -44,7 +43,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.crashlytics.android.Crashlytics;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.Login.AddServicesActivity;
@@ -74,8 +72,13 @@ public class MainActivity extends AppCompatActivity {
     private static Toolbar toolbar;
     public static String CurrentClustername;
     static private FloatingActionButton fab;
-
-
+    private ViewPager.OnPageChangeListener pageChangeListener;
+    private TabLayout.OnTabSelectedListener tabListener;
+    private  TabLayout.TabLayoutOnPageChangeListener onTabChangeListener;
+    DialogInterface.OnClickListener negativeDialogButton;
+    private DrawerRecyclerTouchListener drawerRecyclerTouchListener;
+    private AlertDialog.Builder builder;
+    private DrawerRecyclerTouchListener serviceListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,8 +153,7 @@ public class MainActivity extends AppCompatActivity {
         final TabLayout.Tab hot = tabLayout.newTab();
         final TabLayout.Tab chat = tabLayout.newTab();
         final TabLayout.Tab profile = tabLayout.newTab();
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabListener = new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
@@ -180,7 +182,8 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });
+        };
+        tabLayout.addOnTabSelectedListener(tabListener);
 
         feed.setIcon(R.drawable.main_tab_layout_ic_feed_selected);
         hot.setIcon(R.drawable.main_tab_layout_ic_whatshot);
@@ -198,18 +201,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Onchange Listener checks for a change with the ViewPager
-        mainViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        onTabChangeListener = new TabLayout.TabLayoutOnPageChangeListener(tabLayout);
+        mainViewPager.addOnPageChangeListener(onTabChangeListener);
+        pageChangeListener = new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
-
-
-
 
             @Override
             public void onPageSelected(int position) {
-
                 if (mainViewPager.getCurrentItem() == 1) {
                     //The Current View on the view pager is media
 
@@ -243,7 +244,8 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        };
+        mainViewPager.addOnPageChangeListener(pageChangeListener);
 
         mainViewPager.setCurrentItem(1);
 
@@ -252,9 +254,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //----------------------------------------------------------------------------------------------------Fab Start-----------------------------------------------------------------------------------
-
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener fabClickListener= new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //---fab clicked--
@@ -277,7 +277,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-        });
+        };
+        fab.setOnClickListener(fabClickListener);
 
 
 //----------------------------------------------------------------------------------------------------Fab End-------------------------------------------------------------------------------------
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Option Drawer OnClick & OnLongClick Listeners
-        drawerOptionRecyclerView.addOnItemTouchListener(new DrawerRecyclerTouchListener(getApplication(), new ClickListener() {
+        drawerRecyclerTouchListener = new DrawerRecyclerTouchListener(getApplication(), new ClickListener() {
             //Option onClickListener
             @Override
             public void onClick(View view, int position) {
@@ -391,7 +392,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-        }));
+        });
+        drawerOptionRecyclerView.addOnItemTouchListener(drawerRecyclerTouchListener);
         //
         //
 
@@ -402,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
         drawerServiceRecyclerView.setLayoutManager(new DrawerLayoutManager(getApplicationContext()));
 
         //Service Drawer onCLick
-        drawerServiceRecyclerView.addOnItemTouchListener(new DrawerRecyclerTouchListener(getApplication(), new ClickListener() {
+        serviceListener = new DrawerRecyclerTouchListener(getApplication(), new ClickListener() {
             //Service onClickListeners
             @Override
             public void onClick(View view, int position) {
@@ -442,7 +444,8 @@ public class MainActivity extends AppCompatActivity {
             }
             //
 
-        }));
+        });
+        drawerServiceRecyclerView.addOnItemTouchListener(serviceListener);
         //
 
 //--------------------------------------------------------------------------------------------------Navigation drawer End ------------------------------------------------------------------------
@@ -503,7 +506,7 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(dialogContext);
+            builder = new AlertDialog.Builder(dialogContext);
             builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -511,13 +514,13 @@ public class MainActivity extends AppCompatActivity {
                     System.exit(0);
                 }
             });
-
-            builder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            negativeDialogButton =  new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                 }
-            });
+            };
+            builder.setNegativeButton(getResources().getString(R.string.cancel),negativeDialogButton);
 
             builder.setTitle(getResources().getString(R.string.mainCloseDialogTitle));
             builder.setMessage(getResources().getString(R.string.mainCloseDialogMessage));
@@ -641,20 +644,27 @@ public class MainActivity extends AppCompatActivity {
     public static void setFabBlur(final Resources resources) {
         if (layout.getWidth() > 0) {
             Bitmap back = BlurBuilder.blur(layout);
-            new FabActivity().setBackground(new BitmapDrawable(resources, back));
+            FabActivity.setBackground(new BitmapDrawable(resources, back));
         } else {
             layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
                     Bitmap back = BlurBuilder.blur(layout);
-                    new FabActivity().setBackground(new BitmapDrawable(resources, back));
+                     FabActivity.setBackground(new BitmapDrawable(resources, back));
                 }
             });
         }
 
     }
 
-
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tabLayout.removeOnTabSelectedListener(tabListener);
+        mainViewPager.removeOnPageChangeListener(pageChangeListener);
+        mainViewPager.removeOnPageChangeListener(onTabChangeListener);
+        drawerOptionRecyclerView.removeOnItemTouchListener(drawerRecyclerTouchListener);
+        fab.setOnClickListener(null);
+        drawerServiceRecyclerView.removeOnItemTouchListener(serviceListener);
+    }
 }

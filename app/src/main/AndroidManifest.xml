@@ -104,11 +104,12 @@
         <activity
             android:name=".Twitter.TwitterProfileViewActivity"
             android:parentActivityName=".Twitter.EmbeddedTweetActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Account.AccountActivity"
             android:parentActivityName=".ChatPrivate.PrivateChatActivity" />
-        <activity android:name=".General.DetailPictureActivity"></activity>
+        <activity android:name=".General.DetailPictureActivity"
+            android:theme="@style/AppTheme.NoActionBar.Dark"/>
     </application>
 
 </manifest>
