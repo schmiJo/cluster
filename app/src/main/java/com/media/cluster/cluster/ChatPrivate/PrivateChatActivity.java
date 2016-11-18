@@ -65,7 +65,7 @@ public class PrivateChatActivity extends AppCompatActivity {
                 "privateChatPagerItem", Context.MODE_PRIVATE);
 
 
-        chatArrayAdapter = new ChatArrayAdapter(getPrivateChatData());
+        chatArrayAdapter = new ChatArrayAdapter(getPrivateChatData(), getApplicationContext());
 
         privateChatrecyclerView = (RecyclerView) findViewById(R.id.private_chat_recyclerview);
 
@@ -266,6 +266,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
     private ArrayList<Object> getPrivateChatData() {
         messages.add(new PrivateChatDataModelText("10:15", "bla bla bla", SocialMedias.FACEBOOK));
+        messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.aaa_tem_pic_4k),SocialMedias.TWITTER));
         messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.detail_hometown_button),SocialMedias.TWITTER));
         return messages;
     }

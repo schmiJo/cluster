@@ -15,10 +15,14 @@
 
     <style name="AppTheme.NoActionBar.Dark">
         <item name="colorPrimaryDark">#000000</item>
+        <item name="android:actionOverflowButtonStyle">@style/AppTheme.NoActionBar.Dark.OverFlow</item>
+        <item name="colorControlNormal">#ffffff</item>
     </style>
 
 
-
+    <style name="AppTheme.NoActionBar.Dark.OverFlow">
+        <item name="android:src">@drawable/ic_overflow_white</item>
+    </style>
 
     <style name="Translucent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/dialogBackground</item>

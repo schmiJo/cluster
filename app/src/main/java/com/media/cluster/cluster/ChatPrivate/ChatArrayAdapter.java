@@ -1,5 +1,7 @@
 package com.media.cluster.cluster.ChatPrivate;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Handler;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.media.cluster.cluster.General.DetailPictureActivity;
 import com.media.cluster.cluster.R;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 
  class ChatArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Object> items;
+    private Context context;
 
     final static private int TEXT = 0;
     final static private int IMAGE = 1;
@@ -23,8 +27,9 @@ import java.util.List;
 
 
 
-     ChatArrayAdapter(List<Object> items) {
+     ChatArrayAdapter(List<Object> items, Context context) {
         this.items = items;
+         this.context = context;
     }
 
     @Override
@@ -143,7 +148,9 @@ import java.util.List;
                 imageVH.getImage().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        Intent i = new Intent(context, DetailPictureActivity.class);
+                        context.startActivity(i);
+                        DetailPictureActivity.setDrawable(imageVH.getImage().getDrawable());
                     }
                 });
                 Bitmap compressed  = Bitmap.createScaledBitmap(dataModel.image,300, (dataModel.image.getHeight() / dataModel.image.getWidth())*300 ,true);

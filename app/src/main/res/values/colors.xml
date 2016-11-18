@@ -30,6 +30,7 @@
 
 
     <color name="blank">#00ffffff</color>
+    <color name="black">#000000</color>
 
     <color name="dialogBackground">#aa282828</color>
 
