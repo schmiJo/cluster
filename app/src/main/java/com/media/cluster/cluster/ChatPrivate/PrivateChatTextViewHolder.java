@@ -9,14 +9,14 @@ import android.widget.TextView;
 import com.media.cluster.cluster.R;
 
 
-public class PrivateChatTextViewHolder extends RecyclerView.ViewHolder{
+ class PrivateChatTextViewHolder extends RecyclerView.ViewHolder{
 
     private TextView message;
     private TextView time;
     private LinearLayout root;
     private ImageView media;
 
-    public PrivateChatTextViewHolder(View itemView) {
+     PrivateChatTextViewHolder(View itemView) {
         super(itemView);
          message = (TextView) itemView.findViewById(R.id.private_message);
         time = (TextView) itemView.findViewById(R.id.private_message_time);

@@ -91,6 +91,7 @@ public class SelectWallpaperSource extends AppCompatActivity {
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
+                Log.d("debug", "onActivityResult: "+ error.toString());
             }
             finish();
         }
@@ -143,8 +144,7 @@ public class SelectWallpaperSource extends AppCompatActivity {
         Rect rectangle = new Rect();
         Window window = getWindow();
         window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
-        int statusBarHeight = rectangle.top;
-        return statusBarHeight;
+        return rectangle.top;
     }
 
 

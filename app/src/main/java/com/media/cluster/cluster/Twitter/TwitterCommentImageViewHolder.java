@@ -43,15 +43,15 @@ class TwitterCommentImageViewHolder extends RecyclerView.ViewHolder {
         return respondedPersonUsername;
     }
 
-    public TextView getLikeCount() {
+     TextView getLikeCount() {
         return likeCount;
     }
 
-    public TextView getRetweetCount() {
+     TextView getRetweetCount() {
         return retweetCount;
     }
 
-    public ImageView getMessagePicture() {
+     ImageView getMessagePicture() {
         return messagePicture;
     }
 

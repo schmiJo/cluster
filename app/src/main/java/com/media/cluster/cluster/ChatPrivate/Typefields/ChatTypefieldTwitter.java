@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.media.cluster.cluster.ChatPrivate.PrivateChatActivity;
@@ -33,7 +32,6 @@ public class ChatTypefieldTwitter extends Fragment {
 
     private EditText typefield;
     private ImageButton sendButton;
-    private LinearLayout rootLayout;
     private CardView cardview;
 
     @Override
@@ -43,8 +41,6 @@ public class ChatTypefieldTwitter extends Fragment {
         // Inflate the layout for this fragment
         layout = inflater.inflate(R.layout.fragment_chat_typefield_twitter, container, false);
         sendButton = (ImageButton) layout.findViewById(R.id.typefield_twitter_send);
-
-        rootLayout = (LinearLayout) layout.findViewById(R.id.typefield_twitter_root);
         cardview = (CardView) layout.findViewById(R.id.typefield_twitter_card);
 
         typefield = (EditText) layout.findViewById(R.id.typefield_twitter_input);
@@ -101,7 +97,7 @@ public class ChatTypefieldTwitter extends Fragment {
     }
     private void handleSendButtonCllick(){
         if (!typefield.getText().toString().trim().equals("")) {
-            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.SocialMedias.TWITTER);
+            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.TWITTER);
             MediaPlayer messageSound = MediaPlayer.create(getContext(), R.raw.twitter_pop);
             messageSound.start();
             typefield.setText("");

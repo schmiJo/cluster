@@ -28,15 +28,23 @@ public class GetUserData {
     public GetUserData() {
     }
 
-    public enum Usage{Register, Login}
-    public enum media {FACEBOOK, SKYPE, TWITTER, TUMBLR}
 
-    public static media[] mediaToChatPrivate(){
+    public static final  int Register  =0 ;
+    public static final  int  Login = 1;
+    public static final  int  FACEBOOK =1 ;
+    public static final  int  SKYPE = 2;
+    public static final  int  TWITTER =3  ;
+    public static final  int  TUMBLR =4 ;
 
-        return new media[]{media.FACEBOOK, media.SKYPE, media.TWITTER, media.TUMBLR };
+
+
+
+    public static int[] mediaToChatPrivate(){
+
+        return new int[]{FACEBOOK, SKYPE, TWITTER, TUMBLR };
     }
 
-    public static void getProfileID(final Context context, final String Clustername, final Usage usage){
+    public static void getProfileID(final Context context, final String Clustername, final int usage){
 
         requestQueue = Volley.newRequestQueue(context);
         URL = "http://social-cluster.com/user_get_id.php";

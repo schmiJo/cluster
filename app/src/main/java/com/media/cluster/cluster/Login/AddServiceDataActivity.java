@@ -25,7 +25,7 @@ public class AddServiceDataActivity extends AppCompatActivity {
     private EditText serviceUsername, servicePassword;
     private String currentService;
     private Button Submit;
-    AddServicesActivity.Service currentServiceEnum;
+    int currentServiceEnum;
 
 
     @Override
@@ -82,17 +82,17 @@ public class AddServiceDataActivity extends AppCompatActivity {
                     errorMessage.setVisibility(View.GONE);
                     switch (currentService){
                         case "facebook":
-                            currentServiceEnum = AddServicesActivity.Service.FACEBOOK;
-                            ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.FACEBOOK_EMAIL,serviceUsername.getText().toString().trim(),clustername,password);
+                            currentServiceEnum = AddServicesActivity.FACEBOOK;
+                            ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.FACEBOOK_EMAIL,serviceUsername.getText().toString().trim(),clustername,password);
                             finish();
                         case "tumblr":
-                            currentServiceEnum = AddServicesActivity.Service.TUMBLR;
-                            ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.TUMBLR_USERNAME,serviceUsername.getText().toString().trim(),clustername,password);
+                            currentServiceEnum = AddServicesActivity.TUMBLR;
+                            ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.TUMBLR_USERNAME,serviceUsername.getText().toString().trim(),clustername,password);
                             finish();
                             break;
                         case "skype":
-                            currentServiceEnum = AddServicesActivity.Service.SKYPE;
-                            ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.SKYPE_USERNAME,serviceUsername.getText().toString().trim(),clustername,password);
+                            currentServiceEnum = AddServicesActivity.SKYPE;
+                            ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.SKYPE_USERNAME,serviceUsername.getText().toString().trim(),clustername,password);
                             finish();
                             break;
 

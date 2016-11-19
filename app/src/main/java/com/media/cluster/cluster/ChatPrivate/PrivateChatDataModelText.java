@@ -3,7 +3,7 @@ package com.media.cluster.cluster.ChatPrivate;
 import com.media.cluster.cluster.R;
 
 
-public class PrivateChatDataModelText {
+ class PrivateChatDataModelText {
     String message;
     String sendingTime;
     int backgroundID;
@@ -12,21 +12,21 @@ public class PrivateChatDataModelText {
 
 
 
-    public PrivateChatDataModelText(String sendingTime, String message, PrivateChatActivity.SocialMedias socialMedias) {
+     PrivateChatDataModelText(String sendingTime, String message, int socialMedias) {
         this.sendingTime = sendingTime;
         this.message = message;
 
         switch (socialMedias){
-            case FACEBOOK:
+            case PrivateChatActivity.FACEBOOK:
                 backgroundID = R.drawable.chat_bubble_facebook;
                 break;
-            case SKYPE:
+            case  PrivateChatActivity.SKYPE:
                 backgroundID = R.drawable.chat_bubble_skype;
                 break;
-            case TWITTER:
+            case  PrivateChatActivity.TWITTER:
                 backgroundID = R.drawable.chat_bubble_twitter;
                 break;
-            case TUMBLR:
+            case  PrivateChatActivity.TUMBLR:
                 backgroundID = R.drawable.chat_bubble_tumblr;
                 break;
         }

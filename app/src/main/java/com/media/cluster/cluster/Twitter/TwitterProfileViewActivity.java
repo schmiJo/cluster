@@ -1,9 +1,8 @@
 package com.media.cluster.cluster.Twitter;
 
 
-import android.graphics.Bitmap;
+
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;

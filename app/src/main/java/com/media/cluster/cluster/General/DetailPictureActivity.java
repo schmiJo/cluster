@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,26 +18,26 @@ import android.widget.FrameLayout;
 
 import com.media.cluster.cluster.R;
 
-import static com.loopj.android.http.AsyncHttpClient.log;
 
 public class DetailPictureActivity extends AppCompatActivity {
     TouchImageView touchImageView;
-    String path  ;
     static private Drawable drawable;
-    private Toolbar toolbar;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_picture);
-        toolbar = (Toolbar) findViewById(R.id.detail_picture_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_picture_toolbar);
         setSupportActionBar(toolbar);
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setTitle("");
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

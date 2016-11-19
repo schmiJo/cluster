@@ -79,16 +79,16 @@ public class RegisterPasswordFragment extends Fragment {
          String passwordConfirmInputString = passwordConfirmInput.getText().toString().trim();
         if(passwordConfirmInputString.equals("") || passwordInputString.equals("")){
                  RegisterActivity.setButtonGrey();
-                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.PasswordErrors.ONE, null);
+                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.ONE, null);
         }else if(passwordInputString.length() <8){
                 RegisterActivity.setButtonGrey();
-                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.PasswordErrors.TWO,null);
+                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.TWO,null);
         }else if(!passwordInputString.equals(passwordConfirmInputString)){
                 RegisterActivity.setButtonGrey();
-                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.PasswordErrors.THREE,null);
+                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.THREE,null);
         }else{
                 RegisterActivity.setButtonWhite();
-                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.PasswordErrors.NONE, passwordInputString);
+                RegisterActivity.barNextButtonSetOnPasswordListener(RegisterActivity.NONE, passwordInputString);
         }
 
     }

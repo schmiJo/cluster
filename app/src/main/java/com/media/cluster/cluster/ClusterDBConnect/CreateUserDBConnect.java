@@ -3,7 +3,6 @@ package com.media.cluster.cluster.ClusterDBConnect;
 
 
 import android.content.Context;
-import android.content.res.Resources;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,13 +28,10 @@ public class CreateUserDBConnect {
 
     public static void createUser(final Context context, final String clusterName, final String password, final String firstName, final String surname, final  String birthday, final String gender){
 
-        String URL;
-        StringRequest stringRequest;
-        RequestQueue requestQueue;
 
-        requestQueue = Volley.newRequestQueue(context);
-        URL = "http://social-cluster.com/user_register.php";
-        stringRequest = new StringRequest(Request.Method.POST, URL,
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String URL = "http://social-cluster.com/user_register.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                    @Override
                    public void onResponse(String response) {

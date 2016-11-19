@@ -168,7 +168,7 @@ public class ChatTypefieldFacebook extends Fragment {
     private void handleSendButtonCllick() {
         switchIconState(sendLikeButton);
         if (!typefield.getText().toString().trim().equals("")) {
-            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.SocialMedias.FACEBOOK);
+            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.FACEBOOK);
             MediaPlayer messageSound = MediaPlayer.create(getContext(), R.raw.facebook_pop);
             messageSound.start();
             typefield.setText("");

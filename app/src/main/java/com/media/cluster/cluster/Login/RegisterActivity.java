@@ -12,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -34,7 +33,6 @@ import com.media.cluster.cluster.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +43,10 @@ public class RegisterActivity extends AppCompatActivity {
     static Button barNextButton, barPreviousButton;
     RegisterNameFragment registerNameFragment;
     RegisterDateFragment registerDateFragment;
-    enum PasswordErrors {ONE, TWO, THREE, NONE}
+    static final int ONE = 0;
+    static final int TWO = 1;
+    static final int THREE = 2;
+    static final int NONE = 3;
 
     static public String firstName, lastName, ClusterName, password, gender;
     private View registerSwitchBar;
@@ -298,18 +299,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    public static void barNextButtonSetOnPasswordListener(final PasswordErrors passwordErrors, final String Password) {
+    public static void barNextButtonSetOnPasswordListener(final int passwordErrors, final String Password) {
         if (registerViewPager.getCurrentItem() == 3) {
             barNextButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (passwordErrors.equals(PasswordErrors.ONE)) {
+                    if (passwordErrors == ONE) {
                         RegisterPasswordFragment.passwordErrorCaseOne();
-                    } else if (passwordErrors.equals(PasswordErrors.TWO)) {
+                    } else if (passwordErrors==TWO) {
                         RegisterPasswordFragment.passwordErrorCaseTwo();
-                    } else if (passwordErrors.equals(PasswordErrors.THREE)) {
+                    } else if (passwordErrors==THREE) {
                         RegisterPasswordFragment.passwordErrorCaseTree();
-                    } else if (passwordErrors.equals(PasswordErrors.NONE)) {
+                    } else if (passwordErrors==NONE) {
                         RegisterPasswordFragment.passwordErrorCaseNone();
                         password = Password;
                         registerViewPager.setCurrentItem(4, true);
@@ -358,36 +359,36 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (NumberSet) {
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.PHONENUMBER, RegisterNumberFragment.getNumber(), ClusterName, password);
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.PHONECOUNTRY, RegisterNumberFragment.getCountry(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.PHONENUMBER, RegisterNumberFragment.getNumber(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.PHONECOUNTRY, RegisterNumberFragment.getCountry(), ClusterName, password);
                     String phoneVisibility;
                     if (RegisterNumberFragment.getNumberVisibilty()) {
                         phoneVisibility = "1";
                     } else {
                         phoneVisibility = "0";
                     }
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.PHONEVISIBILITY, phoneVisibility, ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.PHONEVISIBILITY, phoneVisibility, ClusterName, password);
                 }
 
                 if (!RegisterDetailFragment.getSelectedEducation().equals("No Response")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.EDUCATION, RegisterDetailFragment.getSelectedEducation(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.EDUCATION, RegisterDetailFragment.getSelectedEducation(), ClusterName, password);
                 }
                 if (!RegisterDetailFragment.getSelectedProfession().equals("No Response")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.PROFESSION, RegisterDetailFragment.getSelectedProfession(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.PROFESSION, RegisterDetailFragment.getSelectedProfession(), ClusterName, password);
                 }
                 if (!RegisterDetailFragment.getSelectedRelation().equals("No Response")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.RELATIONSHIP, RegisterDetailFragment.getSelectedRelation(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.RELATIONSHIP, RegisterDetailFragment.getSelectedRelation(), ClusterName, password);
                 }
                 if (!RegisterDetailFragment.getJobDescription().equals("")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.JOBDESCRIPTION, RegisterDetailFragment.getJobDescription(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.JOBDESCRIPTION, RegisterDetailFragment.getJobDescription(), ClusterName, password);
                 }
                 if (!RegisterDetailFragment.getAboutMe().equals("")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.Attribute.ABOUTME, RegisterDetailFragment.getAboutMe(), ClusterName, password);
+                    ImplementUserData.implementUser(context, ImplementUserData.ABOUTME, RegisterDetailFragment.getAboutMe(), ClusterName, password);
                 }
 
 
                 String bmToBase64 = ImplementUserData.getStringImage(profilePic);
-                ImplementUserData.implementUser(context, ImplementUserData.Attribute.PROFILE_PIC, bmToBase64, ClusterName, password);
+                ImplementUserData.implementUser(context, ImplementUserData.PROFILE_PIC, bmToBase64, ClusterName, password);
 
                 goToWelcome();
 

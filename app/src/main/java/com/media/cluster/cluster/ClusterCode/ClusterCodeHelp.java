@@ -3,12 +3,9 @@ package com.media.cluster.cluster.ClusterCode;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.GestureDetector;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.media.cluster.cluster.R;
 

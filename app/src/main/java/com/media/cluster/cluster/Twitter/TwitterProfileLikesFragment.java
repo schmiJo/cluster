@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.media.cluster.cluster.Main.DrawerLayoutManager;
 import com.media.cluster.cluster.R;
 
 import java.util.ArrayList;

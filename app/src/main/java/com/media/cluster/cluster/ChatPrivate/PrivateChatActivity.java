@@ -41,7 +41,11 @@ public class PrivateChatActivity extends AppCompatActivity {
     static RecyclerView privateChatrecyclerView;
     static ArrayList<Object> messages = new ArrayList<>();
 
-    public enum SocialMedias {FACEBOOK, SKYPE, TWITTER, TUMBLR}
+    static public final int FACEBOOK =  0 ;
+    static public final int SKYPE = 1;
+    static public final int TWITTER =2 ;
+    static public final int TUMBLR = 3;
+
 
     private static ChatArrayAdapter chatArrayAdapter;
     public static int heightFacebook;
@@ -136,7 +140,7 @@ public class PrivateChatActivity extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    public static void sendChatMessage(String message, SocialMedias socialMedias) {
+    public static void sendChatMessage(String message, int socialMedias) {
 
 
         long milliseconds = System.currentTimeMillis();
@@ -216,24 +220,24 @@ public class PrivateChatActivity extends AppCompatActivity {
 
         switch (GetUserData.mediaToChatPrivate()[position]) {
 
-            case FACEBOOK:
+            case GetUserData.FACEBOOK:
                 Log.d("debug", "Facebook View Pager Height " + heightFacebook);
                 commitSizeToPageViewer(heightFacebook);
                 setRecyclerViewMargin(0);
                 break;
 
-            case SKYPE:
+            case GetUserData.SKYPE:
                 Log.d("debug", "Skype View Pager Height " + heightFacebook);
                 commitSizeToPageViewer(heightFacebook);
                 setRecyclerViewMargin(1);
                 break;
 
-            case TUMBLR:
+            case GetUserData.TUMBLR:
                 Log.d("debug", "Tumblr View Pager Height " + heightTwitter);
                 commitSizeToPageViewer(heightTwitter);
                 setRecyclerViewMargin(2);
                 break;
-            case TWITTER:
+            case GetUserData.TWITTER:
                 Log.d("debug", "Twitter View Pager Height " + heightTwitter);
                 commitSizeToPageViewer(heightTwitter);
                 setRecyclerViewMargin(3);
@@ -265,9 +269,8 @@ public class PrivateChatActivity extends AppCompatActivity {
 
 
     private ArrayList<Object> getPrivateChatData() {
-        messages.add(new PrivateChatDataModelText("10:15", "bla bla bla", SocialMedias.FACEBOOK));
-        messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.aaa_tem_pic_4k),SocialMedias.TWITTER));
-        messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.detail_hometown_button),SocialMedias.TWITTER));
+        messages.add(new PrivateChatDataModelText("10:15", "bla bla bla", FACEBOOK));
+        messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.detail_hometown_button),TWITTER));
         return messages;
     }
 

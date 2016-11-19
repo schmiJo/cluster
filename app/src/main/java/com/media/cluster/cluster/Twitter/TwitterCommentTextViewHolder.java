@@ -41,11 +41,11 @@ class TwitterCommentTextViewHolder extends RecyclerView.ViewHolder {
         return respondedPersonUsername;
     }
 
-    public TextView getLikeCount() {
+     TextView getLikeCount() {
         return likeCount;
     }
 
-    public TextView getRetweetCount() {
+     TextView getRetweetCount() {
         return retweetCount;
     }
 

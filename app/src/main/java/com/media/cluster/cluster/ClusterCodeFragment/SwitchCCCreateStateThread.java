@@ -20,15 +20,15 @@ import java.util.concurrent.TimeUnit;
 
     static LayerDrawable personalClusterCode;
     private Long decimalNumber;
-    private ClusterCodeFragment.SaveOptions options;
+    private int options;
     private File clusterCodePng = new File("sdcard/.cluster/cluster_code.png");
     private boolean show;
-    private View view;
 
-    void switchCCCreateStateThread(View view, final Resources resources,final int AccountID,final ClusterCodeFragment.SaveOptions options, final boolean show) {
+
+    void switchCCCreateStateThread( final Resources resources,final int AccountID,final int  options, final boolean show) {
     this.options = options;
         this.show = show;
-        this.view = view;
+
         decimalNumber = 2000000000000L-AccountID;
 
 
@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
             public void run() {
 
                 Log.d("debug", "SwitchCCCreateStateThread called !!--- AccountID:  " + AccountID + "Decimalnumber: " + decimalNumber + ", SaveOptions: " + options + ", Show Cluster Code: " + show);
-                if (options == ClusterCodeFragment.SaveOptions.LIBARY && clusterCodePng.exists()) {
+                if (options == ClusterCodeFragment.LIBARY && clusterCodePng.exists()) {
                     Log.d("debug", "Create no new CC");
                     updatingUI();
                 } else {
@@ -321,12 +321,12 @@ import java.util.concurrent.TimeUnit;
                 Log.d("debug", "Case:  " + options);
                 switch (options) {
 
-                    case CREATE:
+                    case ClusterCodeFragment.CREATE:
                         //Take the image from the method
                         clusterCodeFragment.showClusterCode(clusterCodeSave.getSingleDrawable());
                         break;
 
-                    case LIBARY:
+                    case ClusterCodeFragment.LIBARY:
                         if (clusterCodePng.exists()) {
                             //Take the image from the local storage
                             Log.d("debug", "exists:  " + clusterCodePng.exists());
@@ -341,7 +341,7 @@ import java.util.concurrent.TimeUnit;
                         }
                         break;
 
-                    case OVERRIDE:
+                    case ClusterCodeFragment.OVERRIDE:
                         //Save it to local storage
                         clusterCodeSave.saveClusterCode();
                         if (show) {

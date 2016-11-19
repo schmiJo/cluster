@@ -19,9 +19,7 @@ import com.media.cluster.cluster.R;
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFinishedFragment extends Fragment {
-    private View layout;
-    private TextView welcomeMessage;
-    private FloatingActionButton addServices;
+
 
     public RegisterFinishedFragment() {
 
@@ -32,9 +30,9 @@ public class RegisterFinishedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        layout = inflater.inflate(R.layout.fragment_register_finished, container, false);
-        welcomeMessage = (TextView) layout.findViewById(R.id.register_finished_welcome_message);
-        addServices = (FloatingActionButton)layout.findViewById(R.id.register_finished_add_service_fab);
+        View layout = inflater.inflate(R.layout.fragment_register_finished, container, false);
+        TextView welcomeMessage = (TextView) layout.findViewById(R.id.register_finished_welcome_message);
+        FloatingActionButton addServices = (FloatingActionButton)layout.findViewById(R.id.register_finished_add_service_fab);
         addServices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,11 +45,11 @@ public class RegisterFinishedFragment extends Fragment {
     }
 
     public static void setClusterCode(Context context, int id) {
-        ClusterCodeFragment.switchCCCreateState(context, id, ClusterCodeFragment.SaveOptions.OVERRIDE, true);
+        ClusterCodeFragment.switchCCCreateState(context, id, ClusterCodeFragment.OVERRIDE, true);
     }
 
     public static void setCodeInfo(Context context) {
-        GetUserData.getProfileID(context, RegisterActivity.getClustername(), GetUserData.Usage.Register);
+        GetUserData.getProfileID(context, RegisterActivity.getClustername(), GetUserData.Register);
     }
 
 }

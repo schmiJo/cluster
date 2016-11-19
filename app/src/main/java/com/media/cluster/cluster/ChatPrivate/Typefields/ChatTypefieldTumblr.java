@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.media.cluster.cluster.ChatPrivate.PrivateChatActivity;
@@ -31,7 +30,6 @@ public class ChatTypefieldTumblr extends Fragment {
 
     private EditText typefield;
     private ImageButton sendButton;
-    private LinearLayout root;
     private CardView cardview;
 
     @Override
@@ -42,7 +40,6 @@ public class ChatTypefieldTumblr extends Fragment {
         layout = inflater.inflate(R.layout.fragment_chat_typefield_tumblr, container, false);
         sendButton = (ImageButton) layout.findViewById(R.id.typefield_tumblr_send);
 
-        root = (LinearLayout) layout.findViewById(R.id.typefield_tumblr_root);
         cardview = (CardView) layout.findViewById(R.id.typefield_tumblr_card);
 
         typefield = (EditText) layout.findViewById(R.id.typefield_tumblr_input);
@@ -103,7 +100,7 @@ public class ChatTypefieldTumblr extends Fragment {
     }
     private void handleSendButtonCllick(){
         if (!typefield.getText().toString().trim().equals("")) {
-            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.SocialMedias.TUMBLR);
+            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.TUMBLR);
             MediaPlayer messageSound = MediaPlayer.create(getContext(),R.raw.facebook_pop);
             messageSound.start();
             typefield.setText("");

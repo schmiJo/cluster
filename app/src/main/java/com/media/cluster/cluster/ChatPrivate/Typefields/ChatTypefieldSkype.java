@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.media.cluster.cluster.ChatPrivate.PrivateChatActivity;
@@ -27,7 +26,6 @@ public class ChatTypefieldSkype extends Fragment {
 
     private ImageButton keyboardButton, smileysButton, stickerButton, contactButton, documentsButton, imageButton, cameraButton, videoButton, locationButton, sendButton;
     private EditText typefield;
-    private LinearLayout lowerLinearLayout;
     private CardView cardview;
 
 
@@ -49,7 +47,6 @@ public class ChatTypefieldSkype extends Fragment {
         sendButton = (ImageButton) layout.findViewById(R.id.typefield_skype_send);
 
         cardview = (CardView) layout.findViewById(R.id.typefield_skype_card);
-        lowerLinearLayout = (LinearLayout) layout.findViewById(R.id.typefield_skype_typefield_root);
 
 
         keyboardButton.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +179,7 @@ public class ChatTypefieldSkype extends Fragment {
     private void handleSendButtonCllick() {
         switchIconState(sendButton);
         if (!typefield.getText().toString().trim().equals("")) {
-            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.SocialMedias.SKYPE);
+            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.SKYPE);
             MediaPlayer messageSound = MediaPlayer.create(getContext(), R.raw.skype_pop);
             messageSound.start();
             typefield.setText("");

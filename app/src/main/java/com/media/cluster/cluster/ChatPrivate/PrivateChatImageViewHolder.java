@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import com.media.cluster.cluster.R;
 
-public class PrivateChatImageViewHolder extends RecyclerView.ViewHolder{
+ class PrivateChatImageViewHolder extends RecyclerView.ViewHolder{
 
     private TextView time;
     private ImageView image, media;
     private View root;
 
-    public PrivateChatImageViewHolder(View itemView) {
+     PrivateChatImageViewHolder(View itemView) {
         super(itemView);
 
         time = (TextView) itemView.findViewById(R.id.private_image_time);
@@ -32,7 +32,7 @@ public class PrivateChatImageViewHolder extends RecyclerView.ViewHolder{
         return media;
     }
 
-    public View getRoot() {
+     View getRoot() {
         return root;
     }
 

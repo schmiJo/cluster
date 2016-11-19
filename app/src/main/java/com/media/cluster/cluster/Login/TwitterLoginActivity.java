@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.media.cluster.cluster.ClusterDBConnect.ImplementUserData;
 import com.media.cluster.cluster.R;
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
@@ -32,8 +31,8 @@ public class TwitterLoginActivity extends AppCompatActivity {
             @Override
             public void success(Result<TwitterSession> result) {
                 String twitterUsername = result.data.getUserName();
-                ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.TWITTER_USERNAME,twitterUsername,clustername,password);
-                AddServicesActivity.addRow(AddServicesActivity.Service.TWITTER,twitterUsername, getApplicationContext(),true);
+                ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.TWITTER_USERNAME,twitterUsername,clustername,password);
+                AddServicesActivity.addRow(AddServicesActivity.TWITTER,twitterUsername, getApplicationContext(),true);
                 finish();
             }
 

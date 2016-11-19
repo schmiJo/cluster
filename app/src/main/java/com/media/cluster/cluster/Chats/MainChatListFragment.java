@@ -4,7 +4,6 @@ package com.media.cluster.cluster.Chats;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.media.cluster.cluster.ChatPrivate.PrivateChatActivity;
-import com.media.cluster.cluster.Main.MainActivity;
 import com.media.cluster.cluster.R;
 
 import java.util.ArrayList;
@@ -32,7 +30,6 @@ public class MainChatListFragment extends Fragment {
     View selectedView;
     int selectedPosition;
     LinearLayoutManager linearLayoutManager;
-    MainActivity mainActivity;
 
 
     public MainChatListFragment() {
@@ -60,7 +57,7 @@ public class MainChatListFragment extends Fragment {
 
 
                 if(adapter.selected >0 ){
-                    adapter.changeLongClickIon(position,view);
+                    adapter.changeLongClickIon(view);
                 }else{
                     Intent openPrivateChat = new Intent(getContext(), PrivateChatActivity.class);
                     openPrivateChat.putExtra("Clustername",adapter.getCurrentClustername(view));
@@ -73,7 +70,7 @@ public class MainChatListFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                adapter.changeLongClickIon(position,view);
+                adapter.changeLongClickIon(view);
                 selectedPosition = position;
                 selectedView = view;
 
@@ -110,8 +107,8 @@ public class MainChatListFragment extends Fragment {
         String[] clusternames = {"clusterjonas", "clustermanuel", "clusterbob15", "xXGüntherXx","clusterjonas", "clustermanuel", "clusterbob15", "xXGüntherXx","clusterjonas", "clustermanuel", "clusterbob15", "xXGüntherXx"};
         String[] lastMessage = {"Hallo, wann kommst du heute nach hause wir warten schon?", " Schaue dir Material Improvements auf YouTube an: www.youtube.com/asdf", "blablablablablba", "Hey","Hallo, wann kommst du heute nach hause wir warten schon?", " Schaue dir Material Improvements auf YouTube an: www.youtube.com/asdf", "blablablablablba", "Hey","Hallo, wann kommst du heute nach hause wir warten schon?", " Schaue dir Material Improvements auf YouTube an: www.youtube.com/asdf", "blablablablablba", "Hey"};
         String[] messageTime = {"9:10 PM", "7:34 PM", "5:12 PM", "10:54 AM","9:10 PM", "7:34 PM", "5:12 PM", "10:54 AM","9:10 PM", "7:34 PM", "5:12 PM", "10:54 AM"};
-        ChatsRowDataModel.MessageIcon[] messageIcon = {ChatsRowDataModel.MessageIcon.NULL, ChatsRowDataModel.MessageIcon.RECEIVED, ChatsRowDataModel.MessageIcon.SENDING, ChatsRowDataModel.MessageIcon.SEND,ChatsRowDataModel.MessageIcon.NULL, ChatsRowDataModel.MessageIcon.RECEIVED, ChatsRowDataModel.MessageIcon.SENDING, ChatsRowDataModel.MessageIcon.SEND,ChatsRowDataModel.MessageIcon.NULL, ChatsRowDataModel.MessageIcon.RECEIVED, ChatsRowDataModel.MessageIcon.SENDING, ChatsRowDataModel.MessageIcon.SEND};
-        ChatsRowDataModel.ChatExtraIcon[] chatExtraIcons = {ChatsRowDataModel.ChatExtraIcon.NEW, ChatsRowDataModel.ChatExtraIcon.NULL, ChatsRowDataModel.ChatExtraIcon.NULL, ChatsRowDataModel.ChatExtraIcon.MUTE,ChatsRowDataModel.ChatExtraIcon.NEW, ChatsRowDataModel.ChatExtraIcon.NULL, ChatsRowDataModel.ChatExtraIcon.NULL, ChatsRowDataModel.ChatExtraIcon.MUTE,ChatsRowDataModel.ChatExtraIcon.NEW, ChatsRowDataModel.ChatExtraIcon.NULL, ChatsRowDataModel.ChatExtraIcon.NULL, ChatsRowDataModel.ChatExtraIcon.MUTE};
+        int[] messageIcon = {ChatsRowDataModel.NULL, ChatsRowDataModel.RECEIVED, ChatsRowDataModel.SENDING, ChatsRowDataModel.SEND,ChatsRowDataModel.NULL, ChatsRowDataModel.RECEIVED, ChatsRowDataModel.SENDING, ChatsRowDataModel.SEND,ChatsRowDataModel.NULL, ChatsRowDataModel.RECEIVED, ChatsRowDataModel.SENDING, ChatsRowDataModel.SEND};
+        int[] chatExtraIcons = {ChatsRowDataModel.NEW, ChatsRowDataModel.NULL, ChatsRowDataModel.NULL, ChatsRowDataModel.MUTE,ChatsRowDataModel.NEW, ChatsRowDataModel.NULL, ChatsRowDataModel.NULL, ChatsRowDataModel.MUTE,ChatsRowDataModel.NEW, ChatsRowDataModel.NULL, ChatsRowDataModel.NULL, ChatsRowDataModel.MUTE};
         int[] newMessageCounter = {2, 0, 0, 0,2, 0, 0, 0,2, 0, 0, 0};
 
 

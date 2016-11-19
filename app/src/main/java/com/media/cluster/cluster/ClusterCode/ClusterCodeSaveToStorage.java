@@ -1,6 +1,5 @@
 package com.media.cluster.cluster.ClusterCode;
 
-import android.app.Activity;
 import android.content.Context;
 
 
@@ -31,7 +30,7 @@ class ClusterCodeSaveToStorage {
      void saveCodeToStorage(int id) {
 
 
-        ClusterCodeFragment.switchCCCreateState(context, id, ClusterCodeFragment.SaveOptions.OVERRIDE, false);
+        ClusterCodeFragment.switchCCCreateState(context, id, ClusterCodeFragment.OVERRIDE, false);
 
 
         File dir = new File("sdcard/pictures/Cluster");

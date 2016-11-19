@@ -25,49 +25,49 @@ class PagerAdapterPrivateChat extends FragmentPagerAdapter {
             case 0:
                 switch (GetUserData.mediaToChatPrivate()[0]) {
 
-                    case FACEBOOK:
+                    case GetUserData.FACEBOOK:
                         return new ChatTypefieldFacebook();
-                    case SKYPE:
+                    case GetUserData.SKYPE:
                         return new ChatTypefieldSkype();
-                    case TUMBLR:
+                    case GetUserData.TUMBLR:
                         return new ChatTypefieldTumblr();
-                    case TWITTER:
+                    case GetUserData.TWITTER:
                         return new ChatTypefieldTwitter();
                 }
             case 1:
                 switch (GetUserData.mediaToChatPrivate()[1]) {
 
-                    case FACEBOOK:
+                    case GetUserData.FACEBOOK:
                         return new ChatTypefieldFacebook();
-                    case SKYPE:
+                    case GetUserData.SKYPE:
                         return new ChatTypefieldSkype();
-                    case TUMBLR:
+                    case GetUserData.TUMBLR:
                         return new ChatTypefieldTumblr();
-                    case TWITTER:
+                    case GetUserData.TWITTER:
                         return new ChatTypefieldTwitter();
                 }
             case 2:
                 switch (GetUserData.mediaToChatPrivate()[2]) {
 
-                    case FACEBOOK:
+                    case GetUserData.FACEBOOK:
                         return new ChatTypefieldFacebook();
-                    case SKYPE:
+                    case GetUserData.SKYPE:
                         return new ChatTypefieldSkype();
-                    case TUMBLR:
+                    case GetUserData.TUMBLR:
                         return new ChatTypefieldTumblr();
-                    case TWITTER:
+                    case GetUserData.TWITTER:
                         return new ChatTypefieldTwitter();
                 }
             case 3:
                 switch (GetUserData.mediaToChatPrivate()[3]) {
 
-                    case FACEBOOK:
+                    case GetUserData.FACEBOOK:
                         return new ChatTypefieldFacebook();
-                    case SKYPE:
+                    case GetUserData.SKYPE:
                         return new ChatTypefieldSkype();
-                    case TUMBLR:
+                    case GetUserData.TUMBLR:
                         return new ChatTypefieldTumblr();
-                    case TWITTER:
+                    case GetUserData.TWITTER:
                         return new ChatTypefieldTwitter();
                 }
 

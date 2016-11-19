@@ -20,16 +20,32 @@ import java.util.Map;
 
 public class ImplementUserData {
 
-    private static String URL;
-    private static StringRequest stringRequest;
-    private static RequestQueue requestQueue;
 
-   public  enum Attribute {FIRSTNAME, SURNAME, CLUSTERNAME, PASSWORD, PHONECOUNTRY,PHONENUMBER,PHONEVISIBILITY , ABOUTME, HOMETOWN, GENDER, BIRTHDAY, PROFESSION, RELATIONSHIP, EDUCATION, JOBDESCRIPTION, FACEBOOK_EMAIL, TWITTER_USERNAME, TUMBLR_USERNAME, SKYPE_USERNAME, PROFILE_PIC}
+    private static final  int  FIRSTNAME=0 ;
+    private static final  int  SURNAME= 1;
+    private static final  int CLUSTERNAME = 2;
+    private static final  int PASSWORD = 3;
+    public static final  int  PHONECOUNTRY= 4;
+    public static final  int PHONENUMBER = 5;
+    public static final  int PHONEVISIBILITY = 6;
+    public static final  int ABOUTME = 7;
+    private static final  int HOMETOWN = 8;
+    private static final  int GENDER = 9;
+    private static final  int BIRTHDAY = 10;
+    public static final  int  PROFESSION= 11 ;
+    public static final  int RELATIONSHIP = 12;
+    public static final  int EDUCATION = 13;
+    public static final  int JOBDESCRIPTION =14 ;
+    public static final  int FACEBOOK_EMAIL = 15 ;
+    public static final  int TWITTER_USERNAME = 16;
+    public static final  int TUMBLR_USERNAME = 17;
+    public static final  int  SKYPE_USERNAME= 18;
+    public static final  int PROFILE_PIC = 19 ;
 
-    public static void implementUser(final Context context, final Attribute attribute, final String value, final String clustername, final String password){
-        requestQueue = Volley.newRequestQueue(context);
-        URL = "http://social-cluster.com/user_implementation.php";
-        stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+    public static void implementUser(final Context context, final int attribute, final String value, final String clustername, final String password){
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String URL = "http://social-cluster.com/user_implementation.php";
+         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 

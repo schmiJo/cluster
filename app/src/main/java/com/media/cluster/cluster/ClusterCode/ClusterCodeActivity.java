@@ -45,7 +45,7 @@ public class ClusterCodeActivity extends AppCompatActivity {
             }
         });
 
-        ClusterCodeFragment.switchCCCCreateState(getApplicationContext(), id, ClusterCodeFragment.SaveOptions.LIBARY);
+        ClusterCodeFragment.switchCCCCreateState(getApplicationContext(), id, ClusterCodeFragment.LIBARY);
 
 
 

@@ -20,8 +20,6 @@ import com.media.cluster.cluster.ClusterDBConnect.ImplementUserData;
 import com.media.cluster.cluster.ClusterDBConnect.GetUserData;
 import com.media.cluster.cluster.R;
 import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 public class AddServicesActivity extends AppCompatActivity {
 
@@ -29,20 +27,23 @@ public class AddServicesActivity extends AppCompatActivity {
     private static View IconContainer, noSelectedInclude;
     private static ViewGroup IconContainerGroup;
     private static ViewGroup ContainerGroup;
-    private TwitterSession twitterSession;
 
     //Row views
     private static View rowFacebook, rowTwitter, rowTumblr, rowSkype;
     private static TextView textFacebook, textTwitter, textTumblr, textSkype;
 
-    enum Service {FACEBOOK, TWITTER, TUMBLR, SKYPE}
+    public static final int FACEBOOK =0;
+    public static final int TWITTER=1;
+    public static final int TUMBLR=2;
+    public static final int SKYPE=3;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_services);
 
-        twitterSession= Twitter.getSessionManager().getActiveSession();
         textSkype = (TextView) findViewById(R.id.add_service_skype_row_username);
         textFacebook = (TextView) findViewById(R.id.add_service_facebook_row_username);
         textTumblr = (TextView) findViewById(R.id.add_service_tumblr_row_username);
@@ -203,22 +204,22 @@ public class AddServicesActivity extends AppCompatActivity {
     }
 
     public void deleteFacebookRow(View view) {
-        deleteRow(Service.FACEBOOK);
+        deleteRow(FACEBOOK);
     }
 
     public void deleteTumblrRow(View view) {
-        deleteRow(Service.TUMBLR);
+        deleteRow(TUMBLR);
     }
 
     public void deleteTwitterRow(View view) {
-        deleteRow(Service.TWITTER);
+        deleteRow(TWITTER);
     }
 
     public void deleteSkypeRow(View view) {
-        deleteRow(Service.SKYPE);
+        deleteRow(SKYPE);
     }
 
-    private void deleteRow(final Service service) {
+    private void deleteRow(final int service) {
         String serviceString ;
         switch (service){
             case FACEBOOK:
@@ -254,7 +255,7 @@ public class AddServicesActivity extends AppCompatActivity {
                         rowFacebook.setVisibility(View.GONE);
 
                         TransitionManager.beginDelayedTransition(ContainerGroup);
-                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.FACEBOOK_EMAIL,"",clustername,password);
+                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.FACEBOOK_EMAIL,"",clustername,password);
 
                         break;
                     case TUMBLR:
@@ -265,7 +266,7 @@ public class AddServicesActivity extends AppCompatActivity {
                         rowTumblr.setVisibility(View.GONE);
                         setIconVisible("tumblr", getApplicationContext(),false);
                         TransitionManager.beginDelayedTransition(ContainerGroup);
-                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.TUMBLR_USERNAME,"",clustername,password);
+                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.TUMBLR_USERNAME,"",clustername,password);
 
                         break;
                     case TWITTER:
@@ -276,7 +277,7 @@ public class AddServicesActivity extends AppCompatActivity {
                         rowTwitter.setVisibility(View.GONE);
                         setIconVisible("twitter", getApplicationContext(),false);
                         TransitionManager.beginDelayedTransition(ContainerGroup);
-                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.TWITTER_USERNAME,"",clustername,password);
+                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.TWITTER_USERNAME,"",clustername,password);
                         Twitter.logOut();
 
                         break;
@@ -288,7 +289,7 @@ public class AddServicesActivity extends AppCompatActivity {
                         rowSkype.setVisibility(View.GONE);
                         setIconVisible("skype", getApplicationContext(),false);
                         TransitionManager.beginDelayedTransition(ContainerGroup);
-                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.Attribute.SKYPE_USERNAME,"",clustername,password);
+                        ImplementUserData.implementUser(getApplicationContext(), ImplementUserData.SKYPE_USERNAME,"",clustername,password);
 
                         break;
                 }
@@ -324,7 +325,7 @@ public class AddServicesActivity extends AppCompatActivity {
 
     }
 
-    public static void addRow(Service service, String username, Context context, boolean animation) {
+    public static void addRow(int service, String username, Context context, boolean animation) {
         switch (service) {
             case FACEBOOK:
                 textFacebook.setText(username);
@@ -379,25 +380,25 @@ public class AddServicesActivity extends AppCompatActivity {
 
     public static void used(Context context, String facebook_email,String tumblr_username,String twitter_username, String skype_username){
         if(!facebook_email.trim().equals("null") && !facebook_email.trim().equals("") ){
-            addRow(Service.FACEBOOK,facebook_email,context, false);
+            addRow(FACEBOOK,facebook_email,context, false);
             icFacebook.setVisibility(View.GONE);
 
         }
 
         if(!tumblr_username.trim().equals("null") && !tumblr_username.trim().equals("")){
-            addRow(Service.TUMBLR,tumblr_username,context, false);
+            addRow(TUMBLR,tumblr_username,context, false);
             icTumblr.setVisibility(View.GONE);
 
         }
 
         if(!twitter_username.trim().equals("null") && !twitter_username.trim().equals("")){
-            addRow(Service.TWITTER,twitter_username, context, false);
+            addRow(TWITTER,twitter_username, context, false);
             icTwitter.setVisibility(View.GONE);
 
         }
 
         if(!skype_username.trim().equals("null")&& !skype_username.trim().equals("")){
-            addRow(Service.SKYPE,skype_username,context, false);
+            addRow(SKYPE,skype_username,context, false);
             icSkype.setVisibility(View.GONE);
 
         }

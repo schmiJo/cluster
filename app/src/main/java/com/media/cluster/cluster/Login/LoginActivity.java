@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String URL = "http://social-cluster.com/user_login.php";
 
     Button loginSubmit;
-    private Button fab;
     private ViewGroup layout;
     private TextView errorMessage ;
 
@@ -54,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         loginNameEditText = (EditText) findViewById(R.id.login_username_input);
         loginPassEditText = (EditText) findViewById(R.id.login_password_input);
         loginSubmit = (Button) findViewById(R.id.loginSubmitButton);
-        fab = (Button) findViewById(R.id.loginRegisterButton);
         errorMessage = (TextView) findViewById(R.id.loginErrorMessage);
 
         loginPassEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -70,10 +68,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void passwordForgotClick(View view){
-        Toast.makeText(getApplicationContext(),"click",Toast.LENGTH_SHORT).show();
     }
 
     public void sumbitLoginInfo(View view){
@@ -127,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginEdit.apply();
 
 
-                    GetUserData.getProfileID(getApplicationContext(),loginNameEditText.getText().toString().trim(), GetUserData.Usage.Login);
+                    GetUserData.getProfileID(getApplicationContext(),loginNameEditText.getText().toString().trim(), GetUserData.Login);
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     new Handler().postDelayed(new Runnable() {

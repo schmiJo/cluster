@@ -20,8 +20,10 @@ public class ClusterCodeFragment extends Fragment {
 
     View layout;
     static ImageView clusterCodeHolder;
-    public enum SaveOptions {CREATE, LIBARY, OVERRIDE}
-    View advancedView;
+    public static final int CREATE= 0;
+    public static final int LIBARY= 1;
+    public static final int OVERRIDE = 2;
+
     static ProgressBar progressBar;
 
 
@@ -41,21 +43,14 @@ public class ClusterCodeFragment extends Fragment {
     }
 
 
-    public static void switchCCCCreateState(Context context, int AccountID, SaveOptions options) {
+    public static void switchCCCCreateState(Context context, int AccountID, int options) {
 
         switchCCCreateState(context, AccountID, options, true);
     }
 
-    public static void switchCCCreateState(Context context, int AccountId, SaveOptions options, boolean show) {
+    public static void switchCCCreateState(Context context, int AccountId, int options, boolean show) {
         SwitchCCCreateStateThread switchCCCreateStateThread = new SwitchCCCreateStateThread();
-        ClusterCodeFragment clusterCodeFragment = new ClusterCodeFragment();
-        switchCCCreateStateThread.switchCCCreateStateThread(clusterCodeFragment.getAdvancedView(context), context.getResources(), AccountId, options, show);
-    }
-
-    public View getAdvancedView(Context context) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        advancedView = inflater.inflate(R.layout.fragment_cluster_code, null);
-        return advancedView;
+        switchCCCreateStateThread.switchCCCreateStateThread( context.getResources(), AccountId, options, show);
     }
 
 

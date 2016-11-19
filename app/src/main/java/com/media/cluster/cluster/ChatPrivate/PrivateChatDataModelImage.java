@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import com.media.cluster.cluster.R;
 
 
-public class PrivateChatDataModelImage {
+ class PrivateChatDataModelImage {
     Bitmap image;
     String sendingTime;
     int backgroundID;
@@ -14,21 +14,21 @@ public class PrivateChatDataModelImage {
 
 
 
-    public PrivateChatDataModelImage(String sendingTime, Bitmap image, PrivateChatActivity.SocialMedias socialMedias) {
+     PrivateChatDataModelImage(String sendingTime, Bitmap image, int socialMedias) {
         this.sendingTime = sendingTime;
         this.image = image;
 
         switch (socialMedias){
-            case FACEBOOK:
+            case PrivateChatActivity.FACEBOOK:
                 backgroundID = R.drawable.chat_bubble_facebook;
                 break;
-            case SKYPE:
+            case  PrivateChatActivity.SKYPE:
                 backgroundID = R.drawable.chat_bubble_skype;
                 break;
-            case TWITTER:
+            case  PrivateChatActivity.TWITTER:
                 backgroundID = R.drawable.chat_bubble_twitter;
                 break;
-            case TUMBLR:
+            case  PrivateChatActivity.TUMBLR:
                 backgroundID = R.drawable.chat_bubble_tumblr;
                 break;
         }
