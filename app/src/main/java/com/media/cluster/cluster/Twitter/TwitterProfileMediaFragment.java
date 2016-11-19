@@ -47,7 +47,6 @@ public class TwitterProfileMediaFragment extends Fragment {
         media.add(new TwitterProfileMediaImageDataModel(BitmapFactory.decodeResource(getResources(),R.drawable.men_unidentified)));
         media.add(new TwitterProfileMediaImageDataModel(BitmapFactory.decodeResource(getResources(),R.drawable.woman_undidentified)));
         media.add(new TwitterProfileMediaImageDataModel(BitmapFactory.decodeResource(getResources(),R.drawable.private_chat_background_default)));
-        media.add(new TwitterProfileMediaImageDataModel(BitmapFactory.decodeResource(getResources(),R.drawable.alien_unidentified)));
         return media;
     }
 
