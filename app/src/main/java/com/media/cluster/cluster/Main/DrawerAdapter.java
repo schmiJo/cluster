@@ -2,6 +2,7 @@ package com.media.cluster.cluster.Main;
 
 
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,8 @@ import java.util.List;
 
      DrawerAdapter(Context context, List<DrawerRowDataModel> data) {
         inflater =LayoutInflater.from(context);
-        this.data = data;}
+        this.data = data;
+     }
 
 
 //onCreateViewHolder
@@ -35,6 +37,7 @@ import java.util.List;
     @Override
     public void onBindViewHolder(DrawerViewHolder holder, int position) {
         DrawerRowDataModel current = data.get(position);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         holder.drawerText.setText(current.title);
         holder.drawerIcon.setImageResource(current.iconId);}
 

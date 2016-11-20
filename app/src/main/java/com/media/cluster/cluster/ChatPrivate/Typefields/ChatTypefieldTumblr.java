@@ -1,11 +1,11 @@
 package com.media.cluster.cluster.ChatPrivate.Typefields;
 
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.media.cluster.cluster.ChatPrivate.PrivateChatActivity;
 import com.media.cluster.cluster.R;
 
 
@@ -30,7 +29,21 @@ public class ChatTypefieldTumblr extends Fragment {
 
     private EditText typefield;
     private ImageButton sendButton;
-    private CardView cardview;
+    MessageListenerTu messageListener;
+
+    public interface MessageListenerTu{
+         void messageTumblr(String message);
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            messageListener = (MessageListenerTu) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString());
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +53,6 @@ public class ChatTypefieldTumblr extends Fragment {
         layout = inflater.inflate(R.layout.fragment_chat_typefield_tumblr, container, false);
         sendButton = (ImageButton) layout.findViewById(R.id.typefield_tumblr_send);
 
-        cardview = (CardView) layout.findViewById(R.id.typefield_tumblr_card);
 
         typefield = (EditText) layout.findViewById(R.id.typefield_tumblr_input);
         typefield.addTextChangedListener(new TextWatcher() {
@@ -66,13 +78,13 @@ public class ChatTypefieldTumblr extends Fragment {
 
                 } else {
                     sendButton.setImageResource(R.drawable.typefield_ic_tumblr_3_send_clicked);
-                    if (typefield.getLineCount() < 2) {
+                    /*if (typefield.getLineCount() < 2) {
                         PrivateChatActivity.setRecyclerViewMargin(cardview.getHeight());
                     } else if (typefield.getLineCount() == 2) {
                         PrivateChatActivity.setRecyclerViewMargin(cardview.getHeight());
                     } else if (typefield.getLineCount() > 2) {
                         PrivateChatActivity.setRecyclerViewMargin(cardview.getHeight());
-                    }
+                    }*/
                 }
 
 
@@ -100,7 +112,7 @@ public class ChatTypefieldTumblr extends Fragment {
     }
     private void handleSendButtonCllick(){
         if (!typefield.getText().toString().trim().equals("")) {
-            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.TUMBLR);
+            messageListener.messageTumblr(typefield.getText().toString());
             MediaPlayer messageSound = MediaPlayer.create(getContext(),R.raw.facebook_pop);
             messageSound.start();
             typefield.setText("");
@@ -108,7 +120,7 @@ public class ChatTypefieldTumblr extends Fragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    PrivateChatActivity.setRecyclerViewMargin(cardview.getHeight());
+                   //PrivateChatActivity.setRecyclerViewMargin(cardview.getHeight());
                 }
             },50  );
         }

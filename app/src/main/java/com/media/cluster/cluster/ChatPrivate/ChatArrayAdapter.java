@@ -2,6 +2,7 @@ package com.media.cluster.cluster.ChatPrivate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Handler;
@@ -11,25 +12,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.media.cluster.cluster.General.DetailGifActivity;
 import com.media.cluster.cluster.General.DetailPictureActivity;
 import com.media.cluster.cluster.R;
 
 import java.util.List;
 
+import pl.droidsonroids.gif.GifDrawable;
 
- class ChatArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+class ChatArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Object> items;
     private Context context;
-
+    private Resources resources;
     final static private int TEXT = 0;
     final static private int IMAGE = 1;
+     final static private int GIF = 2;
 
 
 
 
-     ChatArrayAdapter(List<Object> items, Context context) {
+     ChatArrayAdapter(List<Object> items, Context context, Resources resources) {
         this.items = items;
          this.context = context;
+         this.resources = resources;
     }
 
     @Override
@@ -45,6 +51,10 @@ import java.util.List;
             case IMAGE:
                 View imageView = inflater.inflate(R.layout.chat_row_image_layout, parent, false);
                 viewHolder = new PrivateChatImageViewHolder(imageView);
+                break;
+            case GIF:
+                View gifView = inflater.inflate(R.layout.chat_row_gif_layout, parent, false);
+                viewHolder = new PrivateChatGifViewHolder(gifView);
                 break;
             default:
                 View defaultTextView = inflater.inflate(R.layout.chat_row_text_layout, parent, false);
@@ -67,7 +77,9 @@ import java.util.List;
                 PrivateChatImageViewHolder imageVH = (PrivateChatImageViewHolder) holder;
                 configureImageViewHoder(imageVH, position);
                 break;
-
+            case GIF:
+                PrivateChatGifViewHolder gifVH = (PrivateChatGifViewHolder) holder;
+                configureGifViewHoder(gifVH, position, resources);
 
         }
 
@@ -149,6 +161,7 @@ import java.util.List;
                     @Override
                     public void onClick(View view) {
                         Intent i = new Intent(context, DetailPictureActivity.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(i);
                         DetailPictureActivity.setDrawable(imageVH.getImage().getDrawable());
                     }
@@ -160,6 +173,68 @@ import java.util.List;
 
 
     }
+
+     private void configureGifViewHoder(final  PrivateChatGifViewHolder gifVH, int position,final  Resources res){
+         final PrivateChatDataModelGif dataModel = (PrivateChatDataModelGif) items.get(position);
+
+
+         new Handler().post(new Runnable() {
+             @Override
+             public void run() {
+                 gifVH.getTime().setText(dataModel.sendingTime);
+                 gifVH.getRoot().setBackgroundResource(dataModel.backgroundID);
+                 switch (dataModel.backgroundID){
+                     case R.drawable.chat_bubble_facebook:
+                         gifVH.getMedia().setImageResource(R.drawable.round_service_ic_facebook);
+                         break;
+                     case R.drawable.chat_bubble_skype:
+                         gifVH.getMedia().setImageResource(R.drawable.round_service_ic_skype);
+                         break;
+                     case R.drawable.chat_bubble_twitter:
+                         gifVH.getMedia().setImageResource(R.drawable.round_service_ic_twitter);
+                         break;
+                     case R.drawable.chat_bubble_tumblr:
+                         gifVH.getMedia().setImageResource(R.drawable.round_service_ic_tumblr);
+                         break;
+                 }
+
+                 gifVH.getImage().setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View view) {
+                         Intent i = new Intent(context, DetailGifActivity.class);
+                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                         context.startActivity(i);
+                         DetailGifActivity.setDrawable(GifDrawable.createFromResource(res,R.drawable.aaa_test_bear_gif));
+
+
+                     }
+                 });
+                 gifVH.getImage().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                     @Override
+                     public void onGlobalLayout() {
+                         /*ViewGroup.LayoutParams params = gifVH.getImage().getLayoutParams();
+                         Bitmap bitmap = Utils.drawableToBitmap(GifDrawable.createFromResource(res,R.drawable.aaa_test_bear_gif));
+                         params.height = ((bitmap.getHeight()+1) / (bitmap.getWidth()+1)) * 300;
+                         gifVH.getImage().setLayoutParams(params);
+                         */
+
+
+
+                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                             gifVH.getImage().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                         } else {
+                             gifVH.getImage().getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                         }
+
+                     }
+                 });
+                 gifVH.getImage().setImageDrawable(GifDrawable.createFromResource(res,R.drawable.aaa_test_bear_gif));
+
+             }});}
+
+
+
+
 
 
 
@@ -174,6 +249,8 @@ import java.util.List;
             return TEXT;
         } else if(items.get(position)instanceof  PrivateChatDataModelImage) {
             return IMAGE;
+        }else if(items.get(position)instanceof  PrivateChatDataModelGif) {
+            return  GIF;
         }else{
             return -1;
         }

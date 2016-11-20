@@ -67,20 +67,7 @@ import java.util.List;
 
     private void configureTwitterViewHolder(final TwitterRowViewHolder twitterVH, int position){
         final TweetData tweetData = (TweetData) items.get(position);
-        TweetUtils.loadTweet(tweetData.id, new Callback<Tweet>() {
-            @Override
-            public void success(Result<Tweet> result) {
 
-                CompactTweetView compactTweetView = new CompactTweetView(tweetData.context,result.data);
-                compactTweetView.setTweetActionsEnabled(true);
-                twitterVH.getTwitterRowLayout().addView(compactTweetView);
-            }
-
-            @Override
-            public void failure(TwitterException e) {
-
-            }
-        });
     }
 
     @Override

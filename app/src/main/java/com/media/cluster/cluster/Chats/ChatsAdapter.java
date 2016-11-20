@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ import java.util.List;
         inflater = LayoutInflater.from(context);
         this.data = data;
         this.context = context;
+         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
 

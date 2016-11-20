@@ -25,29 +25,38 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.media.cluster.cluster.Account.AccountActivity;
+import com.media.cluster.cluster.ChatPrivate.Typefields.ChatTypefieldFacebook;
+import com.media.cluster.cluster.ChatPrivate.Typefields.ChatTypefieldSkype;
+import com.media.cluster.cluster.ChatPrivate.Typefields.ChatTypefieldTumblr;
+import com.media.cluster.cluster.ChatPrivate.Typefields.ChatTypefieldTwitter;
 import com.media.cluster.cluster.ClusterDBConnect.GetUserData;
 import com.media.cluster.cluster.R;
 import com.media.cluster.cluster.SaveToExternalStorage.SaveBitmap;
 
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifDrawable;
 
-public class PrivateChatActivity extends AppCompatActivity {
+
+public class PrivateChatActivity extends AppCompatActivity implements ChatTypefieldFacebook.MessageListenerFB, ChatTypefieldSkype.MessageListenerSK,
+        ChatTypefieldTwitter.MessageListenerTw, ChatTypefieldTumblr.MessageListenerTu {
+
     private String clustername;
-    static ViewPager chatViewPager;
+    ViewPager chatViewPager;
     View facebookTypefield;
     View facebookCardview;
-    private static ImageView background;
-    static RecyclerView privateChatrecyclerView;
+    private ImageView background;
+    RecyclerView privateChatrecyclerView;
     static ArrayList<Object> messages = new ArrayList<>();
 
-    static public final int FACEBOOK =  0 ;
+
+    static public final int FACEBOOK = 0;
     static public final int SKYPE = 1;
-    static public final int TWITTER =2 ;
+    static public final int TWITTER = 2;
     static public final int TUMBLR = 3;
 
 
-    private static ChatArrayAdapter chatArrayAdapter;
+    private ChatArrayAdapter chatArrayAdapter;
     public static int heightFacebook;
     public static int heightTwitter;
     public static int marginFacebook;
@@ -69,7 +78,7 @@ public class PrivateChatActivity extends AppCompatActivity {
                 "privateChatPagerItem", Context.MODE_PRIVATE);
 
 
-        chatArrayAdapter = new ChatArrayAdapter(getPrivateChatData(), getApplicationContext());
+        chatArrayAdapter = new ChatArrayAdapter(getPrivateChatData(), getApplicationContext(), getResources());
 
         privateChatrecyclerView = (RecyclerView) findViewById(R.id.private_chat_recyclerview);
 
@@ -103,8 +112,6 @@ public class PrivateChatActivity extends AppCompatActivity {
         recyclerPagerMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
 
 
-
-
         //--------- Getting the name of the clicked chat-----------------------------
         Intent basicInfo = getIntent();
         setTitle(basicInfo.getStringExtra("Name"));
@@ -134,17 +141,16 @@ public class PrivateChatActivity extends AppCompatActivity {
         switchHeight(savedPagerItem);
         scrollToLastPosition();
     }
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         viewPagerItem.edit().putInt("privateChatPagerItem", chatViewPager.getCurrentItem()).apply();
         super.onSaveInstanceState(savedInstanceState);
     }
 
-    public static void sendChatMessage(String message, int socialMedias) {
 
-
+    public void sendChatMessage(String message, int socialMedias) {
         long milliseconds = System.currentTimeMillis();
-
         int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
         int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
         String time = hours + ":" + minutes;
@@ -212,7 +218,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
     }
 
-    public static void scrollToLastPosition() {
+    public void scrollToLastPosition() {
         privateChatrecyclerView.scrollToPosition(messages.size() - 1);
     }
 
@@ -248,16 +254,16 @@ public class PrivateChatActivity extends AppCompatActivity {
     }
 
 
-    public static void setRecyclerViewMargin(int marginBottom) {
+    public void setRecyclerViewMargin(int marginBottom) {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) privateChatrecyclerView.getLayoutParams();
         Log.d("debug", "setListViewMArgin: " + marginBottom);
-        if(marginBottom == 0 || marginBottom == 1){
+        if (marginBottom == 0 || marginBottom == 1) {
             marginBottom = marginFacebook;
-            params.setMargins(0, 0, 0, marginBottom );
+            params.setMargins(0, 0, 0, marginBottom);
             scrollToLastPosition();
-        }else if(marginBottom == 2 || marginBottom == 3){
+        } else if (marginBottom == 2 || marginBottom == 3) {
             marginBottom = marginTwitter;
-            params.setMargins(0, 0, 0, marginBottom );
+            params.setMargins(0, 0, 0, marginBottom);
             scrollToLastPosition();
         }
 
@@ -270,7 +276,8 @@ public class PrivateChatActivity extends AppCompatActivity {
 
     private ArrayList<Object> getPrivateChatData() {
         messages.add(new PrivateChatDataModelText("10:15", "bla bla bla", FACEBOOK));
-        messages.add(new PrivateChatDataModelImage("11:07", BitmapFactory.decodeResource(getResources(),R.drawable.detail_hometown_button),TWITTER));
+        messages.add(new PrivateChatDataModelImage("10:16", BitmapFactory.decodeResource(getResources(),R.drawable.app_logo_high),TUMBLR));
+        messages.add(new PrivateChatDataModelGif("10:16", GifDrawable.createFromResource(getResources(),R.drawable.app_logo_high),TUMBLR));
         return messages;
     }
 
@@ -279,6 +286,26 @@ public class PrivateChatActivity extends AppCompatActivity {
         viewPagerItem.edit().putInt("privateChatPagerItem", chatViewPager.getCurrentItem()).apply();
         Log.d("debug", "onBackPressed");
         PrivateChatActivity.this.finish();
+    }
+
+    @Override
+    public void messageFacebook(String message) {
+        sendChatMessage(message, FACEBOOK);
+    }
+
+    @Override
+    public void messageSkype(String message) {
+        sendChatMessage(message, SKYPE);
+    }
+
+    @Override
+    public void messageTumblr(String message) {
+        sendChatMessage(message, TUMBLR);
+    }
+
+    @Override
+    public void messageTwitter(String message) {
+        sendChatMessage(message, TWITTER);
     }
 }
 

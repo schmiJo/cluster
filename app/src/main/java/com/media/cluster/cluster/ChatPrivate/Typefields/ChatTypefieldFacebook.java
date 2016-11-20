@@ -1,11 +1,11 @@
 package com.media.cluster.cluster.ChatPrivate.Typefields;
 
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.media.cluster.cluster.ChatPrivate.PrivateChatActivity;
 import com.media.cluster.cluster.R;
 
 
@@ -26,9 +25,26 @@ public class ChatTypefieldFacebook extends Fragment {
 
     private ImageButton keyboardButton, cameraButton, imageButton, smileyButton, gifButton, micButton, moreButton, smileysButton, sendLikeButton;
     private EditText typefield;
-    private CardView cardView;
+    TextWatcher textWatcher;
+    MessageListenerFB messagelistener;
+    TextView.OnEditorActionListener actionListener;
 
 
+    public interface MessageListenerFB{
+     void messageFacebook(String message);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+
+        try {
+            messagelistener = (MessageListenerFB) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString());
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,8 +61,6 @@ public class ChatTypefieldFacebook extends Fragment {
         moreButton = (ImageButton) layout.findViewById(R.id.typefield_facebook_more);
         smileysButton = (ImageButton) layout.findViewById(R.id.typefield_facebook_smileys);
         sendLikeButton = (ImageButton) layout.findViewById(R.id.typefield_facebook_send);
-
-        cardView = (CardView) layout.findViewById(R.id.typefield_facebook_cardview);
 
 
 
@@ -101,13 +115,13 @@ public class ChatTypefieldFacebook extends Fragment {
         sendLikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleSendButtonCllick();
+                handleSendButtonClick();
             }
         });
 
 //--------------------------------------------Edit Button for TextInput--------------------------------------------//
         typefield = (EditText) layout.findViewById(R.id.typefield_facebook_input);
-        typefield.addTextChangedListener(new TextWatcher() {
+        textWatcher = new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -129,13 +143,13 @@ public class ChatTypefieldFacebook extends Fragment {
 
                 } else {
                     sendLikeButton.setImageResource(R.drawable.typefield_ic_facebook_9b_save);
-                    if (typefield.getLineCount() < 2) {
+                    /*if (typefield.getLineCount() < 2) {
                         PrivateChatActivity.setRecyclerViewMargin(cardView.getHeight());
                     } else if (typefield.getLineCount() == 2) {
                         PrivateChatActivity.setRecyclerViewMargin(cardView.getHeight());
                     } else if (typefield.getLineCount() > 2) {
                         PrivateChatActivity.setRecyclerViewMargin(cardView.getHeight());
-                    }
+                    }*/
                 }
 
 
@@ -143,32 +157,34 @@ public class ChatTypefieldFacebook extends Fragment {
 
             }
 
-        });
+        };
+        typefield.addTextChangedListener(textWatcher);
         typefield.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switchIconState(keyboardButton);
             }
         });
-
-        typefield.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        actionListener = new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    handleSendButtonCllick();
+                    handleSendButtonClick();
                 }
                 return false;
             }
-        });
+        };
+        typefield.setOnEditorActionListener(actionListener);
 
 
 
         return layout;
     }
 
-    private void handleSendButtonCllick() {
+
+    private void handleSendButtonClick() {
         switchIconState(sendLikeButton);
         if (!typefield.getText().toString().trim().equals("")) {
-            PrivateChatActivity.sendChatMessage(typefield.getText().toString(), PrivateChatActivity.FACEBOOK);
+            messagelistener.messageFacebook(typefield.getText().toString());
             MediaPlayer messageSound = MediaPlayer.create(getContext(), R.raw.facebook_pop);
             messageSound.start();
             typefield.setText("");
@@ -176,7 +192,7 @@ public class ChatTypefieldFacebook extends Fragment {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    PrivateChatActivity.setRecyclerViewMargin(cardView.getHeight());
+                    //PrivateChatActivity.setRecyclerViewMargin(cardView.getHeight());
                 }
             },50  );
         }
@@ -228,5 +244,9 @@ public class ChatTypefieldFacebook extends Fragment {
 
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        typefield.removeTextChangedListener(textWatcher);
+    }
 }
