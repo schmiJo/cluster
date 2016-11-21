@@ -1,19 +1,14 @@
 package com.media.cluster.cluster.Main;
 
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -30,7 +25,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
@@ -46,7 +40,6 @@ import com.android.volley.toolbox.Volley;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.Login.AddServicesActivity;
-import com.media.cluster.cluster.General.BlurBuilder;
 import com.media.cluster.cluster.Main.Fab.FabActivity;
 import com.media.cluster.cluster.R;
 
@@ -65,19 +58,18 @@ public class MainActivity extends AppCompatActivity {
     //
     //View Pager && Toolbar
     ViewPager mainViewPager;
-    private static TabLayout tabLayout;
+    private  TabLayout tabLayout;
     //
-    private static View layout;
+
     Context dialogContext;
-    private static Toolbar toolbar;
+    private  Toolbar toolbar;
     public static String CurrentClustername;
-    static private FloatingActionButton fab;
+     private FloatingActionButton fab;
     private ViewPager.OnPageChangeListener pageChangeListener;
     private TabLayout.OnTabSelectedListener tabListener;
     private  TabLayout.TabLayoutOnPageChangeListener onTabChangeListener;
     DialogInterface.OnClickListener negativeDialogButton;
     private DrawerRecyclerTouchListener drawerRecyclerTouchListener;
-    private AlertDialog.Builder builder;
     private DrawerRecyclerTouchListener serviceListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         final Intent login = new Intent(getApplicationContext(), LoginActivity.class);
-        layout = findViewById(R.id.drawer_layout);
+        View layout = findViewById(R.id.drawer_layout);
 
         RequestQueue loginRequestQueue;
         final String loginURL = "http://social-cluster.com/user_login.php";
@@ -103,10 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (clustername.equals("") || password.equals("")) {
             startActivity(login);
-        } else if (!isNetworkAvailable()) {
-            Snackbar.make(layout, getResources().getString(R.string.noInternetConnection), Snackbar.LENGTH_LONG).show();
-
-        } else {
+        } else if (isNetworkAvailable()) {
 
             loginRequestQueue = Volley.newRequestQueue(getApplicationContext());
             loginStringRequest = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
@@ -260,9 +249,8 @@ public class MainActivity extends AppCompatActivity {
                 //---fab clicked--
                 Intent openFab = new Intent(getApplicationContext(), FabActivity.class);
                 openFab.putExtra("tab", mainViewPager.getCurrentItem());
-                Bundle fabTransition = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in_slow, 0).toBundle();
-                startActivity(openFab, fabTransition);
-
+                startActivityForResult(openFab, RESULT_OK);
+                overridePendingTransition( R.anim.fade_in_slow,0);
                 if (fab.getRotation() == 0) {
                     Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation);
                     fab.startAnimation(fabRotate);
@@ -506,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            builder = new AlertDialog.Builder(dialogContext);
+            AlertDialog.Builder builder = new AlertDialog.Builder(dialogContext);
             builder.setPositiveButton(getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -623,12 +611,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static void closeFab(Context context) {
-        Animation fabRotate = AnimationUtils.loadAnimation(context, R.anim.fab_rotation_reverse);
-        fab.startAnimation(fabRotate);
-        fab.setRotation(0);
 
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -641,21 +624,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public static void setFabBlur(final Resources resources) {
-        if (layout.getWidth() > 0) {
-            Bitmap back = BlurBuilder.blur(layout);
-            FabActivity.setBackground(new BitmapDrawable(resources, back));
-        } else {
-            layout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    Bitmap back = BlurBuilder.blur(layout);
-                     FabActivity.setBackground(new BitmapDrawable(resources, back));
-                }
-            });
-        }
 
-    }
 
     @Override
     protected void onDestroy() {
@@ -666,5 +635,15 @@ public class MainActivity extends AppCompatActivity {
         drawerOptionRecyclerView.removeOnItemTouchListener(drawerRecyclerTouchListener);
         fab.setOnClickListener(null);
         drawerServiceRecyclerView.removeOnItemTouchListener(serviceListener);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == RESULT_OK){
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation_reverse);
+            fab.startAnimation(fabRotate);
+            fab.setRotation(0);
+        }
     }
 }

@@ -34,6 +34,8 @@
     <string name="forwardTo">Forward to</string>
     <string name="tweetPhoto">Tweet Photo</string>
 
+    <string name="noConnection">no connection</string>
+    <string name="refresh">Refresh</string>
     <!--Twitter-->
     <string name="twitter_action_search">Search</string>
     <string name="twitter_action_mute">Mute</string>

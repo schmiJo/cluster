@@ -193,7 +193,6 @@ public class FabActivity extends AppCompatActivity {
             }}
         }));
         backgroundGroup = (ViewGroup) background;
-        MainActivity.setFabBlur(getResources());
         Animation slideIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_bottom);
         fabRecyclerView.startAnimation(slideIn);
 
@@ -316,7 +315,6 @@ public class FabActivity extends AppCompatActivity {
     }
 
     public void closeFab(){
-        new MainActivity().closeFab(getApplicationContext());
         fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation_reverse));
         fabRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_bottom));
         finish();

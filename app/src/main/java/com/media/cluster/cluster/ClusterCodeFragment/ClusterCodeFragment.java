@@ -19,12 +19,12 @@ public class ClusterCodeFragment extends Fragment {
 
 
     View layout;
-     ImageView clusterCodeHolder;
+    static ImageView clusterCodeHolder;
     public static final int CREATE= 0;
     public static final int LIBARY= 1;
     public static final int OVERRIDE = 2;
 
-     ProgressBar progressBar;
+    static ProgressBar progressBar;
 
 
 

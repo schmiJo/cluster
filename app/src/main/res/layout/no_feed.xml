@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
+    android:orientation="vertical"
     android:id="@+id/noFeedError">
     <ImageView
         android:layout_width="212.4dp"
@@ -18,6 +19,14 @@
         android:textAlignment="center"
         android:textColor="@color/secondaryText"
         android:id="@+id/no_feed_message"
-        android:layout_gravity="center_horizontal|bottom"/>
-</FrameLayout>
+        android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/no_feed_button"
+        android:background="?selectableItemBackground"
+        android:text="@string/refresh"
+        android:textColor="@color/com_facebook_blue"/></LinearLayout>
 
