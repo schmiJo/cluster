@@ -12,10 +12,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <style name="AppTheme.NoActionBar.Light">
+    <item name="colorPrimaryDark">#DBDBDB</item>
+    </style>
     <style name="AppTheme.NoActionBar.Dark">
         <item name="colorPrimaryDark">#000000</item>
-        <item name="android:actionOverflowButtonStyle">@style/AppTheme.NoActionBar.Dark.OverFlow</item>
+        <item name="android:actionOverflowButtonStyle">@style/AppTheme.NoActionBar.Dark.OverFlow
+        </item>
         <item name="colorControlNormal">#ffffff</item>
     </style>
 
@@ -33,13 +36,13 @@
     </style>
 
 
-    <style name="AppTheme.Twitter" parent = "AppTheme.NoActionBar">
+    <style name="AppTheme.Twitter" parent="AppTheme.NoActionBar">
         <item name="colorPrimary">#ededed</item>
         <item name="android:textColorSecondary">@color/twitterColor</item>
         <item name="actionMenuTextColor">@color/twitterColor</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
-        </style>
+    </style>
 
     <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/backgroundDark</item>

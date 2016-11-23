@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -37,6 +38,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.Login.AddServicesActivity;
@@ -58,19 +60,20 @@ public class MainActivity extends AppCompatActivity {
     //
     //View Pager && Toolbar
     ViewPager mainViewPager;
-    private  TabLayout tabLayout;
+    private TabLayout tabLayout;
     //
 
     Context dialogContext;
-    private  Toolbar toolbar;
+    private Toolbar toolbar;
     public static String CurrentClustername;
-     private FloatingActionButton fab;
+    private FloatingActionButton fab;
     private ViewPager.OnPageChangeListener pageChangeListener;
     private TabLayout.OnTabSelectedListener tabListener;
-    private  TabLayout.TabLayoutOnPageChangeListener onTabChangeListener;
+    private TabLayout.TabLayoutOnPageChangeListener onTabChangeListener;
     DialogInterface.OnClickListener negativeDialogButton;
     private DrawerRecyclerTouchListener drawerRecyclerTouchListener;
     private DrawerRecyclerTouchListener serviceListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,44 +91,49 @@ public class MainActivity extends AppCompatActivity {
 
         final Intent login = new Intent(getApplicationContext(), LoginActivity.class);
         View layout = findViewById(R.id.drawer_layout);
-
-        RequestQueue loginRequestQueue;
         final String loginURL = "http://social-cluster.com/user_login.php";
-        StringRequest loginStringRequest;
 
-        if (clustername.equals("") || password.equals("")) {
-            startActivity(login);
-        } else if (isNetworkAvailable()) {
 
-            loginRequestQueue = Volley.newRequestQueue(getApplicationContext());
-            loginStringRequest = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    if (!response.equals("successful")) {
-                        startActivity(login);
-                        finish();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                if (clustername.equals("") || password.equals("")) {
                     startActivity(login);
+                    Log.d("debug", "empty");
+                } else if (isNetworkAvailable()) {
+
+                    RequestQueue loginRequestQueue = Volley.newRequestQueue(getApplicationContext());
+                    StringRequest loginStringRequest = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (!response.equals("successful")) {
+                                startActivity(login);
+                                finish();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            startActivity(login);
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("clustername", clustername);
+                            hashMap.put("password", password);
+
+                            return hashMap;
+                        }
+
+                    };
+
+                    loginRequestQueue.add(loginStringRequest);
                 }
-            }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put("clustername", clustername);
-                    hashMap.put("password", password);
+            }
+        });
 
-                    return hashMap;
-                }
-
-            };
-
-            loginRequestQueue.add(loginStringRequest);
-        }
 
 //----------------------------------------------------------------------------------------------------Login Shared Preferences End------------------------------------------------------------------
 
@@ -134,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         mainViewPager = (ViewPager) findViewById(R.id.mainPager);
         mainViewPager.setAdapter(new PagerAdapterMain(getSupportFragmentManager()));
         tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
-
 
 
         //Tab layout start
@@ -243,14 +250,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 //----------------------------------------------------------------------------------------------------Fab Start-----------------------------------------------------------------------------------
-        View.OnClickListener fabClickListener= new View.OnClickListener() {
+        View.OnClickListener fabClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //---fab clicked--
                 Intent openFab = new Intent(getApplicationContext(), FabActivity.class);
                 openFab.putExtra("tab", mainViewPager.getCurrentItem());
                 startActivityForResult(openFab, RESULT_OK);
-                overridePendingTransition( R.anim.fade_in_slow,0);
+                overridePendingTransition(R.anim.fade_in_slow, 0);
                 if (fab.getRotation() == 0) {
                     Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation);
                     fab.startAnimation(fabRotate);
@@ -348,15 +355,17 @@ public class MainActivity extends AppCompatActivity {
                                 File dirCC = new File("sdcard/.cluster");
                                 File fileCC = new File(dirCC, "cluster_code.png");
                                 deleteClusterCode = fileCC.delete();
-                                Log.d("debug", "deleted .cluster/cluster_code:   " + deleteClusterCode);
-
+                                if (BuildConfig.DEBUG) {
+                                    Log.d("debug", "deleted .cluster/cluster_code:   " + deleteClusterCode);
+                                }
                                 //Delete the saved ProfilePic
                                 boolean deleteProfilePic;
                                 File dirPP = new File("sdcard/.cluster");
                                 File filePP = new File(dirPP, "profile_pic.png");
                                 deleteProfilePic = filePP.delete();
-                                Log.d("debug", "deleted Profile Pic:   " + deleteProfilePic);
-
+                                if (BuildConfig.DEBUG) {
+                                    Log.d("debug", "deleted Profile Pic:   " + deleteProfilePic);
+                                }
                                 //Start Login Activity
                                 Intent loginAction = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(loginAction);
@@ -502,13 +511,13 @@ public class MainActivity extends AppCompatActivity {
                     System.exit(0);
                 }
             });
-            negativeDialogButton =  new DialogInterface.OnClickListener() {
+            negativeDialogButton = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
                 }
             };
-            builder.setNegativeButton(getResources().getString(R.string.cancel),negativeDialogButton);
+            builder.setNegativeButton(getResources().getString(R.string.cancel), negativeDialogButton);
 
             builder.setTitle(getResources().getString(R.string.mainCloseDialogTitle));
             builder.setMessage(getResources().getString(R.string.mainCloseDialogMessage));
@@ -523,7 +532,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
@@ -542,8 +551,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplication(), "My Profile", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.action_search) {
             //add Search activity
-            Toast.makeText(getApplication(), "Search", Toast.LENGTH_SHORT).show();
-
+            startActivity(new Intent(getApplicationContext(), MainSearchActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -560,11 +568,11 @@ public class MainActivity extends AppCompatActivity {
     //-----------------------------------------------------------check for connection----------------------------------------------------
 
 
-    //Drawer OnTtemTochListenerClass
+    //Drawer OnItemTouchListenerClass
     class DrawerRecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
 
-        //NAvigationDarwer Gesture Detector
+        //NavigationDrawer Gesture Detector
         private GestureDetector gestureDetector;
         private ClickListener clickListener;
 
@@ -612,7 +620,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (android.os.Build.VERSION.SDK_INT > 5
@@ -623,7 +630,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 
     @Override
@@ -639,7 +645,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == RESULT_OK){
+        if (requestCode == RESULT_OK) {
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation_reverse);
             fab.startAnimation(fabRotate);
@@ -647,3 +653,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
