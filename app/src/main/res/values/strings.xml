@@ -156,8 +156,8 @@
     <string name="loginAccessDenied">You have to login first</string>
     <string name="logoutTitle">Logout??</string>
     <string name="logoutMessage">Do you really want to log out?</string>
-
-
+    <string name="noAddedServicesHeader">You have not added any services yet!</string>
+    <string name="noAddedServiceButton">Add Services</string>
     <!--Register Activity-->
     <string name="repeat_password">Repeat Password</string>
     <string name="next">Next</string>
@@ -175,7 +175,7 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
-    <string name="usernameHeader">Youll use this clustername to sign in to your Cluster Account</string>
+    <string name="usernameHeader">You will use this clustername to sign in to your Cluster Account</string>
     <string name="clustername">Clustername</string>
     <string name="CnInputRestriction">Only use A-Z, a-z, 0-9 and .</string>
     <string name="clusterNameError1">Please Enter a Clustername</string>

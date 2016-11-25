@@ -57,13 +57,13 @@
 
 
             <com.balysv.materialripple.MaterialRippleLayout
-                android:layout_width="match_parent"
-                android:visibility="gone"
                 android:id="@+id/facebookRow"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
+                android:visibility="gone"
                 app:mrl_rippleColor="@color/rippleColor">
 
 
@@ -106,12 +106,12 @@
 
 
             <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/twitterRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
-                android:visibility="gone"
-                android:id="@+id/twitterRow"
                 android:paddingStart="16dp"
+                android:visibility="gone"
                 app:mrl_rippleColor="@color/rippleColor">
 
                 <FrameLayout
@@ -153,13 +153,13 @@
                 android:background="@color/colorAccent" />
 
             <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/tumblrRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                app:mrl_rippleColor="@color/rippleColor"
                 android:visibility="gone"
-                android:id="@+id/tumblrRow">
+                app:mrl_rippleColor="@color/rippleColor">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -199,13 +199,13 @@
                 android:background="@color/colorAccent" />
 
             <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/skypeRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                app:mrl_rippleColor="@color/rippleColor"
                 android:visibility="gone"
-                android:id="@+id/skypeRow">
+                app:mrl_rippleColor="@color/rippleColor">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -244,6 +244,47 @@
                 android:background="@color/colorAccent" />
 
 
+            <LinearLayout
+                android:id="@+id/addServicesLayout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="@string/noAddedServicesHeader"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/astronout" />
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/search_filter_add_bt_shape"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:onClick="addServices"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="8dp"
+                    android:text="@string/noAddedServiceButton"
+                    android:textColor="#fff" />
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

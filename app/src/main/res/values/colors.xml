@@ -7,6 +7,7 @@
     <color name="colorPrimaryDark">#213b61</color>
     <color name="colorPrimaryLight">#a3a8c2</color>
     <color name="colorAccent">#607d8b</color>
+    <color name="colorAccentLight">#9bb5c2</color>
     <color name="colorAccentClicked">#53636b</color>
 
     <color name="dividerColor">#acacac</color>

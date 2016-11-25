@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.media.cluster.cluster.ClusterDBConnect.GetUserData;
+import com.media.cluster.cluster.Login.AddServicesActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.R;
 
@@ -47,6 +48,7 @@ public class MainSearchActivity extends AppCompatActivity {
     BottomSheetBehavior bottomSheetBehavior;
     CompoundButton.OnCheckedChangeListener filterPowerListener;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,10 @@ public class MainSearchActivity extends AppCompatActivity {
 
         if(!loginPref.getString("facebook","").equals("")){
             findViewById(R.id.facebookRow).setVisibility(View.VISIBLE);
+        }else{
+            if(loginPref.getString("skype","").equals("") && loginPref.getString("twitter","").equals("") && loginPref.getString("tumblr","").equals("") ){
+                findViewById(R.id.addServicesLayout).setVisibility(View.VISIBLE);
+            }
         }
 
         if(!loginPref.getString("skype","").equals("")){
@@ -76,6 +82,8 @@ public class MainSearchActivity extends AppCompatActivity {
         if(!loginPref.getString("tumblr","").equals("")){
             findViewById(R.id.tumblrRow).setVisibility(View.VISIBLE);
         }
+
+
 
 
 
@@ -311,4 +319,6 @@ public class MainSearchActivity extends AppCompatActivity {
     public void switchSkype(View view){
         skypeSwitch.setChecked(!skypeSwitch.isChecked());
     }
+
+    public void addServices(View view){ startActivity(new Intent(getApplicationContext(), AddServicesActivity.class));}
 }
