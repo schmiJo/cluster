@@ -31,6 +31,7 @@ public class GetUserData {
 
     public static final  int Register  =0 ;
     public static final  int  Login = 1;
+    public static final  int SearchFilter = 2;
     public static final  int  FACEBOOK =1 ;
     public static final  int  SKYPE = 2;
     public static final  int  TWITTER =3  ;

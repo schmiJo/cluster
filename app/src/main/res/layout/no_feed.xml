@@ -8,14 +8,12 @@
     <ImageView
         android:layout_width="212.4dp"
         android:layout_height="161.4dp"
-        android:src="@drawable/no_feed"
         android:layout_gravity="center"
         android:id="@+id/noFeedErrorImage"
         android:layout_marginBottom="36dp"/>
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/no_feed_message"
         android:textAlignment="center"
         android:textColor="@color/secondaryText"
         android:id="@+id/no_feed_message"
