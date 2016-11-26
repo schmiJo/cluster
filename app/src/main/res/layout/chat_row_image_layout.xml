@@ -11,48 +11,58 @@
         app:mrl_rippleColor="@color/rippleColor"
         android:layout_gravity="center_vertical|end">
 
-    <FrameLayout
-        android:id="@+id/private_image_root"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/chat_bubble_facebook"
-        android:minWidth="80dp">
-
-
-        <ImageView
-            android:id="@+id/private_image"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="3dp"
-             />
-
         <FrameLayout
-            android:layout_width="300dp"
+            android:id="@+id/private_image_root"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="3dp">
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/chat_bubble_facebook"
+            android:minWidth="80dp">
+
 
             <ImageView
-                android:id="@+id/private_image_media"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_gravity="start" />
-
-
-
-            <TextView
-                android:id="@+id/private_image_time"
-                android:layout_width="wrap_content"
+                android:id="@+id/private_image"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:textColor="#fff"
-                android:textSize="12sp" />
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                />
+
+            <FrameLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="3dp">
+
+                <ImageView
+                    android:id="@+id/private_image_media"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="start" />
 
 
+
+                <TextView
+                    android:id="@+id/private_image_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:textColor="#fff"
+                    android:textSize="12sp" />
+
+
+            </FrameLayout>
         </FrameLayout>
-    </FrameLayout>
     </com.balysv.materialripple.MaterialRippleLayout>
+    <ImageView
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="4dp"
+        android:layout_marginRight="2dp"
+        android:id="@+id/private_image_status"
+        app:srcCompat="@drawable/chat_ic_noconnection"
+        />
 </FrameLayout>

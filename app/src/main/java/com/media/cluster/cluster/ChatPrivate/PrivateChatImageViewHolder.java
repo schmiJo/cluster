@@ -10,33 +10,38 @@ import com.media.cluster.cluster.R;
 
  class PrivateChatImageViewHolder extends RecyclerView.ViewHolder{
 
-    private TextView time;
-    private ImageView image, media;
-    private View root;
+     private TextView time;
+     private ImageView image, media;
+     private View root;
+     private ImageView status;
 
-     PrivateChatImageViewHolder(View itemView) {
-        super(itemView);
+     public PrivateChatImageViewHolder(View itemView) {
+         super(itemView);
 
-        time = (TextView) itemView.findViewById(R.id.private_image_time);
-        image = (ImageView) itemView.findViewById(R.id.private_image);
-        media = (ImageView) itemView.findViewById(R.id.private_image_media);
-        root = itemView.findViewById(R.id.private_image_root);
-    }
+         time = (TextView) itemView.findViewById(R.id.private_image_time);
+         image = (ImageView) itemView.findViewById(R.id.private_image);
+         media = (ImageView) itemView.findViewById(R.id.private_image_media);
+         root = itemView.findViewById(R.id.private_image_root);
+         status = (ImageView) itemView.findViewById(R.id.private_image_status);
+     }
 
 
-    public ImageView getImage() {
-        return image;
-    }
+     public ImageView getImage() {
+         return image;
+     }
 
-    public ImageView getMedia() {
-        return media;
-    }
+     public ImageView getMedia() {
+         return media;
+     }
 
-     View getRoot() {
-        return root;
-    }
+     public View getRoot() {
+         return root;
+     }
 
-    public TextView getTime() {
-        return time;
-    }
+     public TextView getTime() {
+         return time;
+     }
+     public ImageView getStatus(){
+         return status;
+     }
 }

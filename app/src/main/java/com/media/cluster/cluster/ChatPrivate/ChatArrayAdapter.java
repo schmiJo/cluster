@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import com.media.cluster.cluster.General.DetailGifActivity;
 import com.media.cluster.cluster.General.DetailPictureActivity;
@@ -110,6 +111,14 @@ class ChatArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         textVH.getMedia().setImageResource(R.drawable.round_service_ic_tumblr);
                         break;
                 }
+                textVH.getStatus().setImageResource(R.drawable.chat_ic_send);
+                textVH.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        Toast.makeText(context, "OnLongClicked ", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
             }
         });
 

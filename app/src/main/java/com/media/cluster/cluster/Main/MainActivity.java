@@ -28,16 +28,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
+import com.media.cluster.cluster.General.FloatingActionWheel;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.Login.AddServicesActivity;
-import com.media.cluster.cluster.Main.Fab.FabActivity;
 import com.media.cluster.cluster.R;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  implements FloatingActionWheel.OnFAWItemClickListner{
     //DrawerRecyclerView
     RecyclerView drawerOptionRecyclerView;
     RecyclerView drawerServiceRecyclerView;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     DialogInterface.OnClickListener negativeDialogButton;
     private DrawerRecyclerTouchListener drawerRecyclerTouchListener;
     private DrawerRecyclerTouchListener serviceListener;
+    FloatingActionWheel faw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewPager.setAdapter(new PagerAdapterMain(getSupportFragmentManager()));
         tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
 
+        faw = (FloatingActionWheel) findViewById(R.id.faw);
 
         //Tab layout start
         final TabLayout.Tab feed = tabLayout.newTab();
@@ -195,20 +197,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //---fab clicked--
-                Intent openFab = new Intent(getApplicationContext(), FabActivity.class);
-                openFab.putExtra("tab", mainViewPager.getCurrentItem());
-                startActivityForResult(openFab, RESULT_OK);
-                overridePendingTransition(R.anim.fade_in_slow, 0);
-                if (fab.getRotation() == 0) {
-                    Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation);
-                    fab.startAnimation(fabRotate);
+
+                if (!faw.getExpantionState()) {
+                    //extended
+
+                    faw.setExpantionState(true);
+                    android.view.animation.Animation animOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+                    fab.startAnimation(animOpen);
                     fab.setRotation(45);
-
-
+                    Log.d("debug", "EXTENDING");
                 } else {
-                    Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation_reverse);
-                    fab.startAnimation(fabRotate);
+                    //
+                    Log.d("debug", "COLLAPSING");
+                    faw.setExpantionState(false);
+                    android.view.animation.Animation animClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+                    fab.startAnimation(animClose);
                     fab.setRotation(0);
+
 
                 }
             }
@@ -498,6 +503,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFAWItemClick(int itemId) {
+
+    }
+
     //-----------------------------------------------------------Design Icons in Toolbar----------------------------------------------------
 
 
@@ -576,15 +586,7 @@ public class MainActivity extends AppCompatActivity {
         drawerServiceRecyclerView.removeOnItemTouchListener(serviceListener);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RESULT_OK) {
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            Animation fabRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotation_reverse);
-            fab.startAnimation(fabRotate);
-            fab.setRotation(0);
-        }
-    }
+
 }
 
 

@@ -11,17 +11,21 @@ import com.media.cluster.cluster.R;
 
  class PrivateChatTextViewHolder extends RecyclerView.ViewHolder{
 
-    private TextView message;
-    private TextView time;
-    private LinearLayout root;
-    private ImageView media;
+     private TextView message;
+     private TextView time;
+     private LinearLayout bubble;
+     private ImageView media;
+     private ImageView status;
+     private View root;
 
      PrivateChatTextViewHolder(View itemView) {
         super(itemView);
          message = (TextView) itemView.findViewById(R.id.private_message);
-        time = (TextView) itemView.findViewById(R.id.private_message_time);
-        root = (LinearLayout) itemView.findViewById(R.id.private_message_root);
-        media = (ImageView) itemView.findViewById(R.id.private_message_media);
+         time = (TextView) itemView.findViewById(R.id.private_message_time);
+         bubble = (LinearLayout) itemView.findViewById(R.id.private_message_bubble);
+         media = (ImageView) itemView.findViewById(R.id.private_message_media);
+         status = (ImageView) itemView.findViewById(R.id.private_message_status);
+         root = itemView.findViewById(R.id.private_message_root);
     }
 
      TextView getTime() {
@@ -33,11 +37,17 @@ import com.media.cluster.cluster.R;
     }
 
     LinearLayout getBackground(){
-        return root;
+        return bubble;
     }
     ImageView getMedia(){
         return media;
     }
+     ImageView getStatus(){
+         return status;
+     }
+     View getRoot(){
+         return root;
+     }
 
 
 }
