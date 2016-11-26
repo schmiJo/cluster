@@ -23,7 +23,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 import com.media.cluster.cluster.BuildConfig;
@@ -191,6 +190,15 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
 
 //----------------------------------------------------------------------------------------------------View Pager End------------------------------------------------------------------------------
 
+
+        ArrayList<Integer> fawItems = new ArrayList<>();
+        fawItems.add(R.drawable.faw_ic_post);
+        fawItems.add(R.drawable.faw_ic_activity);
+        fawItems.add(R.drawable.faw_ic_filter);
+        fawItems.add(R.drawable.faw_ic_contacts);
+        fawItems.add(R.drawable.faw_ic_story);
+        fawItems.add(R.drawable.faw_ic_scanner);
+        faw.setItems(fawItems);
 
 //----------------------------------------------------------------------------------------------------Fab Start-----------------------------------------------------------------------------------
         View.OnClickListener fabClickListener = new View.OnClickListener() {
