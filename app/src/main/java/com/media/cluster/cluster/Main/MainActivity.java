@@ -5,10 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -29,15 +26,6 @@ import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
-
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
@@ -47,9 +35,7 @@ import com.media.cluster.cluster.R;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     //DrawerRecyclerView
@@ -84,55 +70,10 @@ public class MainActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.fab);
 //----------------------------------------------------------------------------------------------------Login Shared Preferences Start----------------------------------------------------------------
         SharedPreferences loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
-        final String clustername = loginPref.getString("clustername", "");
-        CurrentClustername = clustername;
-        final String password = loginPref.getString("password", "");
+        CurrentClustername  =  loginPref.getString("clustername", "");
 
 
-        final Intent login = new Intent(getApplicationContext(), LoginActivity.class);
         View layout = findViewById(R.id.drawer_layout);
-        final String loginURL = "http://social-cluster.com/user_login.php";
-
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                if (clustername.equals("") || password.equals("")) {
-                    startActivity(login);
-                    Log.d("debug", "empty");
-                } else if (isNetworkAvailable()) {
-
-                    RequestQueue loginRequestQueue = Volley.newRequestQueue(getApplicationContext());
-                    StringRequest loginStringRequest = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            if (!response.equals("successful")) {
-                                startActivity(login);
-                                finish();
-                            }
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            startActivity(login);
-                        }
-                    }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            HashMap<String, String> hashMap = new HashMap<>();
-                            hashMap.put("clustername", clustername);
-                            hashMap.put("password", password);
-
-                            return hashMap;
-                        }
-
-                    };
-
-                    loginRequestQueue.add(loginStringRequest);
-                }
-            }
-        });
 
 
 //----------------------------------------------------------------------------------------------------Login Shared Preferences End------------------------------------------------------------------
@@ -558,14 +499,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //-----------------------------------------------------------Design Icons in Toolbar----------------------------------------------------
-    //-----------------------------------------------------------Check for connection----------------------------------------------------
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-    //-----------------------------------------------------------check for connection----------------------------------------------------
 
 
     //Drawer OnItemTouchListenerClass

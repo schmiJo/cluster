@@ -23,11 +23,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.media.cluster.cluster.ClusterDBConnect.GetUserData;
 import com.media.cluster.cluster.Login.AddServicesActivity;
@@ -36,62 +39,67 @@ import com.media.cluster.cluster.R;
 
 public class MainSearchActivity extends AppCompatActivity {
 
-    boolean filterOn ;
+    boolean filterOn, accessTwitter, accessFacebook, accessTumblr, accessSkype;
     boolean allowedStateChanged = false;
     LinearLayout bottomSheet;
     TextWatcher textWatcher;
     EditText searchText;
     Menu menu;
     ViewGroup rootLayoutGroup;
-    Switch filterSwitch,facebookSwitch, twitterSwitch, skypeSwitch, tumblrSwitch;
+    Switch filterSwitch, facebookSwitch, twitterSwitch, skypeSwitch, tumblrSwitch;
     ImageButton openButton;
     BottomSheetBehavior bottomSheetBehavior;
     CompoundButton.OnCheckedChangeListener filterPowerListener;
-
+    SharedPreferences loginPref;
+    View noServiceLayout;
+    Button noServiceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_search);
-        SharedPreferences loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
+        loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
         final String clustername = loginPref.getString("clustername", "");
-        if(clustername.equals("")){
-            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        if (clustername.equals("")) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
-            Log.d("debug","Login started from MainSearchActivity (57)  [Clustername was null]");
+            Log.d("debug", "Login started from MainSearchActivity (57)  [Clustername was null]");
         }
-        GetUserData.getAddedServices(getApplicationContext(),clustername,false);
-
-
-        if(!loginPref.getString("facebook","").equals("")){
+        GetUserData.getAddedServices(getApplicationContext(), clustername, false);
+        noServiceLayout = findViewById(R.id.addServicesLayout);
+        noServiceButton = (Button) findViewById(R.id.noServiceButton);
+        if (!loginPref.getString("facebook", "").equals("")) {
             findViewById(R.id.facebookRow).setVisibility(View.VISIBLE);
-        }else{
-            if(loginPref.getString("skype","").equals("") && loginPref.getString("twitter","").equals("") && loginPref.getString("tumblr","").equals("") ){
-                findViewById(R.id.addServicesLayout).setVisibility(View.VISIBLE);
+            accessFacebook = true;
+        } else {
+            if (loginPref.getString("skype", "").equals("") && loginPref.getString("twitter", "").equals("") && loginPref.getString("tumblr", "").equals("")) {
+                noServiceButton.setVisibility(View.VISIBLE);
+                noServiceLayout.setVisibility(View.VISIBLE);
+                ((TextView) findViewById(R.id.noServiceText)).setText(getString(R.string.noAddedServicesHeader));
             }
         }
 
-        if(!loginPref.getString("skype","").equals("")){
+        if (!loginPref.getString("skype", "").equals("")) {
             findViewById(R.id.skypeRow).setVisibility(View.VISIBLE);
+            accessSkype = true;
         }
 
-        if(!loginPref.getString("twitter","").equals("")){
+        if (!loginPref.getString("twitter", "").equals("")) {
             findViewById(R.id.twitterRow).setVisibility(View.VISIBLE);
+            accessTwitter = true;
         }
 
-        if(!loginPref.getString("tumblr","").equals("")){
+        if (!loginPref.getString("tumblr", "").equals("")) {
             findViewById(R.id.tumblrRow).setVisibility(View.VISIBLE);
+            accessTumblr = true;
         }
-
-
-
 
 
         tumblrSwitch = (Switch) findViewById(R.id.tumblrSwitch);
         twitterSwitch = (Switch) findViewById(R.id.twitterSwitch);
         skypeSwitch = (Switch) findViewById(R.id.skypeSwitch);
         facebookSwitch = (Switch) findViewById(R.id.facebookSwitch);
-        rootLayoutGroup = (ViewGroup)findViewById(R.id.main_search_root);
+        rootLayoutGroup = (ViewGroup) findViewById(R.id.main_search_root);
         filterSwitch = (Switch) findViewById(R.id.filter_switch);
         openButton = (ImageButton) findViewById(R.id.open_button);
         bottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
@@ -118,15 +126,15 @@ public class MainSearchActivity extends AppCompatActivity {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
 
 
-                    if (newState != BottomSheetBehavior.STATE_HIDDEN) {
-                        menu.findItem(R.id.action_filter).setIcon(R.drawable.action_filter_light_ic);
+                if (newState != BottomSheetBehavior.STATE_HIDDEN) {
+                    menu.findItem(R.id.action_filter).setIcon(R.drawable.action_filter_light_ic);
 
 
-                    } else {
-                        menu.findItem(R.id.action_filter).setIcon(R.drawable.action_filter_ic);
+                } else {
+                    menu.findItem(R.id.action_filter).setIcon(R.drawable.action_filter_ic);
 
 
-                    }
+                }
                 if (filterOn) {
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                         Animation rotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation_180);
@@ -136,12 +144,13 @@ public class MainSearchActivity extends AppCompatActivity {
                         openButton.setRotation(0);
                     }
 
-                }else {
+                } else {
 
-                    if(!allowedStateChanged){
-                    if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }}
+                    if (!allowedStateChanged) {
+                        if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        }
+                    }
 
                     allowedStateChanged = false;
                 }
@@ -175,9 +184,10 @@ public class MainSearchActivity extends AppCompatActivity {
                     menu.findItem(R.id.action_clear).setVisible(true);
 
                 } else {
-                    if(menu != null){
-                    menu.findItem(R.id.action_clear).setVisible(false);
-                }}
+                    if (menu != null) {
+                        menu.findItem(R.id.action_clear).setVisible(false);
+                    }
+                }
             }
         };
         ActionBar supportActionBar = getSupportActionBar();
@@ -219,32 +229,35 @@ public class MainSearchActivity extends AppCompatActivity {
                 break;
             case R.id.action_filter:
 
+                if (loginPref.getString("skype", "").equals("") && loginPref.getString("twitter", "").equals("") && loginPref.getString("tumblr", "").equals("") && loginPref.getString("facebook", "").equals("")) {
 
-                View view = this.getCurrentFocus();
-                if (view != null) {
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
-
-                if(!filterOn){
-                    allowedStateChanged = true;
-                    bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics()));
-                }else{
-                    bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics()));
-                }
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
-                            //expand
-                            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                        } else {
-                            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                        }
+                    Toast.makeText(getApplicationContext(), getString(R.string.noAddedServicesHeader), Toast.LENGTH_SHORT).show();
+                } else {
+                    View view = this.getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     }
-                }, 200);
 
+                    if (!filterOn) {
+                        allowedStateChanged = true;
+                        bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics()));
+                    } else {
+                        bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics()));
+                    }
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+                                //expand
+                                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                            } else {
+                                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                            }
+                        }
+                    }, 200);
+                }
                 break;
             case android.R.id.home:
                 finish();
@@ -263,7 +276,7 @@ public class MainSearchActivity extends AppCompatActivity {
             allowedStateChanged = true;
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        }else {
+        } else {
             if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             } else {
@@ -279,23 +292,34 @@ public class MainSearchActivity extends AppCompatActivity {
     }
 
 
-    private void addX(boolean b){
+    private void addX(boolean b) {
 
-        if(b) {
+        if (b) {
             openButton.setImageResource(R.drawable.ic_clear_white);
-        }else{
+        } else {
             openButton.setImageResource(R.drawable.arrow_up_white);
         }
     }
 
-    private void checkIfEnabled(){
+    private void checkIfEnabled() {
         if (filterOn) {
             bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics()));
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             openButton.setRotation(0);
+            if (!((accessFacebook && facebookSwitch.isChecked()) || (accessTwitter && twitterSwitch.isChecked()) || (accessTumblr && tumblrSwitch.isChecked()) || (accessSkype && skypeSwitch.isChecked()))) {
+                setNoServiceVisible();
+            } else {
+                if (noServiceLayout.getVisibility() != View.GONE) {
+                    setNoServiceGone();
+                }
+            }
+
         } else {
             bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics()));
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            if (noServiceLayout.getVisibility() == View.VISIBLE) {
+                setNoServiceGone();
+            }
         }
 
         TransitionManager.beginDelayedTransition(rootLayoutGroup);
@@ -303,22 +327,53 @@ public class MainSearchActivity extends AppCompatActivity {
     }
 
 
-    public void switchFacebook(View view){
+    public void switchFacebook(View view) {
         facebookSwitch.setChecked(!facebookSwitch.isChecked());
-
+        checkSwitches();
     }
 
-    public void switchTwitter(View view){
+    public void switchTwitter(View view) {
         twitterSwitch.setChecked(!twitterSwitch.isChecked());
+        checkSwitches();
     }
 
-    public void switchTumblr(View view){
+    public void switchTumblr(View view) {
         tumblrSwitch.setChecked(!tumblrSwitch.isChecked());
+        checkSwitches();
     }
 
-    public void switchSkype(View view){
+    public void switchSkype(View view) {
         skypeSwitch.setChecked(!skypeSwitch.isChecked());
+        checkSwitches();
     }
 
-    public void addServices(View view){ startActivity(new Intent(getApplicationContext(), AddServicesActivity.class));}
+    public void addServices(View view) {
+        startActivity(new Intent(getApplicationContext(), AddServicesActivity.class));
+    }
+
+    private void checkSwitches() {
+
+        if (!((accessFacebook && facebookSwitch.isChecked()) || (accessTwitter && twitterSwitch.isChecked()) || (accessTumblr && tumblrSwitch.isChecked()) || (accessSkype && skypeSwitch.isChecked()))) {
+            setNoServiceVisible();
+            Log.d("debug", "SetToVisible");
+        } else {
+            setNoServiceGone();
+            Log.d("debug", "SetToGone");
+        }
+
+    }
+
+    private void setNoServiceGone() {
+        Animation fade = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out_slow);
+        noServiceLayout.startAnimation(fade);
+        noServiceLayout.setVisibility(View.GONE);
+    }
+
+    private void setNoServiceVisible() {
+        ((TextView) findViewById(R.id.noServiceText)).setText(getString(R.string.noSelectedServicesHeader));
+        Animation fade = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in_slow);
+        noServiceLayout.startAnimation(fade);
+        noServiceLayout.setVisibility(View.VISIBLE);
+        noServiceButton.setVisibility(View.GONE);
+    }
 }

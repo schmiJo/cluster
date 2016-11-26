@@ -157,6 +157,7 @@
     <string name="logoutTitle">Logout??</string>
     <string name="logoutMessage">Do you really want to log out?</string>
     <string name="noAddedServicesHeader">You have not added any services yet!</string>
+    <string name="noSelectedServicesHeader">You have not selected any services!</string>
     <string name="noAddedServiceButton">Add Services</string>
     <!--Register Activity-->
     <string name="repeat_password">Repeat Password</string>

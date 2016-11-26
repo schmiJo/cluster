@@ -244,47 +244,7 @@
                 android:background="@color/colorAccent" />
 
 
-            <LinearLayout
-                android:id="@+id/addServicesLayout"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="center"
-                    android:text="@string/noAddedServicesHeader"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/astronout" />
-
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/search_filter_add_bt_shape"
-                    android:fontFamily="sans-serif"
-                    android:gravity="center"
-                    android:onClick="addServices"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
-                    android:text="@string/noAddedServiceButton"
-                    android:textColor="#fff" />
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
