@@ -12,9 +12,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.NoActionBar.Light">
-    <item name="colorPrimaryDark">#DBDBDB</item>
+        <item name="colorPrimaryDark">#DBDBDB</item>
     </style>
+
     <style name="AppTheme.NoActionBar.Dark">
         <item name="colorPrimaryDark">#000000</item>
         <item name="android:actionOverflowButtonStyle">@style/AppTheme.NoActionBar.Dark.OverFlow

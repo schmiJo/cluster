@@ -4,6 +4,7 @@ package com.media.cluster.cluster.Main;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -33,7 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.media.cluster.cluster.ClusterDBConnect.GetUserData;
-import com.media.cluster.cluster.Login.AddServicesActivity;
+import com.media.cluster.cluster.Login.AddServices.AddServicesActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.R;
 
@@ -64,6 +67,18 @@ public class MainSearchActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
             Log.d("debug", "Login started from MainSearchActivity (57)  [Clustername was null]");
+        }
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.setStatusBarColor(this.getResources().getColor(R.color.colorAccentDark, getTheme()));
+            }else{
+                window.setStatusBarColor(this.getResources().getColor(R.color.colorAccentDark));
+            }
         }
         GetUserData.getAddedServices(getApplicationContext(), clustername, false);
         noServiceLayout = findViewById(R.id.addServicesLayout);
@@ -356,7 +371,7 @@ public class MainSearchActivity extends AppCompatActivity {
         if (!((accessFacebook && facebookSwitch.isChecked()) || (accessTwitter && twitterSwitch.isChecked()) || (accessTumblr && tumblrSwitch.isChecked()) || (accessSkype && skypeSwitch.isChecked()))) {
             setNoServiceVisible();
             Log.d("debug", "SetToVisible");
-        } else {
+        } else if(noServiceLayout.getVisibility() != View.GONE){
             setNoServiceGone();
             Log.d("debug", "SetToGone");
         }

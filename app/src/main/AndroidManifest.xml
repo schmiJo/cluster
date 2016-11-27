@@ -119,6 +119,11 @@
             android:name=".Main.MainSearchActivity"
             android:label="@string/title_activity_main_search"
             android:theme="@style/AppTheme.NoActionBar.Light" />
+        <activity
+            android:name=".Login.AddServices.AddServicesActivity"
+            android:label="@string/title_activity_add_services"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Login.AddServices.SelectServiceActivity"></activity>
     </application>
 
 </manifest>

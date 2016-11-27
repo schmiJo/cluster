@@ -1,319 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_add_services"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.media.cluster.cluster.Login.AddServicesActivity">
+    android:fitsSystemWindows="true"
+    tools:context="com.media.cluster.cluster.Login.AddServices.AddServicesActivity">
 
-    <include
-        android:id="@+id/add_service_no_selected_include"
-        layout="@layout/add_services_no_selected"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="invisible" />
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/splashScreen"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="64dp"
+        android:id="@+id/addServicesLayout"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/noServiceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="@string/noAddedServicesHeader"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/astronaut" />
+
+
+        <Button
+            android:id="@+id/noServiceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/search_filter_add_bt_shape"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:onClick="addServices"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/add"
+            android:textColor="#fff" />
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp">
 
-        <LinearLayout
-            android:id="@+id/add_service_container"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/facebookRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:visibility="gone"
+        app:mrl_rippleColor="@color/rippleColor">
+
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="56dp"
+            android:onClick="switchFacebook">
 
 
+            <TextView
+                android:id="@+id/facebookText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
 
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="#e1e5ea"
-                    android:elevation="2dp"
-                    android:id="@+id/add_service_icon_container">
-
-                    <ImageView
-                        android:id="@+id/add_service_icon_facebook"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="center_vertical"
-                        android:padding="8dp"
-                        app:srcCompat="@drawable/round_service_ic_facebook" />
-
-                    <ImageView
-                        android:id="@+id/add_service_icon_twitter"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="center_vertical"
-                        android:padding="8dp"
-                        app:srcCompat="@drawable/round_service_ic_twitter" />
-
-                    <ImageView
-                        android:id="@+id/add_service_icon_tumblr"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="center_vertical"
-                        android:padding="8dp"
-                        app:srcCompat="@drawable/round_service_ic_tumblr" />
-
-                    <ImageView
-                        android:id="@+id/add_service_icon_skype"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:layout_gravity="center_vertical"
-                        android:padding="8dp"
-                        app:srcCompat="@drawable/round_service_ic_skype" />
-
-                </LinearLayout>
-
+            <Switch
+                android:id="@+id/facebookSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:checked="true"
+                android:clickable="false" />
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="2px"
-                android:src="@color/dividerColor" />
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical|start"
+                app:srcCompat="@drawable/service_facebook_square" />
 
-            <LinearLayout
-                android:id="@+id/add_service_facebook_row_container"
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent"
+                android:layout_gravity="bottom|center"/>
+        </FrameLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/twitterRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:visibility="gone"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:onClick="switchTwitter">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                app:srcCompat="@drawable/service_twitter_square"
+                android:layout_gravity="center_vertical|start"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_margin="8dp"
-                        app:srcCompat="@drawable/speech_service_ic_facebook" />
-
-                    <TextView
-                        android:id="@+id/add_service_facebook_row_username"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/addServiceEmail"
-                        android:textSize="20sp" />
+                android:layout_gravity="center"
+                android:id="@+id/twitterText"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
 
 
-                    <com.balysv.materialripple.MaterialRippleLayout
-                        android:layout_width="46dp"
-                        android:layout_height="match_parent"
-                        app:mrl_rippleColor="@color/rippleColor">
-
-                        <Button
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/add_service_delete_ic"
-                            android:onClick="deleteFacebookRow"
-                            />
-
-                    </com.balysv.materialripple.MaterialRippleLayout>
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:background="@color/dividerColor" />
-
-            </LinearLayout>
-
-
-
-
-
-
-
-            <LinearLayout
-                android:id="@+id/add_service_twitter_row_container"
-                android:layout_width="match_parent"
+            <Switch
+                android:id="@+id/twitterSwitch"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_gravity="end|center_vertical"
+                android:checked="true"
+                android:clickable="false" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_margin="8dp"
-                        app:srcCompat="@drawable/speech_service_ic_twiter" />
-
-                    <TextView
-                        android:id="@+id/add_service_twitter_row_username"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/username"
-                        android:textSize="20sp" />
-
-
-                    <com.balysv.materialripple.MaterialRippleLayout
-                        android:layout_width="46dp"
-                        android:layout_height="match_parent"
-                        app:mrl_rippleColor="@color/rippleColor">
-
-                        <Button
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/add_service_delete_ic"
-                            android:onClick="deleteTwitterRow"
-                            />
-
-                    </com.balysv.materialripple.MaterialRippleLayout>
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:background="@color/dividerColor" />
-
-            </LinearLayout>
-
-
-
-
-
-
-            <LinearLayout
-                android:id="@+id/add_service_tumblr_row_container"
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent"
+                android:layout_gravity="bottom|center"/>
+        </FrameLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/tumblrRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:visibility="gone"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:onClick="switchTumblr">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                app:srcCompat="@drawable/service_tumblr_square"
+                android:layout_gravity="center_vertical|start"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_gravity="center"
+                android:id="@+id/tumblrText"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_margin="8dp"
-                        app:srcCompat="@drawable/speech_service_ic_tumblr" />
-
-                    <TextView
-                        android:id="@+id/add_service_tumblr_row_username"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/username"
-                        android:textSize="20sp" />
-
-
-                    <com.balysv.materialripple.MaterialRippleLayout
-                        android:layout_width="46dp"
-                        android:layout_height="match_parent"
-                        app:mrl_rippleColor="@color/rippleColor">
-
-                        <Button
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/add_service_delete_ic"
-                            android:onClick="deleteTumblrRow"
-                            />
-
-                    </com.balysv.materialripple.MaterialRippleLayout>
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:background="@color/dividerColor" />
-
-            </LinearLayout>
-
-
-
-
-
-
-            <LinearLayout
-                android:id="@+id/add_service_skype_row_container"
+            <Switch
+                android:id="@+id/tumblrSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:checked="true"
+                android:clickable="false" />
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent"
+                android:layout_gravity="bottom|center"/>
+        </FrameLayout>
+
+    </com.balysv.materialripple.MaterialRippleLayout>
+
+
+
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/skypeRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:visibility="gone"
+        app:mrl_rippleColor="@color/rippleColor">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:onClick="switchSkype">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical|start"
+                app:srcCompat="@drawable/service_skype_square" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:layout_gravity="center"
+                android:id="@+id/skypeText"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="64dp"
-                    android:orientation="horizontal">
+            <Switch
+                android:id="@+id/skypeSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:checked="true"
+                android:clickable="false" />
 
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_margin="8dp"
-                        app:srcCompat="@drawable/speech_service_ic_skype" />
-
-                    <TextView
-                        android:id="@+id/add_service_skype_row_username"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="@string/username"
-                        android:textSize="20sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorAccent"
+                android:layout_gravity="bottom|center"/>
+        </FrameLayout>
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 
-                    <com.balysv.materialripple.MaterialRippleLayout
-                        android:layout_width="46dp"
-                        android:layout_height="match_parent"
-                        app:mrl_rippleColor="@color/rippleColor">
-
-                        <Button
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="8dp"
-                            android:background="@drawable/add_service_delete_ic"
-                            android:onClick="deleteSkypeRow"
-                            />
-
-                    </com.balysv.materialripple.MaterialRippleLayout>
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="2px"
-                    android:background="@color/dividerColor" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/noServiceButtonList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/search_filter_add_bt_shape"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:onClick="addServices"
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp"
+            android:text="@string/noAddedServiceButton"
+            android:textColor="#fff" />
+    </LinearLayout>
     </ScrollView>
-
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

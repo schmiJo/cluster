@@ -11,7 +11,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.Login.RegisterFinishedFragment;
-import com.media.cluster.cluster.Login.AddServicesActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -102,7 +101,7 @@ public class GetUserData {
                             loginEdit.putBoolean("mediaSet", true);
                             loginEdit.apply();
                             if(other) {
-                                AddServicesActivity.used(context, jsonObject.getString("facebook"), jsonObject.getString("tumblr"), jsonObject.getString("twitter"), jsonObject.getString("skype"));
+                                    //return information to add services activity
                             }
                         }
 

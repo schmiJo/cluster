@@ -28,8 +28,8 @@ import android.widget.Toast;
 import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.General.FloatingActionWheel;
+import com.media.cluster.cluster.Login.AddServices.AddServicesActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
-import com.media.cluster.cluster.Login.AddServicesActivity;
 import com.media.cluster.cluster.R;
 
 import java.io.File;

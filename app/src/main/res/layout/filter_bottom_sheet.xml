@@ -62,15 +62,13 @@
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:paddingTop="16dp"
                 android:visibility="gone"
                 app:mrl_rippleColor="@color/rippleColor">
 
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="44dp"
                     android:onClick="switchFacebook">
 
 
@@ -94,6 +92,7 @@
                         android:id="@+id/imageView3"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:layout_gravity="center_vertical|start"
                         app:srcCompat="@drawable/service_facebook_square" />
 
                     <View
@@ -118,15 +117,14 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="44dp"
                     android:onClick="switchTwitter">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        app:srcCompat="@drawable/service_twitter_square" />
+                        app:srcCompat="@drawable/service_twitter_square"
+                        android:layout_gravity="center_vertical|start"/>
 
 
                     <TextView
@@ -167,15 +165,14 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="44dp"
                     android:onClick="switchTumblr">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        app:srcCompat="@drawable/service_tumblr_square" />
+                        app:srcCompat="@drawable/service_tumblr_square"
+                        android:layout_gravity="center_vertical|start"/>
 
 
                     <TextView
@@ -210,19 +207,18 @@
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:mrl_rippleColor="@color/rippleColor">
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:paddingTop="8dp"
+                    android:layout_height="44dp"
                     android:onClick="switchSkype">
 
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        android:layout_gravity="center_vertical|start"
                         app:srcCompat="@drawable/service_skype_square" />
 
 
