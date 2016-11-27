@@ -95,14 +95,16 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         app:srcCompat="@drawable/service_facebook_square" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/colorAccent"
+                        android:layout_gravity="bottom|center"/>
                 </FrameLayout>
             </com.balysv.materialripple.MaterialRippleLayout>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/colorAccent" />
 
 
             <com.balysv.materialripple.MaterialRippleLayout
@@ -143,14 +145,16 @@
                         android:layout_gravity="end|center_vertical"
                         android:checked="true"
                         android:clickable="false" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/colorAccent"
+                        android:layout_gravity="bottom|center"/>
                 </FrameLayout>
             </com.balysv.materialripple.MaterialRippleLayout>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/colorAccent" />
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/tumblrRow"
@@ -189,14 +193,16 @@
                         android:layout_gravity="end|center_vertical"
                         android:checked="true"
                         android:clickable="false" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/colorAccent"
+                        android:layout_gravity="bottom|center"/>
                 </FrameLayout>
 
             </com.balysv.materialripple.MaterialRippleLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/colorAccent" />
+
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/skypeRow"
@@ -204,14 +210,14 @@
                 android:layout_height="wrap_content"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:mrl_rippleColor="@color/rippleColor">
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
+
+                    android:paddingTop="8dp"
                     android:onClick="switchSkype">
 
                     <ImageView
@@ -235,13 +241,14 @@
                         android:layout_gravity="end|center_vertical"
                         android:checked="true"
                         android:clickable="false" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/colorAccent"
+                        android:layout_gravity="bottom|center"/>
                 </FrameLayout>
             </com.balysv.materialripple.MaterialRippleLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/colorAccent" />
 
 
 
