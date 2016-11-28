@@ -11,5 +11,16 @@ public class SelectServiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_service);
+
+        try {
+            android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+            assert actionBar != null;
+            actionBar.setTitle(getString(R.string.addServices));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -18,6 +18,9 @@
     <color name="twitterColor">#1DA1F2</color>
     <color name="twitterStatusBarColor">#657686</color>
 
+    <color name="space">#271b40</color>
+    <color name="space_light">#2a1d46</color>
+
     <!-- Text Colors-->
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#757575</color>

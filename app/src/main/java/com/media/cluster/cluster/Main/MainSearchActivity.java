@@ -42,20 +42,18 @@ import com.media.cluster.cluster.R;
 
 public class MainSearchActivity extends AppCompatActivity {
 
-    boolean filterOn, accessTwitter, accessFacebook, accessTumblr, accessSkype;
-    boolean allowedStateChanged = false;
-    LinearLayout bottomSheet;
-    TextWatcher textWatcher;
-    EditText searchText;
-    Menu menu;
-    ViewGroup rootLayoutGroup;
-    Switch filterSwitch, facebookSwitch, twitterSwitch, skypeSwitch, tumblrSwitch;
-    ImageButton openButton;
-    BottomSheetBehavior bottomSheetBehavior;
-    CompoundButton.OnCheckedChangeListener filterPowerListener;
-    SharedPreferences loginPref;
-    View noServiceLayout;
-    Button noServiceButton;
+    private boolean filterOn, accessTwitter, accessFacebook, accessTumblr, accessSkype;
+    private boolean allowedStateChanged = false;
+    private TextWatcher textWatcher;
+    private EditText searchText;
+    private Menu menu;
+    private ViewGroup rootLayoutGroup;
+    private Switch  facebookSwitch, twitterSwitch, skypeSwitch, tumblrSwitch;
+    private ImageButton openButton;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private SharedPreferences loginPref;
+    private View noServiceLayout;
+    private Button noServiceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,9 +113,9 @@ public class MainSearchActivity extends AppCompatActivity {
         skypeSwitch = (Switch) findViewById(R.id.skypeSwitch);
         facebookSwitch = (Switch) findViewById(R.id.facebookSwitch);
         rootLayoutGroup = (ViewGroup) findViewById(R.id.main_search_root);
-        filterSwitch = (Switch) findViewById(R.id.filter_switch);
+        Switch filterSwitch = (Switch) findViewById(R.id.filter_switch);
         openButton = (ImageButton) findViewById(R.id.open_button);
-        bottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
+        LinearLayout bottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
         searchText = (EditText) findViewById(R.id.search_text);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -126,7 +124,7 @@ public class MainSearchActivity extends AppCompatActivity {
 
 
         checkIfEnabled();
-        filterPowerListener = new CompoundButton.OnCheckedChangeListener() {
+        CompoundButton.OnCheckedChangeListener filterPowerListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 filterOn = b;
@@ -391,4 +389,5 @@ public class MainSearchActivity extends AppCompatActivity {
         noServiceLayout.setVisibility(View.VISIBLE);
         noServiceButton.setVisibility(View.GONE);
     }
+
 }

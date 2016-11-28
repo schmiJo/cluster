@@ -24,6 +24,10 @@
         <item name="colorControlNormal">#ffffff</item>
     </style>
 
+    <style name="AppTheme.Space">
+        <item name="colorPrimary">@color/space_light</item>
+        <item name="colorPrimaryDark">@color/space</item>
+    </style>
 
     <style name="AppTheme.NoActionBar.Dark.OverFlow">
         <item name="android:src">@drawable/ic_overflow_white</item>
