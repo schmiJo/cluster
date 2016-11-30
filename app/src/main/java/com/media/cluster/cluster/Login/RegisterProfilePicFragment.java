@@ -26,7 +26,6 @@ public class RegisterProfilePicFragment extends Fragment {
     FloatingActionButton fab;
     ViewGroup layout;
     static ImageView profilePic;
-    Context context;
 
     public RegisterProfilePicFragment() {
         // Required empty public constructor
@@ -68,7 +67,6 @@ public class RegisterProfilePicFragment extends Fragment {
             if (gender.equals(RegisterDateFragment.Gender.MALE)) {
                 profilePic.setImageResource(R.drawable.men_unidentified);
                 registerProfilePicFragment.createDefaultProfilePic(R.drawable.men_unidentified, context);
-
             } else if (gender.equals(RegisterDateFragment.Gender.FEMALE)) {
                 profilePic.setImageResource(R.drawable.woman_undidentified);
                 registerProfilePicFragment.createDefaultProfilePic(R.drawable.woman_undidentified, context);

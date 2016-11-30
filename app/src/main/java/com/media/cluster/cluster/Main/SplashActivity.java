@@ -37,11 +37,11 @@ public class SplashActivity extends AppCompatActivity {
     public static final String TWITTER_REST_URL = "https://api.twitter.com/1.1";
     public static final String TWITTER_KEY = "pq6Gp4dWWh1KSbnbVvcMT6vrW ";
     public static final String TWITTER_SECRET = " SBvlz259LdPLF5FTOkeA6ReXVu1NPdnBNExAyTZVjYBIQxZ89e ";
-    public static final String TIWTTER_REST_CALLBACK_URL = "oauth://codepathtweets";
+    public static final String TIWTTER_REST_CALLBACK_URL = "oauth://cluster";
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
@@ -82,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (clustername.equals("") || password.equals("")) {
                     startActivity(login);
-                    Log.d("debug", "empty");
+                    Log.d("debug","login activity started SplashActivity (85) [Shared pref = null]");
                 } else if (isNetworkAvailable()) {
 
                     RequestQueue loginRequestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -91,6 +91,7 @@ public class SplashActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             if (!response.equals("successful")) {
                                 startActivity(login);
+                                Log.d("debug","login activity started SplashActivity (94) [Response not successful]");
                                 finish();
                             }else{
                                 thread.start();
@@ -101,6 +102,7 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             startActivity(login);
+                            Log.d("debug","login activity started SplashActivity (104) [Volley Error Response]");
                         }
                     }) {
                         @Override

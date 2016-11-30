@@ -15,6 +15,9 @@
         android:id="@+id/mainPager"
         />
 
+    <include
+        layout="@layout/filter_bottom_sheet"
+        />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

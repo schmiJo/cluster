@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -55,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static StringRequest stringRequest;
     private static RequestQueue requestQueue;
     public static Bitmap profilePic;
+    private static String bmToBase64;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -347,47 +349,47 @@ public class RegisterActivity extends AppCompatActivity {
     public static void  userCreated(final Context context){
 
         new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                RegisterFinishedFragment.setCodeInfo(context);
+                    @Override
+                    public void run() {
+                        RegisterFinishedFragment.setCodeInfo(context);
 
-            }
-        }, 300);
-
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (NumberSet) {
-                    ImplementUserData.implementUser(context, ImplementUserData.PHONENUMBER, RegisterNumberFragment.getNumber(), ClusterName, password);
-                    ImplementUserData.implementUser(context, ImplementUserData.PHONECOUNTRY, RegisterNumberFragment.getCountry(), ClusterName, password);
-                    String phoneVisibility;
-                    if (RegisterNumberFragment.getNumberVisibilty()) {
-                        phoneVisibility = "1";
-                    } else {
-                        phoneVisibility = "0";
                     }
-                    ImplementUserData.implementUser(context, ImplementUserData.PHONEVISIBILITY, phoneVisibility, ClusterName, password);
-                }
+                }, 300);
 
-                if (!RegisterDetailFragment.getSelectedEducation().equals("No Response")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.EDUCATION, RegisterDetailFragment.getSelectedEducation(), ClusterName, password);
-                }
-                if (!RegisterDetailFragment.getSelectedProfession().equals("No Response")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.PROFESSION, RegisterDetailFragment.getSelectedProfession(), ClusterName, password);
-                }
-                if (!RegisterDetailFragment.getSelectedRelation().equals("No Response")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.RELATIONSHIP, RegisterDetailFragment.getSelectedRelation(), ClusterName, password);
-                }
-                if (!RegisterDetailFragment.getJobDescription().equals("")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.JOBDESCRIPTION, RegisterDetailFragment.getJobDescription(), ClusterName, password);
-                }
-                if (!RegisterDetailFragment.getAboutMe().equals("")) {
-                    ImplementUserData.implementUser(context, ImplementUserData.ABOUTME, RegisterDetailFragment.getAboutMe(), ClusterName, password);
-                }
+                bmToBase64 = ImplementUserData.getStringImage(profilePic);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (NumberSet) {
+                            ImplementUserData.implementUser(context, ImplementUserData.PHONENUMBER, RegisterNumberFragment.getNumber(), ClusterName, password);
+                            ImplementUserData.implementUser(context, ImplementUserData.PHONECOUNTRY, RegisterNumberFragment.getCountry(), ClusterName, password);
+                            String phoneVisibility;
+                            if (RegisterNumberFragment.getNumberVisibilty()) {
+                                phoneVisibility = "1";
+                            } else {
+                                phoneVisibility = "0";
+                            }
+                            ImplementUserData.implementUser(context, ImplementUserData.PHONEVISIBILITY, phoneVisibility, ClusterName, password);
+                        }
+
+                        if (!RegisterDetailFragment.getSelectedEducation().equals("No Response")) {
+                            ImplementUserData.implementUser(context, ImplementUserData.EDUCATION, RegisterDetailFragment.getSelectedEducation(), ClusterName, password);
+                        }
+                        if (!RegisterDetailFragment.getSelectedProfession().equals("No Response")) {
+                            ImplementUserData.implementUser(context, ImplementUserData.PROFESSION, RegisterDetailFragment.getSelectedProfession(), ClusterName, password);
+                        }
+                        if (!RegisterDetailFragment.getSelectedRelation().equals("No Response")) {
+                            ImplementUserData.implementUser(context, ImplementUserData.RELATIONSHIP, RegisterDetailFragment.getSelectedRelation(), ClusterName, password);
+                        }
+                        if (!RegisterDetailFragment.getJobDescription().equals("")) {
+                            ImplementUserData.implementUser(context, ImplementUserData.JOBDESCRIPTION, RegisterDetailFragment.getJobDescription(), ClusterName, password);
+                        }
+                        if (!RegisterDetailFragment.getAboutMe().equals("")) {
+                            ImplementUserData.implementUser(context, ImplementUserData.ABOUTME, RegisterDetailFragment.getAboutMe(), ClusterName, password);
+                        }
 
 
-                String bmToBase64 = ImplementUserData.getStringImage(profilePic);
+
                 ImplementUserData.implementUser(context, ImplementUserData.PROFILE_PIC, bmToBase64, ClusterName, password);
 
                 goToWelcome();
@@ -457,6 +459,14 @@ public class RegisterActivity extends AppCompatActivity {
         builder.setMessage(getResources().getString(R.string.registerCloseDialogMessage));
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            createCloseDialog(getApplicationContext());
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static void setProfilePic(Bitmap profilePicNew){

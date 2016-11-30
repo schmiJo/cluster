@@ -29,6 +29,7 @@ import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.General.FloatingActionWheel;
 import com.media.cluster.cluster.Login.AddServices.AddServicesActivity;
+import com.media.cluster.cluster.Login.AddServices.ClusterInfoActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
 import com.media.cluster.cluster.R;
 
@@ -74,7 +75,12 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
 
 
         View layout = findViewById(R.id.drawer_layout);
-
+        final String password = loginPref.getString("password", "");
+        if (CurrentClustername.equals("") || password.equals("")) {
+            final Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(login);
+            Log.d("debug","login activity started MainActivity (83) [Shared pref = null]");
+        }
 
 //----------------------------------------------------------------------------------------------------Login Shared Preferences End------------------------------------------------------------------
 
@@ -290,6 +296,9 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                         Toast.makeText(getApplication(), "Feedback", Toast.LENGTH_SHORT).show();
                         break;
                     case 9:
+                        //Link to InfoActivity
+                        startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
+                    case 10:
                         //Logout
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(dialogContext);
@@ -321,6 +330,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                                     Log.d("debug", "deleted Profile Pic:   " + deleteProfilePic);
                                 }
                                 //Start Login Activity
+                                Log.d("debug","login activity started MainActivity (324) [Log Out confirmed]");
                                 Intent loginAction = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(loginAction);
                             }
@@ -417,8 +427,10 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                 R.drawable.nav_ic_privacy,
                 R.drawable.nav_ic_sticker_store,
                 R.drawable.nav_ic_feedback,
-                R.drawable.nav_ic_logout};
-        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback), getResources().getString(R.string.navLogout)};
+                R.drawable.nav_ic_info_inverted,
+                R.drawable.nav_ic_logout,
+               };
+        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback),getResources().getString(R.string.info) ,getResources().getString(R.string.navLogout)};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             DrawerRowDataModel current = new DrawerRowDataModel();
             current.iconId = icons[i];
@@ -497,9 +509,9 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_help) {
+        if (id == R.id.action_info) {
             //add link to website
-            Toast.makeText(getApplication(), "Help", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
         } else if (id == R.id.action_my_profile) {
             //add my profile Activity
             Toast.makeText(getApplication(), "My Profile", Toast.LENGTH_SHORT).show();

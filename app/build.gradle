@@ -37,6 +37,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        lintConfig rootProject.file('gradle/lint.xml')
+    }
 }
 
 repositories {
@@ -49,7 +53,7 @@ repositories {
     }
     maven { url "https://jitpack.io" }
 }
-
+apply plugin: 'com.neenbedankt.android-apt'
 dependencies {
 
     apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
@@ -68,6 +72,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.scribejava:scribejava-apis:3.2.0'
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.codepath.libraries:android-oauth-handler:1.1.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'

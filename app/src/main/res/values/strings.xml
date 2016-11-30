@@ -147,6 +147,8 @@
     <string name="options">Options</string>
     <string name="imgDescription">img</string>
 
+    <string name="moreInfo">More Information</string>
+    <string name="termsAndConditions">Terms and conditions</string>
 
     <!--Login Activity-->
     <string name="login_login">login</string>
@@ -226,6 +228,7 @@
     <string name="registerCloseDialogTitle">Close Register??😢</string>
     <string name="registerCloseDialogMessage">Do you really want to close Register?  Your data will be lost!</string>
 
+    <string name="clusterDescription">Cluster is an app that combines all your social media accounts to deliver the best user experience.  &#xA;Please help us to make this app even better by submitting feedback.</string>
     <!--Degrees-->
     <string name="degreesNoResponse">No response</string>
     <string name="degreesNotFinished">Not finished</string>

@@ -123,8 +123,11 @@
             android:name=".Login.AddServices.AddServicesActivity"
             android:label="@string/title_activity_add_services"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Login.AddServices.SelectServiceActivity"
-            android:theme="@style/AppTheme.Space"/>
+        <activity
+            android:name=".Login.AddServices.SelectServiceActivity"
+            android:theme="@style/AppTheme.Space" />
+        <activity android:name=".Login.AddServices.ClusterInfoActivity"
+           />
     </application>
 
 </manifest>
