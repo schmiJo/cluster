@@ -6,12 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -23,8 +27,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.Toast;
+
 import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
 import com.media.cluster.cluster.General.FloatingActionWheel;
@@ -37,7 +48,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  implements FloatingActionWheel.OnFAWItemClickListner{
+public class MainActivity extends AppCompatActivity implements FloatingActionWheel.OnFAWItemClickListner {
     //DrawerRecyclerView
     RecyclerView drawerOptionRecyclerView;
     RecyclerView drawerServiceRecyclerView;
@@ -48,30 +59,79 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
     ViewPager mainViewPager;
     private TabLayout tabLayout;
     //
-
+    Menu menu;
     Context dialogContext;
     private Toolbar toolbar;
+    private ViewGroup rootLayoutGroup;
     public static String CurrentClustername;
     private FloatingActionButton fab;
     private ViewPager.OnPageChangeListener pageChangeListener;
     private TabLayout.OnTabSelectedListener tabListener;
     private TabLayout.TabLayoutOnPageChangeListener onTabChangeListener;
-    DialogInterface.OnClickListener negativeDialogButton;
     private DrawerRecyclerTouchListener drawerRecyclerTouchListener;
     private DrawerRecyclerTouchListener serviceListener;
-    FloatingActionWheel faw;
+    private FloatingActionWheel faw;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private SharedPreferences loginPref;
+    private ImageButton openButton;
+    private Switch facebookSwitch, twitterSwitch, skypeSwitch, tumblrSwitch;
+    private boolean filterOn, accessTwitter, accessFacebook, accessTumblr, accessSkype;
+    CompoundButton.OnCheckedChangeListener filterPowerListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        filterPowerListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                filterOn = b;
+                checkIfEnabled();
+            }
+        };
+        initializeViews();
         setSupportActionBar(toolbar);
         dialogContext = this;
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState != BottomSheetBehavior.STATE_HIDDEN) {
+                    menu.findItem(R.id.action_filter).setIcon(R.drawable.action_filter_light_ic);
+
+                    if(fab.getVisibility() == View.VISIBLE) {
+                        fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_scale_out));
+                        fab.setVisibility(View.GONE);
+                        faw.setExpantionState(false);
+                    }
+                } else {
+                    menu.findItem(R.id.action_filter).setIcon(R.drawable.action_ic_filter);
+                    if(fab.getVisibility() == View.GONE) {
+                        fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_scale_in));
+                        fab.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                if (filterOn) {
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                        Animation rotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation_180);
+                        openButton.startAnimation(rotate);
+                        openButton.setRotation(180);
+                    } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                        openButton.setRotation(0);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
 //----------------------------------------------------------------------------------------------------Login Shared Preferences Start----------------------------------------------------------------
-        SharedPreferences loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
-        CurrentClustername  =  loginPref.getString("clustername", "");
+        loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
+        CurrentClustername = loginPref.getString("clustername", "");
 
 
         View layout = findViewById(R.id.drawer_layout);
@@ -79,19 +139,20 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         if (CurrentClustername.equals("") || password.equals("")) {
             final Intent login = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(login);
-            Log.d("debug","login activity started MainActivity (83) [Shared pref = null]");
+            Log.d("debug", "login activity started MainActivity (83) [Shared pref = null]");
         }
 
 //----------------------------------------------------------------------------------------------------Login Shared Preferences End------------------------------------------------------------------
-
-
+        checkIfEnabled();
+        openButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSlider();
+            }
+        });
 //----------------------------------------------------------------------------------------------------View Pager Start------------------------------------------------------------------------------
-        mainViewPager = (ViewPager) findViewById(R.id.mainPager);
         mainViewPager.setAdapter(new PagerAdapterMain(getSupportFragmentManager()));
-        tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
-
-        faw = (FloatingActionWheel) findViewById(R.id.faw);
-
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         //Tab layout start
         final TabLayout.Tab feed = tabLayout.newTab();
         final TabLayout.Tab hot = tabLayout.newTab();
@@ -143,7 +204,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
 
         //Tab layout end
 
-
+        setFilterRows();
         //Onchange Listener checks for a change with the ViewPager
         onTabChangeListener = new TabLayout.TabLayoutOnPageChangeListener(tabLayout);
         mainViewPager.addOnPageChangeListener(onTabChangeListener);
@@ -155,15 +216,13 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
 
             @Override
             public void onPageSelected(int position) {
+                faw.setExpantionState(false);
                 if (mainViewPager.getCurrentItem() == 1) {
-                    //The Current View on the view pager is media
-
                     feed.setIcon(R.drawable.main_tab_layout_ic_feed_selected);
                     hot.setIcon(R.drawable.main_tab_layout_ic_whatshot);
                     chat.setIcon(R.drawable.main_tab_layout_ic_chat);
                     profile.setIcon(R.drawable.main_tab_layout_ic_profile);
                 } else if (mainViewPager.getCurrentItem() == 0) {
-                    //The current View on the Viewpager is chats
 
                     feed.setIcon(R.drawable.main_tab_layout_ic_feed);
                     hot.setIcon(R.drawable.main_tab_layout_ic_whatshot_selected);
@@ -175,12 +234,24 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                     hot.setIcon(R.drawable.main_tab_layout_ic_whatshot);
                     chat.setIcon(R.drawable.main_tab_layout_ic_chat_selected);
                     profile.setIcon(R.drawable.main_tab_layout_ic_profile);
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                 } else if (mainViewPager.getCurrentItem() == 3) {
 
                     feed.setIcon(R.drawable.main_tab_layout_ic_feed);
                     hot.setIcon(R.drawable.main_tab_layout_ic_whatshot);
                     chat.setIcon(R.drawable.main_tab_layout_ic_chat);
                     profile.setIcon(R.drawable.main_tab_layout_ic_profile_selected);
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+
+                try {
+                    if (position == 0 || position == 1) {
+                        menu.findItem(R.id.action_filter).setVisible(true);
+                    } else {
+                        menu.findItem(R.id.action_filter).setVisible(false);
+                    }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -200,7 +271,6 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         ArrayList<Integer> fawItems = new ArrayList<>();
         fawItems.add(R.drawable.faw_ic_post);
         fawItems.add(R.drawable.faw_ic_activity);
-        fawItems.add(R.drawable.faw_ic_filter);
         fawItems.add(R.drawable.faw_ic_contacts);
         fawItems.add(R.drawable.faw_ic_story);
         fawItems.add(R.drawable.faw_ic_scanner);
@@ -246,7 +316,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         toggle.syncState();
 
         //-----Option Drawer
-        drawerOptionRecyclerView = (RecyclerView) findViewById(R.id.drawer_options_recycler_view);
+
         drawerOptionAdapter = new DrawerAdapter(getApplicationContext(), getDrawerOptionData());
         drawerOptionRecyclerView.setAdapter(drawerOptionAdapter);
         drawerOptionRecyclerView.setLayoutManager(new DrawerLayoutManager(getApplicationContext()));
@@ -298,6 +368,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                     case 9:
                         //Link to InfoActivity
                         startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
+                        break;
                     case 10:
                         //Logout
 
@@ -330,7 +401,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                                     Log.d("debug", "deleted Profile Pic:   " + deleteProfilePic);
                                 }
                                 //Start Login Activity
-                                Log.d("debug","login activity started MainActivity (324) [Log Out confirmed]");
+                                Log.d("debug", "login activity started MainActivity (324) [Log Out confirmed]");
                                 Intent loginAction = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(loginAction);
                             }
@@ -359,7 +430,6 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         //
 
         //-----Social Drawer
-        drawerServiceRecyclerView = (RecyclerView) findViewById(R.id.drawer_service_recycler_view);
         drawerSocialAdapter = new DrawerAdapter(getApplicationContext(), getDrawerSocialData());
         drawerServiceRecyclerView.setAdapter(drawerSocialAdapter);
         drawerServiceRecyclerView.setLayoutManager(new DrawerLayoutManager(getApplicationContext()));
@@ -429,8 +499,8 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                 R.drawable.nav_ic_feedback,
                 R.drawable.nav_ic_info_inverted,
                 R.drawable.nav_ic_logout,
-               };
-        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback),getResources().getString(R.string.info) ,getResources().getString(R.string.navLogout)};
+        };
+        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback), getResources().getString(R.string.info), getResources().getString(R.string.navLogout)};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             DrawerRowDataModel current = new DrawerRowDataModel();
             current.iconId = icons[i];
@@ -477,7 +547,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
                     System.exit(0);
                 }
             });
-            negativeDialogButton = new DialogInterface.OnClickListener() {
+            DialogInterface.OnClickListener negativeDialogButton = new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -498,6 +568,7 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -506,19 +577,25 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_info) {
-            //add link to website
-            startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
-        } else if (id == R.id.action_my_profile) {
-            //add my profile Activity
-            Toast.makeText(getApplication(), "My Profile", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.action_search) {
-            //add Search activity
-            startActivity(new Intent(getApplicationContext(), MainSearchActivity.class));
+        switch (item.getItemId()) {
+            case R.id.action_info:
+                startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
+                break;
+            case R.id.action_my_profile:
+                startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
+                break;
+            case R.id.action_search:
+                startActivity(new Intent(getApplicationContext(), MainSearchActivity.class));
+                break;
+            case R.id.action_filter:
+                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -604,8 +681,92 @@ public class MainActivity extends AppCompatActivity  implements FloatingActionWh
         drawerOptionRecyclerView.removeOnItemTouchListener(drawerRecyclerTouchListener);
         fab.setOnClickListener(null);
         drawerServiceRecyclerView.removeOnItemTouchListener(serviceListener);
+
     }
 
+
+    private void openSlider() {
+        if (!filterOn) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        } else {
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            } else {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        }
+
+    }
+
+
+    private void setFilterRows() {
+        if (!loginPref.getString("facebook", "").equals("")) {
+            findViewById(R.id.facebookRow).setVisibility(View.VISIBLE);
+            accessFacebook = true;
+        }
+
+        if (!loginPref.getString("skype", "").equals("")) {
+            findViewById(R.id.skypeRow).setVisibility(View.VISIBLE);
+            accessSkype = true;
+        }
+
+        if (!loginPref.getString("twitter", "").equals("")) {
+            findViewById(R.id.twitterRow).setVisibility(View.VISIBLE);
+            accessTwitter = true;
+        }
+
+        if (!loginPref.getString("tumblr", "").equals("")) {
+            findViewById(R.id.tumblrRow).setVisibility(View.VISIBLE);
+            accessTumblr = true;
+        }
+    }
+
+    private void addX(boolean b) {
+
+        if (b) {
+            openButton.setImageResource(R.drawable.ic_clear_white);
+        } else {
+            openButton.setImageResource(R.drawable.arrow_up_white);
+        }
+    }
+
+    private void initializeViews(){
+        openButton = (ImageButton) findViewById(R.id.open_button);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        mainViewPager = (ViewPager) findViewById(R.id.mainPager);
+        tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
+        bottomSheetBehavior = BottomSheetBehavior.from((LinearLayout) findViewById(R.id.bottom_sheet));
+        faw = (FloatingActionWheel) findViewById(R.id.faw);
+        drawerOptionRecyclerView = (RecyclerView) findViewById(R.id.drawer_options_recycler_view);
+        drawerServiceRecyclerView = (RecyclerView) findViewById(R.id.drawer_service_recycler_view);
+        tumblrSwitch = (Switch) findViewById(R.id.tumblrSwitch);
+        twitterSwitch = (Switch) findViewById(R.id.twitterSwitch);
+        skypeSwitch = (Switch) findViewById(R.id.skypeSwitch);
+        facebookSwitch = (Switch) findViewById(R.id.facebookSwitch);
+        Switch filterSwitch = (Switch) findViewById(R.id.filter_switch);
+        rootLayoutGroup = (ViewGroup) findViewById(R.id.main_view_root);
+        filterOn = filterSwitch.isChecked();
+        filterSwitch.setOnCheckedChangeListener(filterPowerListener);
+    }
+
+    private void checkIfEnabled() {
+        if (filterOn) {
+            bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics()));
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            openButton.setRotation(0);
+
+
+        } else {
+            bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics()));
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        }
+
+        TransitionManager.beginDelayedTransition(rootLayoutGroup);
+        addX(!filterOn);
+    }
 
 }
 

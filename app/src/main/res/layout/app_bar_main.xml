@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main_view_root"
     tools:context=".Main.MainActivity">
 
     <android.support.v4.view.ViewPager
@@ -13,10 +14,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".Main.MainActivity"
         android:id="@+id/mainPager"
-        />
-
-    <include
-        layout="@layout/filter_bottom_sheet"
         />
 
     <android.support.design.widget.AppBarLayout
@@ -73,6 +70,11 @@
         app:borderWidth="0dp"
         />
 
+
+
+    <include
+        layout="@layout/filter_bottom_sheet"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>

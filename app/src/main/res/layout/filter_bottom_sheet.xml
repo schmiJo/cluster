@@ -40,7 +40,6 @@
             android:layout_gravity="center_vertical|start"
             android:layout_marginStart="16dp"
             android:background="?selectableItemBackgroundBorderless"
-            android:onClick="OpenSlider"
             app:srcCompat="@drawable/arrow_up_white" />
 
 

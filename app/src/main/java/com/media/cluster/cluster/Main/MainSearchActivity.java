@@ -122,6 +122,12 @@ public class MainSearchActivity extends AppCompatActivity {
         filterOn = filterSwitch.isChecked();
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
+        openButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSlider();
+            }
+        });
 
         checkIfEnabled();
         CompoundButton.OnCheckedChangeListener filterPowerListener = new CompoundButton.OnCheckedChangeListener() {
@@ -283,7 +289,7 @@ public class MainSearchActivity extends AppCompatActivity {
     }
 
 
-    public void OpenSlider(View view) {
+    public void openSlider() {
 
         if (!filterOn) {
             allowedStateChanged = true;
