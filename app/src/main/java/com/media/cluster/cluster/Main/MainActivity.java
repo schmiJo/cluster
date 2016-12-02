@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import com.media.cluster.cluster.BuildConfig;
 import com.media.cluster.cluster.ClusterCode.ClusterCodeActivity;
+import com.media.cluster.cluster.ClusterDBConnect.GetUserData;
 import com.media.cluster.cluster.General.FloatingActionWheel;
 import com.media.cluster.cluster.Login.AddServices.AddServicesActivity;
 import com.media.cluster.cluster.Login.AddServices.ClusterInfoActivity;
@@ -90,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             }
         };
         initializeViews();
+        loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
+        CurrentClustername = loginPref.getString("clustername", "");
+        GetUserData.getAddedServices(getApplicationContext(), CurrentClustername,false);
         setSupportActionBar(toolbar);
         dialogContext = this;
 
@@ -99,15 +103,16 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 if (newState != BottomSheetBehavior.STATE_HIDDEN) {
                     menu.findItem(R.id.action_filter).setIcon(R.drawable.action_filter_light_ic);
 
-                    if(fab.getVisibility() == View.VISIBLE) {
-                        fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_scale_out));
+                    if (fab.getVisibility() == View.VISIBLE) {
+                        fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_scale_out));
                         fab.setVisibility(View.GONE);
+                        fab.setRotation(0);
                         faw.setExpantionState(false);
                     }
                 } else {
                     menu.findItem(R.id.action_filter).setIcon(R.drawable.action_ic_filter);
-                    if(fab.getVisibility() == View.GONE) {
-                        fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_scale_in));
+                    if (fab.getVisibility() == View.GONE) {
+                        fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_scale_in));
                         fab.setVisibility(View.VISIBLE);
                     }
                 }
@@ -130,8 +135,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             }
         });
 //----------------------------------------------------------------------------------------------------Login Shared Preferences Start----------------------------------------------------------------
-        loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
-        CurrentClustername = loginPref.getString("clustername", "");
+
 
 
         View layout = findViewById(R.id.drawer_layout);
@@ -217,6 +221,10 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             @Override
             public void onPageSelected(int position) {
                 faw.setExpantionState(false);
+                if (fab.getRotation() == 45) {
+                    fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close));
+                    fab.setRotation(0);
+                }
                 if (mainViewPager.getCurrentItem() == 1) {
                     feed.setIcon(R.drawable.main_tab_layout_ic_feed_selected);
                     hot.setIcon(R.drawable.main_tab_layout_ic_whatshot);
@@ -537,6 +545,10 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (faw.getExpantionState()) {
+            faw.setExpantionState(false);
+        } else if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         } else {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(dialogContext);
@@ -561,6 +573,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             dialog.show();
 
         }
+
     }
     //-----------------------------------------------------------Design Icons in Toolbar----------------------------------------------------
 
@@ -589,10 +602,17 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 startActivity(new Intent(getApplicationContext(), MainSearchActivity.class));
                 break;
             case R.id.action_filter:
-                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+                if (!(loginPref.getString("facebook", "").equals("") && !loginPref.getString("tumblr", "").equals("") && !loginPref.getString("twitter", "").equals("") && !loginPref.getString("skype", "").equals(""))) {
+                    if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    }
+                }else {
+                    if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
+                        Toast.makeText(getApplicationContext(), R.string.noAddedServicesHeader, Toast.LENGTH_SHORT).show();
+                    }
                 }
         }
 
@@ -605,7 +625,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
 
     }
 
-    //-----------------------------------------------------------Design Icons in Toolbar----------------------------------------------------
+//-----------------------------------------------------------Design Icons in Toolbar----------------------------------------------------
 
 
     //Drawer OnItemTouchListenerClass
@@ -731,7 +751,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         }
     }
 
-    private void initializeViews(){
+    private void initializeViews() {
         openButton = (ImageButton) findViewById(R.id.open_button);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -756,12 +776,9 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 340, getResources().getDisplayMetrics()));
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             openButton.setRotation(0);
-
-
         } else {
             bottomSheetBehavior.setPeekHeight((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 56, getResources().getDisplayMetrics()));
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
         }
 
         TransitionManager.beginDelayedTransition(rootLayoutGroup);
