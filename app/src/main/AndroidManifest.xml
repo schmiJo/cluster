@@ -125,7 +125,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login.AddServices.SelectServiceActivity"
-            android:theme="@style/AppTheme.Space" />
+            android:theme="@style/AppTheme.Space" 
+                    android:launchMode="singleTask"/>
         <activity android:name=".Login.AddServices.ClusterInfoActivity"
            />
     </application>
