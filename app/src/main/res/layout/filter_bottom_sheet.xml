@@ -68,7 +68,8 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:onClick="switchFacebook">
+                    android:id="@+id/switchFacebookLayout"
+                   >
 
 
                     <TextView
@@ -117,7 +118,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:onClick="switchTwitter">
+                    android:id="@+id/switchTwitterLayout">
 
                     <ImageView
                         android:layout_width="28dp"
@@ -165,7 +166,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:onClick="switchTumblr">
+                    android:id="@+id/switchTumblrLayout">
 
                     <ImageView
                         android:layout_width="28dp"
@@ -212,7 +213,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:onClick="switchSkype">
+                    android:id="@+id/switchSkypeLayout">
 
                     <ImageView
                         android:layout_width="28dp"

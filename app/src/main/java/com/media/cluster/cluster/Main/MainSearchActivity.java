@@ -52,7 +52,7 @@ public class MainSearchActivity extends AppCompatActivity {
     private ImageButton openButton;
     private BottomSheetBehavior bottomSheetBehavior;
     private SharedPreferences loginPref;
-    private View noServiceLayout;
+    private View noServiceLayout ;
     private Button noServiceButton;
 
     @Override
@@ -81,8 +81,32 @@ public class MainSearchActivity extends AppCompatActivity {
         GetUserData.getAddedServices(getApplicationContext(), clustername, false);
         noServiceLayout = findViewById(R.id.addServicesLayout);
         noServiceButton = (Button) findViewById(R.id.noServiceButton);
+
+        View.OnClickListener rowClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()){
+                    case R.id.switchFacebookLayout:
+                        facebookSwitch.setChecked(!facebookSwitch.isChecked());
+                        break;
+                    case R.id.switchSkypeLayout:
+                        twitterSwitch.setChecked(!twitterSwitch.isChecked());
+                        break;
+                    case R.id.switchTumblrLayout:
+                        tumblrSwitch.setChecked(!tumblrSwitch.isChecked());
+                        break;
+                    case R.id.switchTwitterLayout:
+                        skypeSwitch.setChecked(!skypeSwitch.isChecked());
+                        break;
+                }
+                checkSwitches();
+            }
+        };
+
         if (!loginPref.getString("facebook", "").equals("")) {
             findViewById(R.id.facebookRow).setVisibility(View.VISIBLE);
+            View facebookSwitchLayout = findViewById(R.id.switchFacebookLayout);
+            facebookSwitchLayout.setOnClickListener(rowClickListener);
             accessFacebook = true;
         } else {
             if (loginPref.getString("skype", "").equals("") && loginPref.getString("twitter", "").equals("") && loginPref.getString("tumblr", "").equals("")) {
@@ -94,16 +118,22 @@ public class MainSearchActivity extends AppCompatActivity {
 
         if (!loginPref.getString("skype", "").equals("")) {
             findViewById(R.id.skypeRow).setVisibility(View.VISIBLE);
+            View skypeSwitchLayout = findViewById(R.id.switchSkypeLayout);
+            skypeSwitchLayout.setOnClickListener(rowClickListener);
             accessSkype = true;
         }
 
         if (!loginPref.getString("twitter", "").equals("")) {
             findViewById(R.id.twitterRow).setVisibility(View.VISIBLE);
+            View twitterSwitchLayout = findViewById(R.id.switchTwitterLayout);
+            twitterSwitchLayout.setOnClickListener(rowClickListener);
             accessTwitter = true;
         }
 
         if (!loginPref.getString("tumblr", "").equals("")) {
             findViewById(R.id.tumblrRow).setVisibility(View.VISIBLE);
+            View tumblrSwitchLayout = findViewById(R.id.switchTumblrLayout);
+            tumblrSwitchLayout.setOnClickListener(rowClickListener);
             accessTumblr = true;
         }
 
@@ -345,26 +375,6 @@ public class MainSearchActivity extends AppCompatActivity {
         addX(!filterOn);
     }
 
-
-    public void switchFacebook(View view) {
-        facebookSwitch.setChecked(!facebookSwitch.isChecked());
-        checkSwitches();
-    }
-
-    public void switchTwitter(View view) {
-        twitterSwitch.setChecked(!twitterSwitch.isChecked());
-        checkSwitches();
-    }
-
-    public void switchTumblr(View view) {
-        tumblrSwitch.setChecked(!tumblrSwitch.isChecked());
-        checkSwitches();
-    }
-
-    public void switchSkype(View view) {
-        skypeSwitch.setChecked(!skypeSwitch.isChecked());
-        checkSwitches();
-    }
 
     public void addServices(View view) {
         startActivity(new Intent(getApplicationContext(), AddServicesActivity.class));

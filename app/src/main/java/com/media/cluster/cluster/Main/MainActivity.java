@@ -75,9 +75,12 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     private BottomSheetBehavior bottomSheetBehavior;
     private SharedPreferences loginPref;
     private ImageButton openButton;
-    private Switch facebookSwitch, twitterSwitch, skypeSwitch, tumblrSwitch;
-    private boolean filterOn, accessTwitter, accessFacebook, accessTumblr, accessSkype;
+    private Switch facebookSwitch, twitterSwitch, tumblrSwitch;
+    private boolean filterOn, accessTwitter, accessFacebook, accessTumblr;
+    private View.OnClickListener rowClickListener;
+    private int serviceCount = 0;
     CompoundButton.OnCheckedChangeListener filterPowerListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +96,38 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         initializeViews();
         loginPref = getSharedPreferences("userLoginInfo", MODE_PRIVATE);
         CurrentClustername = loginPref.getString("clustername", "");
-        GetUserData.getAddedServices(getApplicationContext(), CurrentClustername,false);
+        GetUserData.getAddedServices(getApplicationContext(), CurrentClustername, false);
         setSupportActionBar(toolbar);
         dialogContext = this;
+
+        rowClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.switchFacebookLayout:
+                        if ((!((!accessTumblr || !tumblrSwitch.isChecked()) && (!accessTwitter || !twitterSwitch.isChecked())) || !facebookSwitch.isChecked())) {
+                            facebookSwitch.setChecked(!facebookSwitch.isChecked());
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.needOneSelectedService, Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case R.id.switchTumblrLayout:
+                        if ((!((!accessFacebook || !facebookSwitch.isChecked()) && (!accessTwitter || !twitterSwitch.isChecked())) || !tumblrSwitch.isChecked())) {
+                            tumblrSwitch.setChecked(!tumblrSwitch.isChecked());
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.needOneSelectedService, Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case R.id.switchTwitterLayout:
+                        if ((!((!accessTumblr || !tumblrSwitch.isChecked()) && (!accessFacebook || !facebookSwitch.isChecked())) || !twitterSwitch.isChecked())) {
+                            twitterSwitch.setChecked(!twitterSwitch.isChecked());
+                        } else {
+                            Toast.makeText(getApplicationContext(), R.string.needOneSelectedService, Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                }
+            }
+        };
 
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -135,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             }
         });
 //----------------------------------------------------------------------------------------------------Login Shared Preferences Start----------------------------------------------------------------
-
 
 
         View layout = findViewById(R.id.drawer_layout);
@@ -253,14 +284,21 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 }
 
                 try {
-                    if (position == 0 || position == 1) {
-                        menu.findItem(R.id.action_filter).setVisible(true);
-                    } else {
+
+                    if (serviceCount <= 1) {
                         menu.findItem(R.id.action_filter).setVisible(false);
+                    } else {
+                        if (position == 0 || position == 1) {
+                            menu.findItem(R.id.action_filter).setVisible(true);
+                        } else {
+                            menu.findItem(R.id.action_filter).setVisible(false);
+                        }
                     }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                 }
+
+
             }
 
             @Override
@@ -582,6 +620,9 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         this.menu = menu;
+        if (serviceCount <= 1) {
+            menu.findItem(R.id.action_filter).setVisible(false);
+        }
         return true;
     }
 
@@ -603,13 +644,13 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 break;
             case R.id.action_filter:
 
-                if (!(loginPref.getString("facebook", "").equals("") && !loginPref.getString("tumblr", "").equals("") && !loginPref.getString("twitter", "").equals("") && !loginPref.getString("skype", "").equals(""))) {
+                if (!(loginPref.getString("facebook", "").equals("") && !loginPref.getString("tumblr", "").equals("") && !loginPref.getString("twitter", "").equals(""))) {
                     if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     } else if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED || bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     }
-                }else {
+                } else {
                     if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_HIDDEN) {
                         Toast.makeText(getApplicationContext(), R.string.noAddedServicesHeader, Toast.LENGTH_SHORT).show();
                     }
@@ -723,23 +764,30 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     private void setFilterRows() {
         if (!loginPref.getString("facebook", "").equals("")) {
             findViewById(R.id.facebookRow).setVisibility(View.VISIBLE);
+            View facebookSwitchLayout = findViewById(R.id.switchFacebookLayout);
+            facebookSwitchLayout.setOnClickListener(rowClickListener);
             accessFacebook = true;
+            serviceCount++;
         }
 
-        if (!loginPref.getString("skype", "").equals("")) {
-            findViewById(R.id.skypeRow).setVisibility(View.VISIBLE);
-            accessSkype = true;
-        }
 
         if (!loginPref.getString("twitter", "").equals("")) {
             findViewById(R.id.twitterRow).setVisibility(View.VISIBLE);
+            View twitterSwitchLayout = findViewById(R.id.switchTwitterLayout);
+            twitterSwitchLayout.setOnClickListener(rowClickListener);
             accessTwitter = true;
+            serviceCount++;
         }
 
         if (!loginPref.getString("tumblr", "").equals("")) {
             findViewById(R.id.tumblrRow).setVisibility(View.VISIBLE);
+            View tumblrSwitchLayout = findViewById(R.id.switchTumblrLayout);
+            tumblrSwitchLayout.setOnClickListener(rowClickListener);
             accessTumblr = true;
+            serviceCount++;
         }
+
+
     }
 
     private void addX(boolean b) {
@@ -763,7 +811,6 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         drawerServiceRecyclerView = (RecyclerView) findViewById(R.id.drawer_service_recycler_view);
         tumblrSwitch = (Switch) findViewById(R.id.tumblrSwitch);
         twitterSwitch = (Switch) findViewById(R.id.twitterSwitch);
-        skypeSwitch = (Switch) findViewById(R.id.skypeSwitch);
         facebookSwitch = (Switch) findViewById(R.id.facebookSwitch);
         Switch filterSwitch = (Switch) findViewById(R.id.filter_switch);
         rootLayoutGroup = (ViewGroup) findViewById(R.id.main_view_root);
@@ -784,6 +831,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         TransitionManager.beginDelayedTransition(rootLayoutGroup);
         addX(!filterOn);
     }
+
 
 }
 

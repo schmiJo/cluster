@@ -147,6 +147,7 @@
     <string name="options">Options</string>
     <string name="imgDescription">img</string>
 
+    <string name="needOneSelectedService">You need at least one selected service</string>
     <string name="moreInfo">More Information</string>
     <string name="termsAndConditions">Terms and conditions</string>
 
