@@ -117,6 +117,8 @@ public class SplashActivity extends AppCompatActivity {
                     };
 
                     loginRequestQueue.add(loginStringRequest);
+                }else{
+                    thread.start();
                 }
 
 
