@@ -481,7 +481,7 @@ public class FloatingActionWheel extends View {
             return false;
         }
         if (ressourcesCounter > 0) {
-            item1 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(0)));
+            item1 = Utils.drawableToBitmap(context, resouceIds.get(0));
             Log.d("debug", "Sets Item1 : " + resouceIds.get(0));
             ressourcesCounter--;
             availabilityItem1 = true;
@@ -492,7 +492,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item2 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(1)));
+            item2 = Utils.drawableToBitmap(context, resouceIds.get(1));
             Log.d("debug", "Sets Item2");
             ressourcesCounter--;
             availabilityItem2 = true;
@@ -501,7 +501,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item3 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(2)));
+            item3 = Utils.drawableToBitmap(context, resouceIds.get(2));
             Log.d("debug", "Sets Item3");
             ressourcesCounter--;
             availabilityItem3 = true;
@@ -510,7 +510,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item4 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(3)));
+            item4 = Utils.drawableToBitmap(context, resouceIds.get(3));
             Log.d("debug", "Sets Item4");
             ressourcesCounter--;
             availabilityItem4 = true;
@@ -519,7 +519,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item5 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(4)));
+            item5 = Utils.drawableToBitmap(context, resouceIds.get(4));
             ressourcesCounter--;
             availabilityItem5 = true;
             maxItemNumber++;
@@ -527,7 +527,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item6 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(5)));
+            item6 = Utils.drawableToBitmap(context, resouceIds.get(5));
             ressourcesCounter--;
             availabilityItem6 = true;
             maxItemNumber++;
@@ -535,7 +535,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item7 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(6)));
+            item7 = Utils.drawableToBitmap(context, resouceIds.get(6));
             ressourcesCounter--;
             availabilityItem7 = true;
             maxItemNumber++;
@@ -543,7 +543,7 @@ public class FloatingActionWheel extends View {
             return true;
         }
         if (ressourcesCounter > 0) {
-            item8 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds.get(7)));
+            item8 = Utils.drawableToBitmap(context, resouceIds.get(7));
             ressourcesCounter--;
             availabilityItem8 = true;
             maxItemNumber++;
@@ -564,44 +564,44 @@ public class FloatingActionWheel extends View {
         maxItemNumber = 0;
 
         if (resouceIds[0] != 0) {
-            item1 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[0]));
+            item1 = Utils.drawableToBitmap(context, resouceIds[0]);
             availabilityItem1 = true;
             maxItemNumber++;
         }
         if (resouceIds[1] != 0) {
-            item2 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[1]));
+            item2 = Utils.drawableToBitmap(context, resouceIds[1]);
             availabilityItem2 = true;
             maxItemNumber++;
         }
 
         if (resouceIds[2] != 0) {
-            item3 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[2]));
+            item3 = Utils.drawableToBitmap(context, resouceIds[2]);
             availabilityItem3 = true;
             maxItemNumber++;
         }
         if (resouceIds[3] != 0) {
-            item4 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[3]));
+            item4 = Utils.drawableToBitmap(context, resouceIds[3]);
             availabilityItem4 = true;
             maxItemNumber++;
         }
         if (resouceIds[4] != 0) {
-            item5 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[0]));
+            item5 = Utils.drawableToBitmap(context, resouceIds[0]);
             availabilityItem5 = true;
             maxItemNumber++;
         }
         if (resouceIds[5] != 0) {
-            item6 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[1]));
+            item6 = Utils.drawableToBitmap(context, resouceIds[1]);
             availabilityItem6 = true;
             maxItemNumber++;
         }
 
         if (resouceIds[6] != 0) {
-            item7 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[2]));
+            item7 = Utils.drawableToBitmap(context, resouceIds[2]);
             availabilityItem7 = true;
             maxItemNumber++;
         }
         if (resouceIds[7] != 0) {
-            item8 = Utils.drawableToBitmap(ContextCompat.getDrawable(context, resouceIds[3]));
+            item8 = Utils.drawableToBitmap(context, resouceIds[3]);
             availabilityItem8 = true;
             maxItemNumber++;
         }

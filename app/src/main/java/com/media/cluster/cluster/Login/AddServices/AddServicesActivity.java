@@ -193,7 +193,7 @@ public class AddServicesActivity extends AppCompatActivity {
         }
 
         startActivity(i);
-        overridePendingTransition(R.anim.fade_in_slow, R.anim.activity_scale_in);
+        //overridePendingTransition(R.anim.fade_in_slow, R.anim.activity_scale_in);
     }
 
     //// TODO: 11/27/2016 add muting of services 
