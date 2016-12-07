@@ -116,7 +116,7 @@
             android:name=".General.DetailGifActivity"
             android:theme="@style/AppTheme.NoActionBar.Dark" />
         <activity
-            android:name=".Main.MainSearchActivity"
+            android:name=".Main.Search.MainSearchActivity"
             android:label="@string/title_activity_main_search"
             android:theme="@style/AppTheme.NoActionBar.Light" />
         <activity
@@ -125,10 +125,45 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login.AddServices.SelectServiceActivity"
-            android:theme="@style/AppTheme.Space" 
-                    android:launchMode="singleTask"/>
-        <activity android:name=".Login.AddServices.ClusterInfoActivity"
-           />
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Space" />
+        <activity android:name=".Login.AddServices.ClusterInfoActivity" />
+        <activity
+            android:name=".Twitter.TwitterLoginActivity"
+            android:theme="@style/Translucent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.media.cluster.cluster"
+                    android:scheme="com.media.cluster.cluster" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Tumblr.TumblrLoginActivity" android:theme="@style/Translucent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.media.cluster.cluster"
+                    android:scheme="com.media.cluster.cluster" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

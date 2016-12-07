@@ -43,6 +43,7 @@ import com.media.cluster.cluster.General.FloatingActionWheel;
 import com.media.cluster.cluster.Login.AddServices.AddServicesActivity;
 import com.media.cluster.cluster.Login.AddServices.ClusterInfoActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
+import com.media.cluster.cluster.Main.Search.MainSearchActivity;
 import com.media.cluster.cluster.R;
 
 import java.io.File;
@@ -762,6 +763,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
 
 
     private void setFilterRows() {
+        serviceCount = 0;
         if (!loginPref.getString("facebook", "").equals("")) {
             findViewById(R.id.facebookRow).setVisibility(View.VISIBLE);
             View facebookSwitchLayout = findViewById(R.id.switchFacebookLayout);
@@ -832,7 +834,12 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         addX(!filterOn);
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GetUserData.getAddedServices(getApplicationContext(),CurrentClustername,false);
+        setFilterRows();
+    }
 }
 
 

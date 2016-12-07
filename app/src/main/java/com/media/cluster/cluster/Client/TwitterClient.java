@@ -1,4 +1,4 @@
-package com.media.cluster.cluster.Twitter;
+package com.media.cluster.cluster.Client;
 
 
 import android.content.Context;
@@ -17,8 +17,8 @@ public class TwitterClient extends OAuthBaseClient {
 
     private static final Class<? extends Api> REST_API_CLASS = TwitterApi.class;
     private static final String TWITTER_REST_URL = "https://api.twitter.com/1.1";
-    private static final String TWITTER_KEY = "8W1vhfZ4ujqq8LOXxronKkuDe ";
-    private static final String TWITTER_SECRET = "pcAbYnMhkxkxS7JNVNFvgsUbBb0H3xLOM1phWL3wZL8LtfVkJ4";
+    private static final String TWITTER_KEY = "xWYS45mQYzwXtFzwwiRxk6LQh";
+    private static final String TWITTER_SECRET = "RV82K47864J91BKDISTPE9i0g4VPPYPYhHAIyyiDquWSHCuT5P";
     private static final String TWITTER_REST_CALLBACK_URL = "oauth://com.media.cluster.cluster";
 
     public TwitterClient(Context context) {
@@ -39,6 +39,8 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("page", String.valueOf(page));
         getClient().get(apiUrl, params, handler);
     }
+
+    public void getCurrentTwitterName(){}
 
 
 

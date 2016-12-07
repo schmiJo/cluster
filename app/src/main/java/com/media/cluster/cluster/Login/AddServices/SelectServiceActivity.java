@@ -1,9 +1,7 @@
 package com.media.cluster.cluster.Login.AddServices;
 
 
-import android.animation.Animator;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +16,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.media.cluster.cluster.R;
+import com.media.cluster.cluster.Tumblr.TumblrLoginActivity;
+import com.media.cluster.cluster.Twitter.TwitterLoginActivity;
 
 import java.util.Arrays;
 
@@ -29,10 +29,10 @@ public class SelectServiceActivity extends AppCompatActivity implements SelectSe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
 
         Intent services = getIntent();
-        selectServicesView = new SelectServicesView(this,getApplicationContext(),
+        selectServicesView = new SelectServicesView(this, getApplicationContext(),
                 !services.getBooleanExtra("facebook", false),
                 !services.getBooleanExtra("skype", false),
                 !services.getBooleanExtra("twitter", false),
@@ -77,9 +77,6 @@ public class SelectServiceActivity extends AppCompatActivity implements SelectSe
     }
 
 
-
-
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -114,7 +111,7 @@ public class SelectServiceActivity extends AppCompatActivity implements SelectSe
 
     @Override
     public void onItemClick(int itemId) {
-        switch (itemId){
+        switch (itemId) {
             case 1:
                 //Facebook clicked
                 Log.d("debug", "Facebook");
@@ -127,10 +124,13 @@ public class SelectServiceActivity extends AppCompatActivity implements SelectSe
             case 3:
                 //Twitter clicked
                 Log.d("debug", "Twitter");
+                startActivity(new Intent(getApplicationContext(), TwitterLoginActivity.class));
+
                 break;
             case 4:
                 //Tumblr clicked
                 Log.d("debug", "Tumblr");
+                startActivity(new Intent(getApplicationContext(), TumblrLoginActivity.class));
                 break;
         }
     }

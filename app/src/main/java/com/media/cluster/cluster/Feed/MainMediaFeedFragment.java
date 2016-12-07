@@ -25,7 +25,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.media.cluster.cluster.Main.MainActivity;
 import com.media.cluster.cluster.R;
 import com.media.cluster.cluster.Twitter.EmbeddedTweetActivity;
-import com.media.cluster.cluster.Twitter.TwitterClient;
+import com.media.cluster.cluster.Client.TwitterClient;
 
 
 import org.json.JSONArray;

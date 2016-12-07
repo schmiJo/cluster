@@ -32,7 +32,7 @@
     <inspection_tool class="AndroidLintExtraTranslation" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AndroidLintFullBackupContent" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AndroidLintGetInstance" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="AndroidLintGoogleAppIndexingApiWarning" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintGoogleAppIndexingApiWarning" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="AndroidLintGoogleAppIndexingUrlError" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="AndroidLintGoogleAppIndexingWarning" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="AndroidLintGradleCompatible" enabled="true" level="WARNING" enabled_by_default="true" />
