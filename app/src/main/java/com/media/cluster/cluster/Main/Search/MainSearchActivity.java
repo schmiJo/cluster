@@ -84,6 +84,7 @@ import java.util.Map;
         private RecyclerTouchListener searchSuggestionRecyclerListener;
         private Context dialogContext;
         private boolean repressUpdate = false;
+        private List<String> suggestions = new ArrayList<>();
 
 
 
@@ -121,9 +122,8 @@ import java.util.Map;
             GetUserData.getAddedServices(getApplicationContext(), clustername, false);
             noServiceLayout = findViewById(R.id.addServicesLayout);
             noServiceButton = (Button) findViewById(R.id.noServiceButton);
-
             suggestionRecyclerView = (RecyclerView) findViewById(R.id.searchSuggestionRecyclerView);
-            getSuggestions(searchText.getText().toString().trim());
+            updateSuggestions();
 
             searchSuggestionRecyclerListener = new RecyclerTouchListener(getApplication(),suggestionRecyclerView,new ClickListener(){
                 @Override
@@ -138,12 +138,7 @@ import java.util.Map;
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             AddSearchHistory.removeSearchHistory(clustername, password, (new SearchListViewHolder(view)).getSuggestionText().getText().toString().trim(), getApplicationContext());
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    getSuggestions(searchText.getText().toString().trim());
-                                }
-                            },100);
+                            updateSuggestions();
 
                         }
                     });
@@ -178,7 +173,10 @@ import java.util.Map;
                         suggestionRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out));
                         suggestionRecyclerView.setVisibility(View.GONE);
                         if(!searchText.getText().toString().trim().equals("")){
-                            AddSearchHistory.addSearchHistory(clustername,password,searchText.getText().toString().trim(),getApplicationContext());
+                            String search = searchText.getText().toString().trim();
+                            AddSearchHistory.addSearchHistory(clustername,password,search, getApplicationContext());
+                            suggestions.add(0,search);
+
                             return true;
                         }else{
 
@@ -527,63 +525,82 @@ import java.util.Map;
             noServiceButton.setVisibility(View.GONE);
         }
 
+        private void updateSuggestions(){
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            String URL = "http://social-cluster.com/get_search.php";
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    if(response.trim().equals("null") ) {
+                        suggestionRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out));
+                        suggestionRecyclerView.setVisibility(View.GONE);
+                    }else {
+
+                        try {
+
+
+                            JSONArray jr = new JSONArray(response);
+
+
+                            for (int i = 0; i < jr.length(); i++) {
+
+                                String row = jr.getString(i);
+                                suggestions.add(row);
+                            }
+
+                            getSuggestions(searchText.getText().toString().trim());
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("clustername",clustername);
+                    hashMap.put("password", password);
+                    hashMap.put("searchRequest", "");
+                    return hashMap;
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        }
+
 
     private  void getSuggestions(final String search){
+        int count = 0;
+        List<String> specificSuggestions = new ArrayList<>();
 
+        for(int i = 0; i< suggestions.size(); i++){
 
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String URL = "http://social-cluster.com/get_search.php";
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            if(response.trim().equals("null") ) {
-                suggestionRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out));
-                suggestionRecyclerView.setVisibility(View.GONE);
-            }else {
-
-                try {
-
-                    List<String> suggestions = new ArrayList<>();
-                    JSONArray jr = new JSONArray(response);
-
-
-                    for (int i = 0; i < jr.length(); i++) {
-
-                        String row = jr.getString(i);
-                        suggestions.add(row);
-                    }
-                    if(suggestionRecyclerView.getVisibility() == View.GONE){
-                        suggestionRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in));
-                        suggestionRecyclerView.setVisibility(View.VISIBLE);
-                    }
-                    suggestionRecyclerView.setAdapter(new SearchListAdapter(suggestions));
-                    suggestionRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-                }
-
+            if(suggestions.get(i).contains(search)){
+                specificSuggestions.add(suggestions.get(i));
             }
+            if(count == 10){
+                break;
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            count++;
+        }
 
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("clustername",clustername);
-                hashMap.put("password", password);
-                hashMap.put("searchRequest", search);
-                return hashMap;
-            }
-        };
-
-        requestQueue.add(stringRequest);
+        if(suggestionRecyclerView.getVisibility() == View.GONE  && suggestions.size() > 0){
+            suggestionRecyclerView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in));
+            suggestionRecyclerView.setVisibility(View.VISIBLE);
+        }
+        suggestionRecyclerView.setAdapter(new SearchListAdapter(specificSuggestions));
+        suggestionRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
     }
 

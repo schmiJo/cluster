@@ -70,11 +70,15 @@
         app:borderWidth="0dp"
         />
 
-
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="8dp"
+    android:layout_marginTop="56dp">
 
     <include
         layout="@layout/filter_bottom_sheet"
-        />
+        /></android.support.design.widget.CoordinatorLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
