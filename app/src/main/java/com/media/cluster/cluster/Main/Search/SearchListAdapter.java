@@ -11,11 +11,12 @@ import java.util.List;
 
 
 
-public class SearchListAdapter extends RecyclerView.Adapter{
+ class SearchListAdapter extends RecyclerView.Adapter{
 
     private List<String> strings;
+    public static boolean showGetter = true;
 
-    public SearchListAdapter(List<String> strings) {
+     SearchListAdapter(List<String> strings) {
         this.strings = strings;
     }
 
@@ -34,15 +35,11 @@ public class SearchListAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            SearchListViewHolder viewHolder = (SearchListViewHolder)holder;
+            final SearchListViewHolder viewHolder = (SearchListViewHolder)holder;
 
-        viewHolder.getGetSuggestion().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
+        if(!showGetter) {
+            viewHolder.getGetSuggestion().setVisibility(View.GONE);
+        }
         viewHolder.getSuggestionText().setText(strings.get(position));
 
 

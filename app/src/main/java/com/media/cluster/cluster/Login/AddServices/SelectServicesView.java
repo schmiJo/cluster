@@ -110,7 +110,7 @@ public class SelectServicesView extends SurfaceView implements Runnable, Surface
         this.width = Utils.getDisplayDimensions(appContext, true);
         this.height = Utils.getDisplayDimensions(appContext, false);
         radius = width;
-        radiusDecrement = Utils.convertDpToPixel(20, appContext);
+        radiusDecrement = Utils.convertDpToPixel(15, appContext);
         targetRadius = Utils.convertDpToPixel(80, appContext);
 
 

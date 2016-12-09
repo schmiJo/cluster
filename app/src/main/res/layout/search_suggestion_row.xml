@@ -12,12 +12,6 @@
         android:layout_height="wrap_content">
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:srcCompat="@drawable/ic_restore_grey" />
-
         <TextView
             android:id="@+id/search_text"
             android:layout_width="match_parent"
@@ -27,14 +21,31 @@
             android:layout_marginEnd="64dp"
             android:layout_marginStart="64dp"
             android:layout_marginTop="16dp"
-            android:gravity="center_vertical" />
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/search_take_image"
-            android:layout_width="12dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_margin="16dp"
-            app:srcCompat="@drawable/ic_take_suggestion" />
+            app:srcCompat="@drawable/ic_take_suggestion"
+            android:padding="8dp"
+            android:background="?selectableItemBackgroundBorderless"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_restore_grey" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/dividerColor"
+            android:layout_marginStart="64dp"
+            />
     </FrameLayout>
 </com.balysv.materialripple.MaterialRippleLayout>

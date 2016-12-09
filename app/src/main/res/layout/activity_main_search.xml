@@ -95,8 +95,10 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#fff"
         android:layout_marginTop="56dp"
         android:id="@+id/searchSuggestionRecyclerView"
+        app:reverseLayout="true"
         />
 
     <include layout="@layout/content_main_search" />

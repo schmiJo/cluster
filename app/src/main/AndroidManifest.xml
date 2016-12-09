@@ -125,9 +125,20 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Login.AddServices.SelectServiceActivity"
-            android:launchMode="singleTask"
             android:theme="@style/AppTheme.Space" />
         <activity android:name=".Login.AddServices.ClusterInfoActivity" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Twitter.TwitterLoginActivity"
             android:theme="@style/Translucent">
@@ -147,7 +158,9 @@
                     android:scheme="com.media.cluster.cluster" />
             </intent-filter>
         </activity>
-        <activity android:name=".Tumblr.TumblrLoginActivity" android:theme="@style/Translucent">
+        <activity
+            android:name=".Tumblr.TumblrLoginActivity"
+            android:theme="@style/Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -164,6 +177,9 @@
                     android:scheme="com.media.cluster.cluster" />
             </intent-filter>
         </activity>
+        <activity android:name=".Profile.FacebookProfileActivity" />
+        <activity android:name=".Main.Search.HistoryActivity"
+            />
     </application>
 
 </manifest>

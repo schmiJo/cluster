@@ -13,8 +13,6 @@
     <string name="addServices">Add services</string>
     <string name="info">Info</string>
 
-    <string name="facebook_app_id">183056648799553</string>
-
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -230,7 +228,9 @@
     <string name="loginErrorMessage4">There has been an error</string>
     <string name="registerCloseDialogTitle">Close Register??😢</string>
     <string name="registerCloseDialogMessage">Do you really want to close Register?  Your data will be lost!</string>
+    <string name="noHistory">You have no search history</string>
 
+    <string name="serverError">Server Error</string>
     <string name="clusterDescription">Cluster is an app that combines all your social media accounts to deliver the best user experience.  &#xA;Please help us to make this app even better by submitting feedback.</string>
     <!--Degrees-->
     <string name="degreesNoResponse">No response</string>
@@ -290,6 +290,8 @@
     <string name="add_service">Add service</string>
 
 
+
+
     <!--Chat Typefields-->
     <string name="typefield_message_facebook">Write a Facebook Message</string>
     <string name="typefield_message_skype">Write a Skype Message</string>
@@ -302,13 +304,14 @@
     <!--Clustercode Help-->
     <string name="clustercode_help">This is your personal Clustercode. With it you can connect you to your friends.</string>
     <string name="clustercode_help_camera">You can scan the code of another person by clicking the Camera Button</string>
-
+    <string name="history">History</string>
     <!--Cluster Code Menu-->
     <string name="clustercode_menu_help">Help</string>
     <string name="clustercode_menu_share">Share Code</string>
     <string name="clustercode_menu_save">Save Code to Gallery</string>
-
-
+    <string name="remove">remove</string>
+    <string name="removeConfirm">Remove this from your history?</string>
+    <string name="removeEntireHistory">Really delete your entire search history?</string>
     <!--Private Chat Activity-->
     <string name="private_chat_mute">Mute</string>
     <string name="private_chat_block">Block</string>
@@ -328,10 +331,15 @@
     <string name="share">Share</string>
     <string name="report">Report</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main_search">MainSearchActivity</string>
     <string name="title_activity_add_services">AddServicesActivity</string>
+
+
+    <string name="fb_login_protocol_scheme">fbAPP_ID</string>
+    <string name="facebook_app_id">183056648799553</string>
+    <string name="removeHistory">Remove History?</string>
+
+    <string name="facebook_welcome_message">You have successfully added your Facebook account</string>
 
 
 </resources>

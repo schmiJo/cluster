@@ -49,7 +49,7 @@
                 <!--option Recycler View-->
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="605dp"
+                    android:layout_height="660dp"
                     android:id="@+id/drawer_options_recycler_view"
                     />
 

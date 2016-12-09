@@ -87,7 +87,7 @@ public class MainChatListFragment extends Fragment {
 
 
 
-    //create an Array list of Rowinformation Objects
+    //create an Array list of Row information Objects
     public static List<ChatsRowDataModel> getData() {
         List<ChatsRowDataModel> data = new ArrayList<>();
 

@@ -2,6 +2,7 @@ package com.media.cluster.cluster.Profile.ProfileTabs.InfoTab;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.transition.TransitionManager;
@@ -24,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.media.cluster.cluster.Profile.FacebookProfileActivity;
 import com.media.cluster.cluster.Profile.MainProfileFragment;
 import com.media.cluster.cluster.R;
 
@@ -247,7 +249,7 @@ public class ProfileInfoFragment extends Fragment {
         facebookF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(getContext(), FacebookProfileActivity.class));
             }
         });
         skypeF.setOnClickListener(new View.OnClickListener() {

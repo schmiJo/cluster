@@ -43,6 +43,7 @@ import com.media.cluster.cluster.General.FloatingActionWheel;
 import com.media.cluster.cluster.Login.AddServices.AddServicesActivity;
 import com.media.cluster.cluster.Login.AddServices.ClusterInfoActivity;
 import com.media.cluster.cluster.Login.LoginActivity;
+import com.media.cluster.cluster.Main.Search.HistoryActivity;
 import com.media.cluster.cluster.Main.Search.MainSearchActivity;
 import com.media.cluster.cluster.R;
 
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         if (CurrentClustername.equals("") || password.equals("")) {
             final Intent login = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(login);
-            Log.d("debug", "login activity started MainActivity (83) [Shared pref = null]");
+            Log.d("debug", "login activity started MainActivity (179) [Shared pref = null]");
         }
 
 //----------------------------------------------------------------------------------------------------Login Shared Preferences End------------------------------------------------------------------
@@ -405,18 +406,18 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                         //Add Privacy Activity
                         Toast.makeText(getApplication(), "Privacy", Toast.LENGTH_SHORT).show();
                         break;
-                    case 7:
+                    case 8:
                         //Add Store Activity
                         Toast.makeText(getApplication(), "Sticker Store", Toast.LENGTH_SHORT).show();
-                    case 8:
+                    case 9:
                         //Add Feedback
                         Toast.makeText(getApplication(), "Feedback", Toast.LENGTH_SHORT).show();
                         break;
-                    case 9:
+                    case 10:
                         //Link to InfoActivity
                         startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
                         break;
-                    case 10:
+                    case 11:
                         //Logout
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(dialogContext);
@@ -466,6 +467,12 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                         AlertDialog dialog = builder.create();
                         dialog.show();
 
+                        break;
+
+                    case 7:
+
+                        //History
+                        startActivity(new Intent(getApplicationContext(), HistoryActivity.class));
                         break;
                 }
             }
@@ -542,12 +549,13 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 R.drawable.nav_ic_notifications,
                 R.drawable.nav_ic_settings,
                 R.drawable.nav_ic_privacy,
+                R.drawable.nav_ic_restore,
                 R.drawable.nav_ic_sticker_store,
                 R.drawable.nav_ic_feedback,
                 R.drawable.nav_ic_info_inverted,
                 R.drawable.nav_ic_logout,
         };
-        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback), getResources().getString(R.string.info), getResources().getString(R.string.navLogout)};
+        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy),getResources().getString(R.string.history), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback), getResources().getString(R.string.info), getResources().getString(R.string.navLogout)};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             DrawerRowDataModel current = new DrawerRowDataModel();
             current.iconId = icons[i];
@@ -641,7 +649,9 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 startActivity(new Intent(getApplicationContext(), ClusterInfoActivity.class));
                 break;
             case R.id.action_search:
-                startActivity(new Intent(getApplicationContext(), MainSearchActivity.class));
+                Intent i = new Intent(getApplicationContext(), MainSearchActivity.class);
+                i.putExtra("search","");
+                startActivity(i);
                 break;
             case R.id.action_filter:
 
