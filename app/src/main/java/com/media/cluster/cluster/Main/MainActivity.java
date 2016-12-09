@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -62,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     ViewPager mainViewPager;
     private TabLayout tabLayout;
     //
-    Menu menu;
-    Context dialogContext;
+    private Menu menu;
+    private Context dialogContext;
     private Toolbar toolbar;
     private ViewGroup rootLayoutGroup;
     public static String CurrentClustername;
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     private TabLayout.TabLayoutOnPageChangeListener onTabChangeListener;
     private DrawerRecyclerTouchListener drawerRecyclerTouchListener;
     private DrawerRecyclerTouchListener serviceListener;
-    private FloatingActionWheel faw;
+    private FloatingActionWheel faw, faw2;
     private BottomSheetBehavior bottomSheetBehavior;
     private SharedPreferences loginPref;
     private ImageButton openButton;
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     private boolean filterOn, accessTwitter, accessFacebook, accessTumblr;
     private View.OnClickListener rowClickListener;
     private int serviceCount = 0;
+
     CompoundButton.OnCheckedChangeListener filterPowerListener;
 
 
@@ -142,6 +146,10 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                         fab.setVisibility(View.GONE);
                         fab.setRotation(0);
                         faw.setExpantionState(false);
+                        if (faw2.getExpantionState()) {
+                            faw2.setExpantionState(false);
+                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                        }
                     }
                 } else {
                     menu.findItem(R.id.action_filter).setIcon(R.drawable.action_ic_filter);
@@ -254,6 +262,11 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             @Override
             public void onPageSelected(int position) {
                 faw.setExpantionState(false);
+                if (faw2.getExpantionState()) {
+                    faw2.setExpantionState(false);
+                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
+                }
+
                 if (fab.getRotation() == 45) {
                     fab.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close));
                     fab.setRotation(0);
@@ -324,29 +337,38 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         fawItems.add(R.drawable.faw_ic_scanner);
         faw.setItems(fawItems);
 
+
 //----------------------------------------------------------------------------------------------------Fab Start-----------------------------------------------------------------------------------
         View.OnClickListener fabClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //---fab clicked--
 
-                if (!faw.getExpantionState()) {
-                    //extended
+                if (!faw2.getExpantionState()) {
+                    if (!faw.getExpantionState()) {
+                        //extended
 
-                    faw.setExpantionState(true);
-                    android.view.animation.Animation animOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
-                    fab.startAnimation(animOpen);
-                    fab.setRotation(45);
-                    Log.d("debug", "EXTENDING");
+                        faw.setExpantionState(true);
+                        android.view.animation.Animation animOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+                        fab.startAnimation(animOpen);
+                        fab.setRotation(45);
+                        Log.d("debug", "EXTENDING");
+                    } else {
+                        //
+                        Log.d("debug", "COLLAPSING");
+                        faw.setExpantionState(false);
+                        android.view.animation.Animation animClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
+                        fab.startAnimation(animClose);
+                        fab.setRotation(0);
+
+                    }
+
                 } else {
-                    //
-                    Log.d("debug", "COLLAPSING");
-                    faw.setExpantionState(false);
+                    faw2.setExpantionState(false);
+                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
                     android.view.animation.Animation animClose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
                     fab.startAnimation(animClose);
                     fab.setRotation(0);
-
-
                 }
             }
 
@@ -555,7 +577,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 R.drawable.nav_ic_info_inverted,
                 R.drawable.nav_ic_logout,
         };
-        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy),getResources().getString(R.string.history), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback), getResources().getString(R.string.info), getResources().getString(R.string.navLogout)};
+        String[] titles = {getResources().getString(R.string.navActivity), getResources().getString(R.string.navClusterCode), getResources().getString(R.string.navContacts), getResources().getString(R.string.navAddServices), getResources().getString(R.string.navNotification), getResources().getString(R.string.navSettings), getResources().getString(R.string.navPrivacy), getResources().getString(R.string.history), getResources().getString(R.string.navStickerStore), getResources().getString(R.string.navSendFeedback), getResources().getString(R.string.info), getResources().getString(R.string.navLogout)};
         for (int i = 0; i < titles.length && i < icons.length; i++) {
             DrawerRowDataModel current = new DrawerRowDataModel();
             current.iconId = icons[i];
@@ -594,6 +616,9 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
             drawer.closeDrawer(GravityCompat.START);
         } else if (faw.getExpantionState()) {
             faw.setExpantionState(false);
+        } else if (faw2.getExpantionState()) {
+            faw2.setExpantionState(false);
+            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)));
         } else if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         } else {
@@ -629,6 +654,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         this.menu = menu;
+        this.menu = menu;
         if (serviceCount <= 1) {
             menu.findItem(R.id.action_filter).setVisible(false);
         }
@@ -650,7 +676,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
                 break;
             case R.id.action_search:
                 Intent i = new Intent(getApplicationContext(), MainSearchActivity.class);
-                i.putExtra("search","");
+                i.putExtra("search", "");
                 startActivity(i);
                 break;
             case R.id.action_filter:
@@ -674,6 +700,34 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
 
     @Override
     public void onFAWItemClick(int itemId) {
+
+        switch (itemId) {
+            case 1:
+                ArrayList<Integer> faw2ItemsPost = new ArrayList<>();
+                if (!loginPref.getString("facebook", "").equals("")) {
+                    faw2ItemsPost.add(R.drawable.faw_facebook);
+                }
+
+                if (!loginPref.getString("twitter", "").equals("")) {
+                    faw2ItemsPost.add(R.drawable.faw_twitter);
+                }
+
+                if (!loginPref.getString("tumblr", "").equals("")) {
+                    faw2ItemsPost.add(R.drawable.faw_tumblr);
+                }
+                faw2.setItems(faw2ItemsPost);
+
+
+                faw2.setExpantionState(true);
+                fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.colorAccentDark)));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        faw.setExpantionState(false);
+                    }
+                }, 500);
+                break;
+        }
 
     }
 
@@ -819,6 +873,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
         tabLayout = (TabLayout) findViewById(R.id.main_tab_layout);
         bottomSheetBehavior = BottomSheetBehavior.from((LinearLayout) findViewById(R.id.bottom_sheet));
         faw = (FloatingActionWheel) findViewById(R.id.faw);
+        faw2 = (FloatingActionWheel) findViewById(R.id.faw2);
         drawerOptionRecyclerView = (RecyclerView) findViewById(R.id.drawer_options_recycler_view);
         drawerServiceRecyclerView = (RecyclerView) findViewById(R.id.drawer_service_recycler_view);
         tumblrSwitch = (Switch) findViewById(R.id.tumblrSwitch);
@@ -847,7 +902,7 @@ public class MainActivity extends AppCompatActivity implements FloatingActionWhe
     @Override
     protected void onResume() {
         super.onResume();
-        GetUserData.getAddedServices(getApplicationContext(),CurrentClustername,false);
+        GetUserData.getAddedServices(getApplicationContext(), CurrentClustername, false);
         setFilterRows();
     }
 }

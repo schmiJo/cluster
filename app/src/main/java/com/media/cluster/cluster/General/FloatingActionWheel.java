@@ -61,7 +61,7 @@ public class FloatingActionWheel extends View {
     private int itemsPerSector = 0;
     private int itemsPerSectorXML = 0;
     private double scrollFactor = 0;
-    private boolean resouceIdsarrived = false;
+
 
     private int xItem1 = 0;
     private int yItem1 = 0;
@@ -105,7 +105,7 @@ public class FloatingActionWheel extends View {
 
     Paint tempPaint = new Paint();
     Context context;
-    Activity activity = (Activity) context;
+
 
 
 
@@ -114,7 +114,7 @@ public class FloatingActionWheel extends View {
     private OnFAWItemClickListner onFAWItemClickListener;
 
     public interface OnFAWItemClickListner{
-        public void onFAWItemClick(int itemId);
+         void onFAWItemClick(int itemId);
 
     }
 
@@ -123,6 +123,7 @@ public class FloatingActionWheel extends View {
         Log.d("debug", "onAttachedToWindow");
         super.onAttachedToWindow();
         try {
+            Activity activity = (Activity) context;
             onFAWItemClickListener = (OnFAWItemClickListner) activity;
         }catch (ClassCastException e){
             e.printStackTrace();
@@ -155,6 +156,7 @@ public class FloatingActionWheel extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
+        Log.d("debug", "init");
 
 
         final TypedArray a = getContext().obtainStyledAttributes(
@@ -696,7 +698,7 @@ public class FloatingActionWheel extends View {
 
     //static Array
     public void setItems(int[] resourceIds) {
-        resouceIdsarrived = setRessources(resourceIds);
+         setRessources(resourceIds);
     }
 
     //Dynamic Array
@@ -722,7 +724,7 @@ public class FloatingActionWheel extends View {
         availabilityItem8 = false;
 
 
-        resouceIdsarrived = setRessources(resourceIds);
+        setRessources(resourceIds);
 
         setItemsPerSelector();
         invalidate();

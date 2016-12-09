@@ -59,6 +59,16 @@
         android:layout_gravity="bottom|end"
         />
 
+    <com.media.cluster.cluster.General.FloatingActionWheel
+        android:id="@+id/faw2"
+        android:layout_width="264dp"
+        android:layout_height="264dp"
+        app:backgroundColor="@color/colorAccentDark"
+        app:extentionState="false"
+        app:itemsPerSector="3"
+        android:layout_gravity="bottom|end"
+        />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -70,15 +80,10 @@
         app:borderWidth="0dp"
         />
 
-<android.support.design.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:elevation="8dp"
-    android:layout_marginTop="56dp">
+
 
     <include
-        layout="@layout/filter_bottom_sheet"
-        /></android.support.design.widget.CoordinatorLayout>
+        layout="@layout/filter_bottom_sheet"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
